@@ -14,6 +14,7 @@ public class Game extends Canvas implements Runnable {
     public static final int SCALE = 2;
     public static final int ROWS = Config.GAME_HEIGHT;
     public static final int LINES = Config.GAME_WIDTH;
+    public static int secs = 0;
     public static boolean bracketboo = false;
     public final String TITLE = "Militia";	
     private boolean running = false;
@@ -73,13 +74,12 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run() {
 		init();
-		int secs = 0;
 		int frames = 0;
 		while (running) {
 	            frames++;
-	            if (frames % 20 == 0) {
-	            	secs++;
-	//            	System.out.println(secs);
+	            if (frames % 10 == 0) {
+	            	this.secs++;
+	            	System.out.println(this.secs);
 	            }
 	            render();                         
 	            try {
