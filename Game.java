@@ -115,16 +115,6 @@ public class Game extends Canvas implements Runnable {
             //Monster action
             if (Game.Playstate == PLAYSTATE.MONSTER){
                 for (Monster mons: maplv1.monsters){
-//                    int min = 1000;
-//                    Position a = null;
-//                    System.out.println(mons.getClass().getSimpleName() + " " + mons.curPosition);
-//                    for (Hero hero: maplv1.heros){
-//                        int temppos = mons.getCurPosition().getDistance(hero.getCurPosition());
-//                            if (temppos < min) {
-//                                min = temppos;
-//                                a = hero.getCurPosition();
-//                            }
-//                        }
                     mons.move(maplv1.heros, maplv1.monsters);
                     maplv1.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
                     System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
