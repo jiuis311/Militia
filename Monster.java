@@ -35,11 +35,6 @@ public abstract class Monster {
             return curPosition.equals(((Monster) obj).curPosition);
         return false;
     }
-	public void draw(Graphics g) {
-		this.monsterImage.setX(this.curPosition.getX()+1);
-		this.monsterImage.setY(this.curPosition.getY()+1);
-		this.monsterImage.draw(g);
-	}
 	abstract void calMoveArea(ArrayList<Monster> pos);
 	abstract boolean move(ArrayList<Hero> heros, ArrayList<Monster> mons);
 }

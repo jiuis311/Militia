@@ -2,7 +2,7 @@ import java.awt.Graphics;
 
 public class Drawer {
 	private Hero activeHero;
-	private MapLV1 maplv1;
+	private Map map;
 	private DrawTile sword;
 	private DrawTile spear;
 	private DrawTile minion;
@@ -21,14 +21,14 @@ public class Drawer {
 		shield = new DrawTile("/shield.png");
 	}
 	
-	public void update(Hero activeHero, MapLV1 maplv1) {
+	public void update(Hero activeHero, Map map) {
 		this.activeHero = activeHero;
-		this.maplv1 = maplv1;
+		this.map = map;
 	}
 	
 	public void drawHero(Graphics g) {
 		String heroName;
-		for(Hero hero: maplv1.heros) {
+		for(Hero hero: map.heros) {
         	heroName = hero.getClass().getSimpleName();
         	if (heroName.equals("Sword")) {
         		sword.setX(hero.getCurPosition().getX()+1);
@@ -45,7 +45,7 @@ public class Drawer {
 	
 	public void drawMonster(Graphics g) {
 		String monsterName;
-		for(Monster monster: maplv1.monsters) {
+		for(Monster monster: map.monsters) {
         	monsterName = monster.getClass().getSimpleName();
         	if (monsterName.equals("Minion")) {
         		minion.setX(monster.getCurPosition().getX()+1);
@@ -65,13 +65,13 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-		for (Monster mons: maplv1.monsters){                   
-            mons.move(maplv1.heros, maplv1.monsters);
-            maplv1.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
+		for (Monster mons: map.monsters){                   
+            mons.move(map.heros, map.monsters);
+            map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
             System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
         }
         System.out.println("Position change");
-        maplv1.setUnselectState();
+        map.setUnselectState();
 	}
 	
 	public void drawMoveArea(Graphics g) {
