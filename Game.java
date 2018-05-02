@@ -24,7 +24,8 @@ public class Game extends Canvas implements Runnable {
     private DrawTile bracket;
     public static enum STATE{
         MENU,
-        GAME
+        GAME,
+        ENDGAME
     }
     public static STATE State = STATE.MENU;
     public static enum PLAYSTATE {
@@ -33,6 +34,7 @@ public class Game extends Canvas implements Runnable {
     }
     public static PLAYSTATE Playstate = PLAYSTATE.HERO;
     public static MenuButton menuButton;
+    public static EndMenuButton endMenuButton;
     public MapLV1 maplv1;
     private Hero activeHero;
     private Drawer drawer;
@@ -41,6 +43,7 @@ public class Game extends Canvas implements Runnable {
         grid = new TileGrid(ROWS, LINES);
         this.addMouseListener(new MouseInput());
         menuButton = new MenuButton();
+        endMenuButton = new EndMenuButton();
         menuBg = new MenuBackground();
         maplv1 = new MapLV1();
         Playstate = PLAYSTATE.HERO;
@@ -97,24 +100,24 @@ public class Game extends Canvas implements Runnable {
         
 	//////////////////////////////
 	if (State == STATE.GAME){
-			//Draw game background
+            //Draw game background
             bg.draw(g);
             grid.draw(g);
-            menuButton.drawMenuInGame(g);   
-            
+            menuButton.drawMenuInGame(g);               
             //draw monster and hero         
             drawer.update(activeHero, maplv1);
-            drawer.draw(g);
-            
-
+            drawer.draw(g);        
             ////////////////////////
             //draw bracket
             if(bracketboo){
             	bracket.draw(g);
             }
-	}	else if(State == STATE.MENU){
+	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
+        } else if (State == STATE.ENDGAME) {
+            menuBg.draw(g);
+            endMenuButton.drawButtons(g);
         }			
         //////////////////////////////
 	g.dispose();

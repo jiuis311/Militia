@@ -65,7 +65,7 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-		for (Monster mons: maplv1.monsters){                   
+            for (Monster mons: maplv1.monsters){                   
             mons.move(maplv1.heros, maplv1.monsters);
             maplv1.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
             System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
@@ -98,9 +98,9 @@ public class Drawer {
 	
 	public void draw(Graphics g) {
 		if (Game.Playstate == Game.PLAYSTATE.HERO) {
-            this.drawMoveArea(g);
-            this.drawAttackArea(g);
-        } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
+                    this.drawMoveArea(g);
+                    this.drawAttackArea(g);
+                } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
         	this.calMonster();
         	Game.Playstate = Game.PLAYSTATE.HERO;
         }
