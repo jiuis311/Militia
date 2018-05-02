@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable {
     public static MenuButton menuButton;
     public MapLV1 maplv1;
     private Hero activeHero;
-    private HeroAction heroAction;
+    private Drawer drawer;
     
     public void init() {
         grid = new TileGrid(ROWS, LINES);
@@ -43,10 +43,10 @@ public class Game extends Canvas implements Runnable {
         menuButton = new MenuButton();
         menuBg = new MenuBackground();
         maplv1 = new MapLV1();
-        heroAction = new HeroAction();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
         bracket = new DrawTile("/bracket.png");
+        drawer = new Drawer();
     }
 	
     private synchronized void start() {
@@ -75,6 +75,8 @@ public class Game extends Canvas implements Runnable {
 	while (running) {
             frames++;
             if (frames % 20 == 0) {
+            	secs++;
+            	System.out.println(secs);
             }
             render();                         
             try {
@@ -95,46 +97,22 @@ public class Game extends Canvas implements Runnable {
         
 	//////////////////////////////
 	if (State == STATE.GAME){
+			//Draw game background
             bg.draw(g);
             grid.draw(g);
-            menuButton.drawMenuInGame(g);                  
-            //draw monster and hero
+            menuButton.drawMenuInGame(g);   
             
-            //Hero action            
-            if (Game.Playstate == PLAYSTATE.HERO) {
-            	heroAction.update(activeHero, g);
-                heroAction.showMoveArea();
-                heroAction.showAttackArea();
-            }
+            //draw monster and hero         
+            drawer.update(activeHero, maplv1);
+            drawer.draw(g);
             
-            //End hero action            
-            for(Hero hero: maplv1.heros) {
-            	hero.draw(g);
-            }
-         
-            //Monster action
-            if (Game.Playstate == PLAYSTATE.MONSTER){
-                for (Monster mons: maplv1.monsters){
-                    mons.move(maplv1.heros, maplv1.monsters);
-                    maplv1.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-                    System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
-                }
-                System.out.println("Position change");
-                Game.Playstate = PLAYSTATE.HERO; 
-                maplv1.setUnselectState();
-                
-            }
-            //End monster action
-        
-            for (Monster mons: maplv1.monsters){
-            	mons.draw(g);
-            }
+
             ////////////////////////
+            //draw bracket
             if(bracketboo){
             	bracket.draw(g);
             }
-	}
-        else if(State == STATE.MENU){
+	}	else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
         }			
@@ -144,66 +122,66 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-	Game game = new Game();
-	game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-	game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-	game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-	JFrame frame = new JFrame(game.TITLE);
-	frame.add(game);
-	game.addMouseListener(new MouseAdapter() {
-	@Override 
-	public void mouseClicked(MouseEvent e) {
-            if (State == STATE.GAME) {
-               	int x = (int)(e.getX()/80) - 2;
-               	int y = (int)(e.getY()/80);
-               	Hero tmpHero = game.maplv1.getHero(x-1,y-1);
-               	System.out.println("Hero: " + game.activeHero);
-               	if (tmpHero != null && tmpHero.getState() != Hero.State.DONE && !(game.activeHero != null && game.activeHero.getState() == Hero.State.MOVED)) {
-                    System.out.println("Tmp : " + tmpHero.getState());
-                    if (game.activeHero != null && game.activeHero.getState() == Hero.State.SELECTING) {
-                    	game.activeHero.setState(Hero.State.UNSELECT);
-                    }
-                    game.activeHero = tmpHero;
-                }
-                if (game.activeHero != null) {
-                    if (Game.Playstate == Game.PLAYSTATE.HERO) {
-                    	if (game.activeHero.getState() == Hero.State.MOVED) {
-                            System.out.println("MOVED STATE. Ready to attack");
-                            if (game.activeHero.attack(new Position(x-1, y-1))) {
-                				game.maplv1.update(game.activeHero, Map.Event.HERO_ATTACK, new Position(x-1,y-1));
-                    			System.out.println("ATTACKED");
-                    			game.activeHero.setState(Hero.State.DONE);
-                			}
-                    	} else if (game.activeHero.getState() == Hero.State.UNSELECT) {
-                            System.out.println("UNSELECT STATE");
-                            game.activeHero.setState(Hero.State.SELECTING);
-                    	} else if (game.activeHero.getState() == Hero.State.SELECTING) {
-                            System.out.println("SELECTING STATE");
-                            if (game.activeHero.move(new Position(x-1, y-1))) {
-                    		game.maplv1.update(game.activeHero, Map.Event.HERO_MOVE, new Position(x-1,y-1));
-                    		game.activeHero.setState(Hero.State.MOVED);
-                            }
-                    	} else {
-                            System.out.println("Done state");
-                    	}                    		
-                    	////
-                    	if (game.maplv1.checkEndTurn())
-                            Game.Playstate = PLAYSTATE.MONSTER;
-                    }
-                }				
-		
-                //Get click position (not important)
-                if (1<=x && 8>=x && 1<=y && 8>=y){
-                    bracketboo = true;
-                    game.bracket.setX(x);
-                    game.bracket.setY(y);
-                }
-                else {
-                    bracketboo = false;
-                }
-            }
-	}
-    });
+		Game game = new Game();
+		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		JFrame frame = new JFrame(game.TITLE);
+		frame.add(game);
+		game.addMouseListener(new MouseAdapter() {
+			@Override 
+			public void mouseClicked(MouseEvent e) {
+		            if (State == STATE.GAME) {
+		               	int x = (int)(e.getX()/80) - 2;
+		               	int y = (int)(e.getY()/80);
+		               	Hero tmpHero = game.maplv1.getHero(x-1,y-1);
+		               	System.out.println("Hero: " + game.activeHero);
+		               	if (tmpHero != null && tmpHero.getState() != Hero.State.DONE && !(game.activeHero != null && game.activeHero.getState() == Hero.State.MOVED)) {
+		                    System.out.println("Tmp : " + tmpHero.getState());
+		                    if (game.activeHero != null && game.activeHero.getState() == Hero.State.SELECTING) {
+		                    	game.activeHero.setState(Hero.State.UNSELECT);
+		                    }
+		                    game.activeHero = tmpHero;
+		                }
+		                if (game.activeHero != null) {
+		                    if (Game.Playstate == Game.PLAYSTATE.HERO) {
+		                    	if (game.activeHero.getState() == Hero.State.MOVED) {
+		                            System.out.println("MOVED STATE. Ready to attack");
+		                            if (game.activeHero.attack(new Position(x-1, y-1))) {
+		                				game.maplv1.update(game.activeHero, Map.Event.HERO_ATTACK, new Position(x-1,y-1));
+		                    			System.out.println("ATTACKED");
+		                    			game.activeHero.setState(Hero.State.DONE);
+		                			}
+		                    	} else if (game.activeHero.getState() == Hero.State.UNSELECT) {
+		                            System.out.println("UNSELECT STATE");
+		                            game.activeHero.setState(Hero.State.SELECTING);
+		                    	} else if (game.activeHero.getState() == Hero.State.SELECTING) {
+		                            System.out.println("SELECTING STATE");
+		                            if (game.activeHero.move(new Position(x-1, y-1))) {
+		                    		game.maplv1.update(game.activeHero, Map.Event.HERO_MOVE, new Position(x-1,y-1));
+		                    		game.activeHero.setState(Hero.State.MOVED);
+		                            }
+		                    	} else {
+		                            System.out.println("Done state");
+		                    	}                    		
+		                    	////
+		                    	if (game.maplv1.checkEndTurn())
+		                            Game.Playstate = PLAYSTATE.MONSTER;
+		                    }
+		                }				
+				
+		                //Get click position (not important)
+		                if (1<=x && 8>=x && 1<=y && 8>=y){
+		                    bracketboo = true;
+		                    game.bracket.setX(x);
+		                    game.bracket.setY(y);
+		                }
+		                else {
+		                    bracketboo = false;
+		                }
+		            }
+			}
+	    });
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);

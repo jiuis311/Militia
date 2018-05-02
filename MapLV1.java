@@ -1,3 +1,4 @@
+
 public class MapLV1 extends Map {
      
     MapLV1() {
@@ -24,18 +25,22 @@ public class MapLV1 extends Map {
     void update(Object obj, Event eventType, Position pos) {
     	switch(eventType) {
 	        case HERO_MOVE:		        	
-	        	BigMinion bm1 = new BigMinion(pos);
-	        	if (obj instanceof Sword)
+	        	if (obj instanceof Sword) {
 	        		board[pos.getX()][pos.getY()] = Symbol.SWORD;
-	        		Sword sw1 = new Sword(pos);
-	        		if (monsters.contains(bm1)) heros.remove(sw1);
+	        	}
 	        	else if (obj instanceof Spear) {
 	        		board[pos.getX()][pos.getY()] = Symbol.SPEAR;
-	        		Spear sp1 = new Spear(pos);
-	        		if (monsters.contains(bm1)) heros.remove(sp1);
 	        	}
-	        	Minion m1 = new Minion(pos);
-	            if (monsters.contains(m1)) monsters.remove(m1);	            
+	        	for(Monster mons:monsters) {
+	        		if (mons.getCurPosition().equals(pos)) {
+	        			if (mons.getClass().getSimpleName() == "Minion") {
+	        				monsters.remove(mons);
+	        			} else if (mons.getClass().getSimpleName() == "BigMinion") {
+	        				heros.remove(obj);
+	        			}
+	        			break;
+	        		}
+	        	}             
 	            break;
 	        case HERO_ATTACK:	  
 	            for (Position position: ((Hero) obj).calDamageArea(pos)) {

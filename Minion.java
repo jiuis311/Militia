@@ -11,15 +11,15 @@ public class Minion extends Monster {
 	public void calMoveArea(ArrayList<Monster> monsters) {
 		ArrayList<Position> mArea = new ArrayList<Position>();
 		Position tmp = new Position(getCurPosition().getX()+1,getCurPosition().getY());
-		if (tmp.getX() < Config.GAME_WIDTH) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX(),getCurPosition().getY());
 		mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX()-1,getCurPosition().getY());
-		if (tmp.getX() >= 0) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX(),getCurPosition().getY()+1);
-		if (tmp.getY() <= Config.GAME_HEIGHT) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX(),getCurPosition().getY()-1);
-		if (tmp.getY() >= 0) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		for(Monster mons: monsters) {
 			Position pos = mons.getCurPosition();
 			mArea.remove(pos);

@@ -1,7 +1,8 @@
-import java.util.ArrayList;
+import java.awt.Graphics;
 
-public class BigMinion extends Monster{
+public class BigMinion extends Minion{
 	private int shield;
+	private DrawTile shieldImage;
 	public int getShield() {
 		return shield;
 	}
@@ -12,46 +13,19 @@ public class BigMinion extends Monster{
 		super(pos);
 		this.setMonsterImage(new DrawTile("/monster3.png"));
 		shield = 1;
+		shieldImage = new DrawTile("/shield.png");
 	}
-
 	@Override
-	public void calMoveArea(ArrayList<Monster> monsters) {
-		ArrayList<Position> mArea = new ArrayList<Position>();
-		Position tmp = new Position(getCurPosition().getX()+1,getCurPosition().getY());
-		if (tmp.getX() < Config.GAME_WIDTH) mArea.add(tmp);
-		tmp = new Position(getCurPosition().getX(),getCurPosition().getY());
-		mArea.add(tmp);
-		tmp = new Position(getCurPosition().getX()-1,getCurPosition().getY());
-		if (tmp.getX() >= 0) mArea.add(tmp);
-		tmp = new Position(getCurPosition().getX(),getCurPosition().getY()+1);
-		if (tmp.getY() <= Config.GAME_HEIGHT) mArea.add(tmp);
-		tmp = new Position(getCurPosition().getX(),getCurPosition().getY()-1);
-		if (tmp.getY() >= 0) mArea.add(tmp);
-		for(Monster mons: monsters) {
-			Position pos = mons.getCurPosition();
-			mArea.remove(pos);
+	public void draw(Graphics g) {
+		Position pos = this.getCurPosition();
+		DrawTile monster = this.getMonsterImage();
+		monster.setX(pos.getX()+1);
+		monster.setY(pos.getY()+1);
+		monster.draw(g);
+		if (this.shield == 1) {
+			this.shieldImage.setX(pos.getX()+1);
+			this.shieldImage.setY(pos.getY()+1);
+			this.shieldImage.draw(g);
 		}
-		setMoveArea(mArea);		
-	}
-
-	@Override
-	public boolean move(ArrayList<Hero> heros, ArrayList<Monster> mons) {
-		calMoveArea(mons);
-		Position monPos = getCurPosition();
-		Position min = heros.get(0).getCurPosition();
-		for (Hero hero: heros) {
-			Position heroPos = hero.getCurPosition();
-			if (min.getDistance(monPos) > heroPos.getDistance(monPos)) {
-				min = heroPos;
-			}
-		}
-		Position min2 = getCurPosition();
-		for (Position position: getMoveArea()) {
-			if (min2.getDistance(min) > position.getDistance(min)) {
-				min2 = position;
-			}
-		}
-		setCurPosition(min2);
-		return true;
 	}
 }

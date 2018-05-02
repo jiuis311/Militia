@@ -75,6 +75,14 @@ abstract class Map {
         return null;
     }
     
+    public Monster getMonster(Position pos) {
+        for(Monster mons: monsters) {
+            if(mons.getCurPosition().equals(pos))
+                return mons;
+        }
+        return null;
+    }
+    
     private boolean checkHero(Position pos) {
         for(Hero hero: heros) {
             if(hero.getCurPosition().equals(pos))
@@ -136,22 +144,28 @@ abstract class Map {
         }
     }
 
-    protected void removeMonster(Position pos) {
-    	Minion m2 = new Minion(pos);
-        if (monsters.contains(m2)) {
-            monsters.remove(m2);
-            board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
-        }
-        BigMinion bm2 = new BigMinion(pos);
-        if (monsters.contains(bm2)) {
-            int shield = bm2.getShield();
-            if (shield == 0) {
-            	monsters.remove(bm2);
-            	board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
-            } else {
-            	bm2.lowerShield();
-            }                
-        }
+    protected boolean removeMonster(Position pos) {
+    	for(Monster mons:monsters) {
+    		if (mons.getCurPosition().equals(pos)) {
+    			if (mons.getClass().getName() == "Minion") {
+    				monsters.remove(mons);
+    	            board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
+    	            return true;
+    			} else if (mons.getClass().getName() == "BigMinion") {
+    				BigMinion mon = (BigMinion) mons;
+    				int shield = mon.getShield();
+    	            if (shield == 0) {
+    	            	monsters.remove(mons);
+    	            	board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
+    	            	return true;
+    	            } else {
+    	            	mon.lowerShield();
+    	            	return false;
+    	            } 
+    			}
+    		}
+    	}     
+        return true;
     }
   
     public void setUnselectState() {

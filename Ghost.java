@@ -14,15 +14,15 @@ public class Ghost extends Monster{
 	void calMoveArea(ArrayList<Monster> monsters) {
 		ArrayList<Position> mArea = new ArrayList<Position>();
 		Position tmp = new Position(getCurPosition().getX()+2,getCurPosition().getY()+2);
-		if (tmp.getX() <= Config.GAME_WIDTH && tmp.getY() <= Config.GAME_HEIGHT) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX(),getCurPosition().getY());
 		this.getMoveArea().add(tmp);
 		tmp = new Position(getCurPosition().getX()+2,getCurPosition().getY()-2);
-		if (tmp.getX() <= Config.GAME_WIDTH && tmp.getY() >= 0) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX()-2,getCurPosition().getY()+2);
-		if (tmp.getX() >= 0 && tmp.getY() <= Config.GAME_HEIGHT) mArea.add(tmp);
+		if (tmp.valid()) mArea.add(tmp);
 		tmp = new Position(getCurPosition().getX()-2,getCurPosition().getY()-2);
-		if (tmp.getX() >= 0 && tmp.getY() >= 0) mArea.add(tmp);		
+		if (tmp.valid()) mArea.add(tmp);		
 		for(Monster mons: monsters) {
 			Position pos = mons.getCurPosition();
 			mArea.remove(pos);

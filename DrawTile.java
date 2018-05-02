@@ -16,7 +16,7 @@ public class DrawTile implements ImageObserver  {
     	BufferedImageLoader loader = new BufferedImageLoader();
     	try {
             this.image = loader.loadImage(imageLink);
-            System.out.println("Call");
+            //System.out.println("Call");
     	} catch (IOException e) {
             e.printStackTrace();
     	}
