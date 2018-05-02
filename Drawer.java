@@ -11,6 +11,9 @@ public class Drawer {
 	private DrawTile attackArea;
 	private DrawTile shield;
 	
+	private int monsterTotal;
+	private int monsterCount = 0;
+	
 	Drawer() {
 		sword = new DrawTile("/short_sword.png");
 		spear = new DrawTile("/spear3.png");
@@ -65,13 +68,17 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-            for (Monster mons: map.monsters){                   
-            mons.move(map.heros, map.monsters);
-            map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-            System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
-        }
-        System.out.println("Position change");
-        map.setUnselectState();
+		this.monsterTotal = map.monsters.size();
+		Monster mons = map.monsters.get(this.monsterCount);
+        mons.move(map.heros, map.monsters);
+        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
+        Game.secs = 0;
+        this.monsterCount++;
+            //System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
+            //map.draw();
+//            System.out.println("Position change");
+        
+//        map.setUnselectState();
 	}
 	
 	public void drawMoveArea(Graphics g) {
@@ -98,11 +105,16 @@ public class Drawer {
 	
 	public void draw(Graphics g) {
 		if (Game.Playstate == Game.PLAYSTATE.HERO) {
-                    this.drawMoveArea(g);
-                    this.drawAttackArea(g);
-                } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
-        	this.calMonster();
-        	Game.Playstate = Game.PLAYSTATE.HERO;
+            this.drawMoveArea(g);
+            this.drawAttackArea(g);
+        } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
+        	if (Game.secs >=1)
+        		this.calMonster();
+        	if (this.monsterCount >= map.monsters.size()) {
+        		Game.Playstate = Game.PLAYSTATE.HERO;
+            	map.setUnselectState();
+            	this.monsterCount = 0;
+        	}
         }
 		
 		this.drawHero(g);
