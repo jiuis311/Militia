@@ -68,9 +68,7 @@ public class Drawer {
             for (Monster mons: map.monsters){                   
             mons.move(map.heros, map.monsters);
             map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-            System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
         }
-        System.out.println("Position change");
         map.setUnselectState();
 	}
 	
