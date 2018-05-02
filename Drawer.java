@@ -11,6 +11,9 @@ public class Drawer {
 	private DrawTile attackArea;
 	private DrawTile shield;
 	
+	private int monsterTotal;
+	private int monsterCount = 0;
+	
 	Drawer() {
 		sword = new DrawTile("/short_sword.png");
 		spear = new DrawTile("/spear3.png");
@@ -65,12 +68,15 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-            for (Monster mons: map.monsters){                   
+		this.monsterTotal = map.monsters.size();
+        for (Monster mons: map.monsters) {                   
             mons.move(map.heros, map.monsters);
             map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-            System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
+            //System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
+            //map.draw();
+//            System.out.println("Position change");
         }
-        System.out.println("Position change");
+        
         map.setUnselectState();
 	}
 	
