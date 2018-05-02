@@ -32,6 +32,7 @@ abstract class Map {
         
         heros = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
+        setUnselectState();
     }
     
     /**
