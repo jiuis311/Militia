@@ -93,17 +93,19 @@ public class Mode {
             } while(!map.checkEndTurn());   // tat ca hero thuc hien xong
            
            for(Monster monster_tmp: map.monsters) {
-                System.out.println("Monster move");
-                old_pos = monster_tmp.getCurPosition();
-                map.board[old_pos.getX()][old_pos.getY()] = Map.Symbol.DEFAULT;
-                monster_tmp.move(map.heros, map.monsters);
-                pos = monster_tmp.getCurPosition();
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
+                if (!checkEndGame()) {
+                    System.out.println("Monster move");
+                    old_pos = monster_tmp.getCurPosition();
+                    map.board[old_pos.getX()][old_pos.getY()] = Map.Symbol.DEFAULT;
+                    monster_tmp.move(map.heros, map.monsters);
+                    pos = monster_tmp.getCurPosition();
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                    map.update(monster_tmp, Map.Event.MONSTER_MOVE, pos);
                 }
-                map.update(monster_tmp, Map.Event.MONSTER_MOVE, pos);
             }
            
            // set lai state cho hero
