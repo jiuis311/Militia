@@ -12,6 +12,7 @@ public class Drawer {
 	private DrawTile shield;
 	
 	private int monsterTotal;
+	private int heroTotal;
 	private int monsterCount = 0;
 	
 	Drawer() {
@@ -69,11 +70,15 @@ public class Drawer {
 	
 	public void calMonster() {
 		this.monsterTotal = map.monsters.size();
+		this.heroTotal = map.heros.size();
 		Monster mons = map.monsters.get(this.monsterCount);
-        mons.move(map.heros, map.monsters);
-        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-        Game.secs = 0;
-        this.monsterCount++;
+		if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+		else {
+	        mons.move(map.heros, map.monsters);
+	        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
+	        Game.secs = 0;
+	        this.monsterCount++;
+		}
             //System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
             //map.draw();
 //            System.out.println("Position change");
