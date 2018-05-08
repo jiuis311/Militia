@@ -3,8 +3,8 @@ import java.awt.Graphics;
 public class Drawer {
 	private Hero activeHero;
 	private Map map;
-	private DrawTile sword;
-	private DrawTile spear;
+	private DrawTile swordman;
+	private DrawTile lancer;
 	private DrawTile minion;
 	private DrawTile bigMinion;
 	private DrawTile moveArea;
@@ -16,8 +16,8 @@ public class Drawer {
 	private int monsterCount = 0;
 	
 	Drawer() {
-		sword = new DrawTile("/short_sword.png");
-		spear = new DrawTile("/spear3.png");
+		swordman = new DrawTile("/short_sword.png");
+		lancer = new DrawTile("/spear3.png");
 		minion = new DrawTile("/monster2.png");
 		bigMinion = new DrawTile("/monster3.png");
 		moveArea = new DrawTile("/move-tile.png");
@@ -34,14 +34,14 @@ public class Drawer {
 		String heroName;
 		for(Hero hero: map.heros) {
         	heroName = hero.getClass().getSimpleName();
-        	if (heroName.equals("Sword")) {
-        		sword.setX(hero.getCurPosition().getX()+1);
-        		sword.setY(hero.getCurPosition().getY()+1);
-        		sword.draw(g);
-        	} else if (heroName.equals("Spear")) {
-        		spear.setX(hero.getCurPosition().getX()+1);
-        		spear.setY(hero.getCurPosition().getY()+1);
-        		spear.draw(g);
+        	if (heroName.equals("Swordman")) {
+        		swordman.setX(hero.getCurPosition().getX()+1);
+        		swordman.setY(hero.getCurPosition().getY()+1);
+        		swordman.draw(g);
+        	} else if (heroName.equals("Lancer")) {
+        		lancer.setX(hero.getCurPosition().getX()+1);
+        		lancer.setY(hero.getCurPosition().getY()+1);
+        		lancer.draw(g);
         	}
         }
 	}
@@ -113,7 +113,7 @@ public class Drawer {
             this.drawMoveArea(g);
             this.drawAttackArea(g);
         } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
-        	if (Game.secs >=1)
+        	if (Game.secs >=0.5)
         		this.calMonster();
         	if (this.monsterCount >= map.monsters.size()) {
         		Game.Playstate = Game.PLAYSTATE.HERO;

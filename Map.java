@@ -120,7 +120,7 @@ abstract class Map {
                               {
                                 Position pos = calPosition(number);
                                 board[pos.getX()][pos.getY()] = Symbol.SWORD;
-                                heros.add(new Sword(pos));
+                                heros.add(new Swordman(pos));
                               });
                 break;
             case "Minion":

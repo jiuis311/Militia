@@ -1,9 +1,9 @@
 
 import java.util.ArrayList;
 
-public class Spear extends Hero {
+public class Lancer extends Hero {
 		
-    public Spear(Position pos) {
+    public Lancer(Position pos) {
         super(pos);
         this.setHeroImage(new DrawTile("/spear3.png"));
     }
