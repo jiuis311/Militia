@@ -35,6 +35,7 @@ public class MapLV1 extends Map {
 	        		if (mons.getCurPosition().equals(pos)) {
 	        			if (mons.getClass().getSimpleName() == "Minion") {
 	        				monsters.remove(mons);
+	        				curScore++;
 	        			} else if (mons.getClass().getSimpleName() == "BigMinion") {
 	        				heros.remove(obj);
 	        			}

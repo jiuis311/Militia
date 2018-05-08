@@ -69,21 +69,16 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-		this.monsterTotal = map.monsters.size();
 		this.heroTotal = map.heros.size();
-		Monster mons = map.monsters.get(this.monsterCount);
 		if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
 		else {
+			this.monsterTotal = map.monsters.size();
+			Monster mons = map.monsters.get(this.monsterCount);
 	        mons.move(map.heros, map.monsters);
 	        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
 	        Game.secs = 0;
 	        this.monsterCount++;
 		}
-            //System.out.println(mons.getClass().getSimpleName() + " " + mons.getCurPosition());
-            //map.draw();
-//            System.out.println("Position change");
-        
-//        map.setUnselectState();
 	}
 	
 	public void drawMoveArea(Graphics g) {
@@ -113,7 +108,7 @@ public class Drawer {
             this.drawMoveArea(g);
             this.drawAttackArea(g);
         } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
-        	if (Game.secs >=0.5)
+        	if (Game.secs >=1)
         		this.calMonster();
         	if (this.monsterCount >= map.monsters.size()) {
         		Game.Playstate = Game.PLAYSTATE.HERO;
