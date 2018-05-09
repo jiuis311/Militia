@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Drawer {
@@ -103,6 +105,13 @@ public class Drawer {
 		}
 	}
 	
+	public void drawScore(Graphics g) {
+		Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 40);
+        g.setFont(fn1);
+        g.setColor(Color.black);
+        g.drawString("SCORE: " + map.curScore, (Game.WIDTH / 12) * 19, 150);
+	}
+	
 	public void draw(Graphics g) {
 		if (Game.Playstate == Game.PLAYSTATE.HERO) {
             this.drawMoveArea(g);
@@ -119,5 +128,6 @@ public class Drawer {
 		
 		this.drawHero(g);
 		this.drawMonster(g);
+		this.drawScore(g);
 	}
 }
