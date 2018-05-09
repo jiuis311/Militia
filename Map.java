@@ -34,6 +34,7 @@ abstract class Map {
         
         heros = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
+        setUnselectState();
     }
     
     /**
@@ -101,7 +102,7 @@ abstract class Map {
         return false;
     }
     
-    private boolean checkUtility(Position pos) {
+    private boolean checkCharacter(Position pos) {
         return checkHero(pos) || checkMonster(pos);
     }
     
@@ -111,9 +112,9 @@ abstract class Map {
         return new Position(x, y);
     }
     
-    protected void randomUtility(Object obj, int num) {
+    protected void randomCharacter(Object obj, int num) {
         IntStream stream = new Random().ints(0, Config.GAME_WIDTH*Config.GAME_HEIGHT)
-                                    .filter(number->!checkUtility(calPosition(number)))
+                                    .filter(number->!checkCharacter(calPosition(number)))
                                     .distinct()
                                     .limit(num);
         switch(obj.getClass().getSimpleName()) {
