@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 
 public class Drawer {
 	private Hero activeHero;
@@ -71,10 +75,9 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
+		if (map.turns == 0)Game.State = Game.STATE.ENDGAME;
 		this.heroTotal = map.heros.size();
-                this.monsterTotal = map.monsters.size();
-                if (monsterTotal == 0) Game.State = Game.STATE.ENDGAME; //tam thoi 
-                else if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+        if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
 		else {
 			this.monsterTotal = map.monsters.size();
 			Monster mons = map.monsters.get(this.monsterCount);
@@ -109,10 +112,11 @@ public class Drawer {
 	}
 	
 	public void drawScore(Graphics g) {
-		Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 40);
+		Font fn1 = new Font("sofiapro-light.otf", Font.PLAIN, 40);
         g.setFont(fn1);
         g.setColor(Color.black);
         g.drawString("SCORE: " + map.curScore, (Game.WIDTH / 12) * 19, 150);
+        g.drawString("TURN: " + map.turns, (Game.WIDTH / 12) * 19, 250);
 	}
 	
 	public void draw(Graphics g) {
