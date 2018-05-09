@@ -1,34 +1,20 @@
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public abstract class Monster {
-	private Position curPosition;
-	private ArrayList<Position> moveArea;
-	private DrawTile monsterImage;
+public abstract class Monster extends Character{
+	private boolean target;
 	
 	//Getter and setter
-	public Position getCurPosition() {
-		return curPosition;
+	public boolean isTargeted() {
+		return target;
 	}
-	public DrawTile getMonsterImage() {
-		return monsterImage;
-	}
-	public void setMonsterImage(DrawTile monsterImage) {
-		this.monsterImage = monsterImage;
-	}
-	public void setCurPosition(Position pos) {
-		curPosition = pos;
-	}
-	public ArrayList<Position> getMoveArea() {
-		return moveArea;
-	}
-	public void setMoveArea(ArrayList<Position> pos) {
-		moveArea = pos;
+	public void setTarget() {
+		target = true;
 	}
 	//
 	Monster(Position pos) {
-		curPosition = pos;
-		moveArea = new ArrayList<Position>();
+		super(pos);
+		target = false;
 	}
 	public boolean equals(Object obj) {
         if(obj instanceof Monster) 

@@ -3,11 +3,11 @@ public class MapLV1 extends Map {
      
     MapLV1() {
         super();
-//        board[1][1] = Symbol.MINION;
-//        monsters.add(new Minion(new Position(1, 1)));
-//        
-//        board[1][3] = Symbol.MINION;
-//        monsters.add(new Minion(new Position(1, 3)));
+        board[1][1] = Symbol.MINION;
+        monsters.add(new Minion(new Position(1, 1)));
+        
+        board[1][3] = Symbol.MINION;
+        monsters.add(new Minion(new Position(1, 3)));
         
         board[1][6] = Symbol.SWORD;
         heros.add(new Swordman(new Position(1, 6)));
@@ -17,7 +17,11 @@ public class MapLV1 extends Map {
         
         board[6][4] = Symbol.SPEAR;
         heros.add(new Lancer(new Position(6, 4)));
-        
+        turns = 4;
+        targetedMons = 3;
+        for (Monster mons:monsters) {
+        	mons.setTarget();
+        }
         random();
     }
     
@@ -56,13 +60,12 @@ public class MapLV1 extends Map {
 	        	}	            
 	            Swordman sw3 = new Swordman(pos);
 	            if (heros.contains(sw3)) heros.remove(sw3);
-	            Lancer sp3 = new Lancer(pos);
-	            if (heros.contains(sp3)) heros.remove(sp3);
+	             
 	            break;
  	        default:
 	            break;
     	}
-    	draw();
+    	//draw();
     }
 
     @Override

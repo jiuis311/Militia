@@ -79,7 +79,7 @@ public class Game extends Canvas implements Runnable {
 	            frames++;
 	            if (frames % 10 == 0) {
 	            	this.secs++;
-	            	System.out.println(this.secs);
+	            	//System.out.println(this.secs);
 	            }
 	            render();                         
 	            try {
