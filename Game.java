@@ -79,7 +79,7 @@ public class Game extends Canvas implements Runnable {
 	            frames++;
 	            if (frames % 10 == 0) {
 	            	this.secs++;
-	            	System.out.println(this.secs);
+	            	//System.out.println(this.secs);
 	            }
 	            render();                         
 	            try {
@@ -156,7 +156,7 @@ public class Game extends Canvas implements Runnable {
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-        game.addMouseListener(new GameMouseListener(game));
+                game.addMouseListener(new GameMouseListener(game));
 		JFrame frame = new JFrame(game.TITLE);
 		frame.add(game);
         frame.pack();
