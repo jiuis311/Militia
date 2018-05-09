@@ -78,7 +78,7 @@ public class Drawer {
 			Monster mons = map.monsters.get(this.monsterCount);
 	        mons.move(map.heros, map.monsters);
 	        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-	        if (map.heros.size() == 0) Game.State = Game.STATE.ENDGAME;
+	        if (map.heros.size() == 0) Game.State = Game.STATE.ENDGAME; 
 	        Game.secs = 0;
 	        this.monsterCount++;
 		}
