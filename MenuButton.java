@@ -13,8 +13,8 @@ public class MenuButton implements ImageObserver {
 	private int helpButtonY = 300;
 	private int quitButtonX = Game.WIDTH / 2 + 120;
 	private int quitButtonY = 400;
-    private int menuGameX = Game.WIDTH - 600;
-    private int menuGameY = 0;
+        private int menuGameX = Game.WIDTH - 600;
+        private int menuGameY = 0;
 	private static final int BUTTONWIDTH = 274;
 	private static final int BUTTONHEIGHT = 74;
 	private BufferedImage startButton;
@@ -23,8 +23,8 @@ public class MenuButton implements ImageObserver {
 	private BufferedImage startButton2;
 	private BufferedImage helpButton2;
 	private BufferedImage quitButton2;
-    private BufferedImage exitButton;
-    private BufferedImage exitButton2;
+        private BufferedImage exitButton;
+        private BufferedImage exitButton2;
 	public static boolean startButtonState = false;
 	public static boolean helpButtonState = false;
 	public static boolean quitButtonState = false;

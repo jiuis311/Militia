@@ -46,9 +46,9 @@ public class DrawTile implements ImageObserver  {
         g.drawImage(image, (this.x+2)*WIDTH, this.y*WIDTH, WIDTH, WIDTH, (ImageObserver) this);
     }
 
-	@Override
-	public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		// TODO Auto-generated method stub
-		return false;
-	};
+    @Override
+    public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	// TODO Auto-generated method stub
+	return false;
+    };
 }
