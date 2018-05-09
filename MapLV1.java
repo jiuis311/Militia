@@ -69,7 +69,7 @@ public class MapLV1 extends Map {
     void random() {
         Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
-        randomUtility(minion, 2);
-        randomUtility(big_minion, 1);
+        randomCharacter(minion, 2);
+        randomCharacter(big_minion, 1);
     }    
 }
