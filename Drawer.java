@@ -38,7 +38,7 @@ public class Drawer {
 	
 	public void drawHero(Graphics g) {
 		String heroName;
-		for(Hero hero: map.heros) {
+		for(Hero hero: map.heroes) {
         	heroName = hero.getClass().getSimpleName();
         	if (heroName.equals("Swordman")) {
         		swordman.setX(hero.getCurPosition().getX()+1);
@@ -76,14 +76,14 @@ public class Drawer {
 	
 	public void calMonster() {
 		if (map.turns == 0)Game.State = Game.STATE.ENDGAME;
-		this.heroTotal = map.heros.size();
-        if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+                    this.heroTotal = map.heroes.size();
+                    if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
 		else {
 			this.monsterTotal = map.monsters.size();
 			Monster mons = map.monsters.get(this.monsterCount);
-	        mons.move(map.heros, map.monsters);
+	        mons.move(map.heroes, map.monsters);
 	        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-	        if (map.heros.size() == 0) Game.State = Game.STATE.ENDGAME;
+	        if (map.heroes.size() == 0) Game.State = Game.STATE.ENDGAME;
 	        Game.secs = 0;
 	        this.monsterCount++;
 		}
@@ -92,7 +92,7 @@ public class Drawer {
 	public void drawMoveArea(Graphics g) {
 		if (this.activeHero != null && this.activeHero.getState() == Hero.State.SELECTING) {
 			this.activeHero.calMoveArea();
-			for(Position pos: activeHero.getMoveArea()) {
+			for(Position pos: activeHero.getMoveArea(this.map.heroes)) {
 	    		this.moveArea.setX(pos.getX()+1);
 	    		this.moveArea.setY(pos.getY()+1);
 	    		this.moveArea.draw(g);

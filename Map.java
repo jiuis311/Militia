@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 abstract class Map {
-    ArrayList<Hero> heros;
+    ArrayList<Hero> heroes;
     ArrayList<Monster> monsters;
     protected Symbol[][] board;
     protected int curScore;
@@ -32,7 +32,7 @@ abstract class Map {
             }
         }
         
-        heros = new ArrayList<Hero>();
+        heroes = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
         setUnselectState();
     }
@@ -71,7 +71,7 @@ abstract class Map {
     public Hero getHero(int x, int y) {
         Position pos = new Position(x, y);
         
-        for(Hero hero: heros) {
+        for(Hero hero: heroes) {
             if(hero.getCurPosition().equals(pos))
                 return hero;
         }
@@ -87,7 +87,7 @@ abstract class Map {
     }
     
     private boolean checkHero(Position pos) {
-        for(Hero hero: heros) {
+        for(Hero hero: heroes) {
             if(hero.getCurPosition().equals(pos))
                 return true;
         }
@@ -123,7 +123,7 @@ abstract class Map {
                               {
                                 Position pos = calPosition(number);
                                 board[pos.getX()][pos.getY()] = Symbol.SWORD;
-                                heros.add(new Swordman(pos));
+                                heroes.add(new Swordman(pos));
                               });
                 break;
             case "Minion":
@@ -177,11 +177,11 @@ abstract class Map {
     }
   
     public void setUnselectState() {
-        for(Hero hero: heros)
+        for(Hero hero: heroes)
             hero.setState(Hero.State.UNSELECT);
     }
     public boolean checkEndTurn() {
-        for(Hero hero: heros)
+        for(Hero hero: heroes)
             if(hero.getState() != Hero.State.DONE)
                 return false;
         turns--;
