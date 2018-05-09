@@ -1,6 +1,10 @@
 abstract class Entity {
-    private Position curPosition;
+    protected Position curPosition;
     
-    public Position getPosition() { return curPosition; }
-    public void setPosition(Position position) { curPosition = position; }
+    public Position getCurPosition() { return curPosition; }
+    public void setCurPosition(Position position) { curPosition = position; }
+    
+    Entity(Position position) {
+        setCurPosition(position);
+    }
 }

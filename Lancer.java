@@ -5,7 +5,6 @@ public class Lancer extends Hero {
 		
     public Lancer(Position pos) {
         super(pos);
-        this.setHeroImage(new DrawTile("/spear3.png"));
     }
     
     @Override

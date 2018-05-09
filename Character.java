@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 
 abstract class Character extends Entity {
-    private ArrayList<Position> moveArea;
+    protected ArrayList<Position> moveArea;
     
-    public ArrayList<Position> getMoveArea(ArrayList<?> heroes, ArrayList<?> monsters) {
-        calMoveArea(heroes, monsters);
-        return moveArea;
+    public void setMoveArea(ArrayList<Position> moveArea) {
+        this.moveArea = moveArea;
     }
-    abstract void calMoveArea(ArrayList<?> heroes, ArrayList<?> monsters);
+    
+    Character(Position position) {
+        super(position);
+        moveArea = new ArrayList<Position>();
+    }
 }

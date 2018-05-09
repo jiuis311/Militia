@@ -5,7 +5,6 @@ public class Swordman extends Hero {
 		
     public Swordman(Position pos) {
         super(pos);
-        this.setHeroImage(new DrawTile("/short_sword.png"));
     }
     
     @Override
