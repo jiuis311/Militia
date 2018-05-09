@@ -7,7 +7,7 @@ abstract class Map {
     ArrayList<Hero> heros;
     ArrayList<Monster> monsters;
     protected Symbol[][] board;
-    
+    protected int curScore;
    enum Symbol {
         DEFAULT,
         MINION,
@@ -120,7 +120,7 @@ abstract class Map {
                               {
                                 Position pos = calPosition(number);
                                 board[pos.getX()][pos.getY()] = Symbol.SWORD;
-                                heros.add(new Sword(pos));
+                                heros.add(new Swordman(pos));
                               });
                 break;
             case "Minion":
@@ -149,6 +149,7 @@ abstract class Map {
     		if (mons.getCurPosition().equals(pos)) {
     			if (mons.getClass().getName() == "Minion") {
     				monsters.remove(mons);
+    				curScore++;
     	            board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
     	            return true;
     			} else if (mons.getClass().getName() == "BigMinion") {
@@ -156,6 +157,7 @@ abstract class Map {
     				int shield = mon.getShield();
     	            if (shield == 0) {
     	            	monsters.remove(mons);
+    	            	curScore+=3;
     	            	board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
     	            	return true;
     	            } else {

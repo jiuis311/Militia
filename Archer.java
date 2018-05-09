@@ -1,8 +1,8 @@
 
 import java.util.ArrayList;
 
-public class Arrow extends Hero {
-    public Arrow(Position pos) {
+public class Archer extends Hero {
+    public Archer(Position pos) {
         super(pos);
     }
     

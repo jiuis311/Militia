@@ -10,13 +10,13 @@ public class MapLV1 extends Map {
         monsters.add(new Minion(new Position(1, 3)));
         
         board[1][6] = Symbol.SWORD;
-        heros.add(new Sword(new Position(1, 6)));
+        heros.add(new Swordman(new Position(1, 6)));
         
         board[5][2] = Symbol.BIG_MINION;
         monsters.add(new BigMinion(new Position(5, 2)));
         
         board[6][4] = Symbol.SPEAR;
-        heros.add(new Spear(new Position(6, 4)));
+        heros.add(new Lancer(new Position(6, 4)));
         
         random();
     }
@@ -25,16 +25,17 @@ public class MapLV1 extends Map {
     void update(Object obj, Event eventType, Position pos) {
     	switch(eventType) {
 	        case HERO_MOVE:		        	
-	        	if (obj instanceof Sword) {
+	        	if (obj instanceof Swordman) {
 	        		board[pos.getX()][pos.getY()] = Symbol.SWORD;
 	        	}
-	        	else if (obj instanceof Spear) {
+	        	else if (obj instanceof Lancer) {
 	        		board[pos.getX()][pos.getY()] = Symbol.SPEAR;
 	        	}
 	        	for(Monster mons:monsters) {
 	        		if (mons.getCurPosition().equals(pos)) {
 	        			if (mons.getClass().getSimpleName() == "Minion") {
 	        				monsters.remove(mons);
+	        				curScore++;
 	        			} else if (mons.getClass().getSimpleName() == "BigMinion") {
 	        				heros.remove(obj);
 	        			}
@@ -53,9 +54,9 @@ public class MapLV1 extends Map {
 	        	} else if (obj instanceof BigMinion) {
 	        		board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
 	        	}	            
-	            Sword sw3 = new Sword(pos);
+	            Swordman sw3 = new Swordman(pos);
 	            if (heros.contains(sw3)) heros.remove(sw3);
-	            Spear sp3 = new Spear(pos);
+	            Lancer sp3 = new Lancer(pos);
 	            if (heros.contains(sp3)) heros.remove(sp3);
 	            break;
  	        default:

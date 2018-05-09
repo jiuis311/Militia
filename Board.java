@@ -30,7 +30,7 @@ public class Board {
             int y = rand[i]%Y;
             int x = (rand[i] - y)/Y;
             //System.out.println(Integer.toString(rand[i])+','+x+','+y);
-            heros.add(new Sword(new Position(x, y)));
+            heros.add(new Swordman(new Position(x, y)));
             board[x][y] = 'S';
         }
         
@@ -73,8 +73,8 @@ public class Board {
                 break;
             case MONS_MOVE:
                 board[pos.getX()][pos.getY()] = 'M';
-                Sword sword = new Sword(pos);
-                if (heros.contains(sword)) heros.remove(sword);
+                Swordman swordman = new Swordman(pos);
+                if (heros.contains(swordman)) heros.remove(swordman);
                 break;
             default:
                 break;
