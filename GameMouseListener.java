@@ -47,9 +47,9 @@ public class GameMouseListener extends MouseAdapter {
                             this.activeHero.setState(Hero.State.SELECTING);
                     	} else if (this.activeHero.getState() == Hero.State.SELECTING) {
                             //System.out.println("SELECTING STATE");                           
-                            if (this.activeHero.move(new Position(x-1, y-1))) {
+                            if (this.activeHero.move(new Position(x-1, y-1), this.map.heroes)) {
 	                            this.map.update(this.activeHero, Map.Event.HERO_MOVE, new Position(x-1,y-1));
-	                            if (!game.maplv1.heros.contains(activeHero)) 
+	                            if (!game.maplv1.heroes.contains(activeHero)) 
 	                            	this.activeHero.setState(Hero.State.DONE);
 	                            else
 	                            	this.activeHero.setState(Hero.State.MOVED);

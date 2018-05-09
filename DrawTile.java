@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class DrawTile implements ImageObserver  {
     protected int x = 0;
@@ -12,14 +13,13 @@ public class DrawTile implements ImageObserver  {
     protected String imageLink;
     public static final int WIDTH = Config.TILEWIDTH;
     
-    DrawTile(String imageLink){	
-    	BufferedImageLoader loader = new BufferedImageLoader();
-    	try {
-            this.image = loader.loadImage(imageLink);
+    DrawTile(String imageLink) {
+        try {
+            image = ImageIO.read(DrawTile.class.getResourceAsStream(imageLink));
             //System.out.println("Call");
-    	} catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-    	}
+        }
     }
     
     public int getX() {

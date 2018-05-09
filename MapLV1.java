@@ -10,13 +10,13 @@ public class MapLV1 extends Map {
         monsters.add(new Minion(new Position(1, 3)));
         
         board[1][6] = Symbol.SWORD;
-        heros.add(new Swordman(new Position(1, 6)));
+        heroes.add(new Swordman(new Position(1, 6)));
         
         board[5][2] = Symbol.BIG_MINION;
         monsters.add(new BigMinion(new Position(5, 2)));
         
         board[6][4] = Symbol.SPEAR;
-        heros.add(new Lancer(new Position(6, 4)));
+        heroes.add(new Lancer(new Position(6, 4)));
         turns = 4;
         targetedMons = 3;
         for (Monster mons:monsters) {
@@ -41,7 +41,7 @@ public class MapLV1 extends Map {
 	        				monsters.remove(mons);
 	        				curScore++;
 	        			} else if (mons.getClass().getSimpleName() == "BigMinion") {
-	        				heros.remove(obj);
+	        				heroes.remove(obj);
 	        			}
 	        			break;
 	        		}
@@ -51,6 +51,7 @@ public class MapLV1 extends Map {
 	            for (Position position: ((Hero) obj).calDamageArea(pos)) {
 	            	removeMonster(position);
 	            }
+                    
 	            break;
 	        case MONSTER_MOVE:
 	        	if (obj instanceof Minion) {
@@ -59,7 +60,7 @@ public class MapLV1 extends Map {
 	        		board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
 	        	}	            
 	            Swordman sw3 = new Swordman(pos);
-	            if (heros.contains(sw3)) heros.remove(sw3);
+	            if (heroes.contains(sw3)) heroes.remove(sw3);
 	             
 	            break;
  	        default:

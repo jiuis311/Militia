@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
         maplv1 = new MapLV1();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
-        bracket = new DrawTile("/bracket.png");
+        bracket = new DrawTile("/res/bracket.png");
         drawer = new Drawer();
     }
 	
@@ -156,7 +156,7 @@ public class Game extends Canvas implements Runnable {
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-        game.addMouseListener(new GameMouseListener(game));
+                game.addMouseListener(new GameMouseListener(game));
 		JFrame frame = new JFrame(game.TITLE);
 		frame.add(game);
         frame.pack();
