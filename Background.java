@@ -6,12 +6,12 @@ import java.io.IOException;
 public class Background extends DrawTile implements ImageObserver {
 
     public Background() {
-        super("/game-background.png");
+        super("/menu-background1.png");
     }
 
     @Override
     public void draw(Graphics g) {
-         g.drawImage(image, 0, 0, Game.WIDTH*Game.SCALE+200, Game.HEIGHT*Game.SCALE, this);
+         g.drawImage(image, 0, 0, Game.WIDTH*Game.SCALE+10, Game.HEIGHT*Game.SCALE, this);
     }
 
     @Override

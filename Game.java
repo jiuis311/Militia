@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
         GAME,
         ENDGAME
     }
-    public static STATE State = STATE.MENU;
+    public static STATE State = STATE.ENDGAME;
     public static enum PLAYSTATE {
     	HERO,
     	MONSTER
@@ -156,7 +156,7 @@ public class Game extends Canvas implements Runnable {
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-        game.addMouseListener(new GameMouseListener(game));
+                game.addMouseListener(new GameMouseListener(game));
 		JFrame frame = new JFrame(game.TITLE);
 		frame.add(game);
         frame.pack();

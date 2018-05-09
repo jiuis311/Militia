@@ -51,6 +51,7 @@ public class MapLV1 extends Map {
 	            for (Position position: ((Hero) obj).calDamageArea(pos)) {
 	            	removeMonster(position);
 	            }
+                    
 	            break;
 	        case MONSTER_MOVE:
 	        	if (obj instanceof Minion) {
