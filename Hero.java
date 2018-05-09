@@ -1,59 +1,15 @@
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
-abstract class Hero {
-    private Position curPosition;
-    private ArrayList<Position> moveArea;
+abstract class Hero extends Character{
     private ArrayList<Position> attackArea;
     private State state;
-    private DrawTile heroImage;
-    private DrawTile moveAreaTile;
-    private DrawTile attackAreaTile;
-    
-    //Getter and setter
-    public Position getCurPosition() {
-		return curPosition;
-	}
 
-	public void setCurPosition(Position curPosition) {
-		this.curPosition = curPosition;
-	}
+    public void setAttackArea(ArrayList<Position> attackArea) {
+            this.attackArea = attackArea;
+    }
 
-	public DrawTile getHeroImage() {
-		return heroImage;
-	}
-
-	public void setHeroImage(DrawTile heroImage) {
-		this.heroImage = heroImage;
-	}
-
-	public DrawTile getMoveAreaTile() {
-		return moveAreaTile;
-	}
-
-	public void setMoveAreaTile(DrawTile moveAreaTile) {
-		this.moveAreaTile = moveAreaTile;
-	}
-
-	public DrawTile getAttackAreaTile() {
-		return attackAreaTile;
-	}
-
-	public void setAttackAreaTile(DrawTile attackAreaTile) {
-		this.attackAreaTile = attackAreaTile;
-	}
-
-	public void setMoveArea(ArrayList<Position> moveArea) {
-		this.moveArea = moveArea;
-	}
-
-	public void setAttackArea(ArrayList<Position> attackArea) {
-		this.attackArea = attackArea;
-	}
-	
-	//
-	public enum State {
+    //
+    public enum State {
         UNSELECT,
         SELECTING,
         MOVING,
@@ -62,13 +18,10 @@ abstract class Hero {
         DONE
     }
     
-    Hero(Position pos) {
-        curPosition = new Position(pos.getX(), pos.getY());
-        moveArea = new ArrayList<Position> ();
+    Hero(Position position) {
+        super(position);
         attackArea = new ArrayList<Position> ();
         state = State.UNSELECT;
-        moveAreaTile = new DrawTile("/move-tile.png");
-        attackAreaTile = new DrawTile("/attack-tile.png");
     }
     
     public void setState(State state) { this.state = state; }
@@ -78,12 +31,12 @@ abstract class Hero {
         calMoveArea();
         calAttackArea();
         System.out.println("Vi tri di chuyen");
-        for(Position pos: moveArea) {
+        for(Position pos: getMoveArea()) {
             System.out.print('('+Integer.toString(pos.getX())+','+pos.getY()+')');
         }
         System.out.println();
         System.out.println("Vi tri tan cong");
-        for(Position pos: attackArea) {
+        for(Position pos: getAttackArea()) {
             System.out.print('('+Integer.toString(pos.getX())+','+pos.getY()+')');
         }
     }
