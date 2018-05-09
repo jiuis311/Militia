@@ -9,7 +9,7 @@ public class TileGrid implements ImageObserver {
     private DrawTile tile;
 
     public TileGrid(int x, int y) {
-    	tile = new DrawTile("/ground-tile.png");
+    	tile = new DrawTile("/res/ground-tile.png");
     }
 
     @Override

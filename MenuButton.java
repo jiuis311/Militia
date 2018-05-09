@@ -5,90 +5,54 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class MenuButton implements ImageObserver {
-	private int startButtonX = Game.WIDTH / 2 + 230;
-	private int startButtonY = 350;
-	private int helpButtonX = Game.WIDTH / 2 + 230;
-	private int helpButtonY = 450;
-	private int quitButtonX = Game.WIDTH / 2 + 230;
-	private int quitButtonY = 550;
-        private int menuGameX = Game.WIDTH - 570;
-        private int menuGameY = 25;
-        private int logoX = Game.WIDTH / 2 + 60;
-        private int logoY = 100;
-	private static final int BUTTONWIDTH = 170;
-	private static final int BUTTONHEIGHT = 107;
-        private static final int GAMEBUTTONWIDTH = 85;
-	private static final int GAMEBUTTONHEIGHT = 53;
-	private BufferedImage startButton;
-	private BufferedImage helpButton;
-	private BufferedImage quitButton;
-	private BufferedImage startButton2;
-	private BufferedImage helpButton2;
-	private BufferedImage quitButton2;
-        private BufferedImage exitButton;
-        private BufferedImage exitButton2;
-        private BufferedImage logo;
-	public static boolean startButtonState = false;
-	public static boolean helpButtonState = false;
-	public static boolean quitButtonState = false;
-        public static boolean exitButtonState = false;
+    private int startButtonX = Game.WIDTH / 2 + 230;
+    private int startButtonY = 350;
+    private int helpButtonX = Game.WIDTH / 2 + 230;
+    private int helpButtonY = 450;
+    private int quitButtonX = Game.WIDTH / 2 + 230;
+    private int quitButtonY = 550;
+    private int menuGameX = Game.WIDTH - 570;
+    private int menuGameY = 25;
+    private int logoX = Game.WIDTH / 2 + 60;
+    private int logoY = 100;
+    private static final int BUTTONWIDTH = 170;
+    private static final int BUTTONHEIGHT = 107;
+    private static final int GAMEBUTTONWIDTH = 85;
+    private static final int GAMEBUTTONHEIGHT = 53;
+    private BufferedImage startButton;
+    private BufferedImage helpButton;
+    private BufferedImage quitButton;
+    private BufferedImage startButton2;
+    private BufferedImage helpButton2;
+    private BufferedImage quitButton2;
+    private BufferedImage exitButton;
+    private BufferedImage exitButton2;
+    private BufferedImage logo;
+    public static boolean startButtonState = false;
+    public static boolean helpButtonState = false;
+    public static boolean quitButtonState = false;
+    public static boolean exitButtonState = false;
 
-	
-	MenuButton() {
-		BufferedImageLoader loader = new BufferedImageLoader();
-		try {
-			this.startButton = loader.loadImage("/play.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			this.helpButton = loader.loadImage("/help.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			this.quitButton = loader.loadImage("/quit.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-                try {
-			this.exitButton = loader.loadImage("/quit.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			this.startButton2 = loader.loadImage("/play1.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			this.helpButton2 = loader.loadImage("/help1.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			this.quitButton2 = loader.loadImage("/quit1.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-                try {
-			this.exitButton2 = loader.loadImage("/quit1.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-                try {
-			this.logo = loader.loadImage("/militiaLogo.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
+    MenuButton() {
+        try {
+            startButton = ImageIO.read(DrawTile.class.getResourceAsStream("/res/play.png"));
+            helpButton = ImageIO.read(DrawTile.class.getResourceAsStream("/res/help.png"));
+            quitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/res/quit.png"));
+            exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/res/exit.png"));
+            startButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/res/play1.png"));
+            helpButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/res/help1.png"));
+            quitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/res/quit1.png"));
+            exitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/res/quit1.png"));
+            logo = ImageIO.read(DrawTile.class.getResourceAsStream("/res/militiaLogo.png"));
+            //System.out.println("Call");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public void drawButtons(Graphics g) {
 //        Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 150);
