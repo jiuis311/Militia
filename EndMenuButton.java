@@ -6,55 +6,37 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class EndMenuButton implements ImageObserver{
-        private int reStartButtonX = Game.WIDTH / 2 + 210;
-	private int reStartButtonY = 350;
-	private int exitButtonX = Game.WIDTH / 2 + 210;
-	private int exitButtonY = 450;
-        private int endLogoX = Game.WIDTH/2 + 60;
-        private int endLogoY = 100;
-	private static final int BUTTONWIDTH = 250;
-	private static final int BUTTONHEIGHT = 107;
-	private BufferedImage reStartButton;
-	private BufferedImage exitButton;
-	private BufferedImage reStartButton2;
-	private BufferedImage exitButton2;
-        private BufferedImage endLogo;
-	public static boolean reStartButtonState = false;
-	public static boolean exitButtonState = false;
+    private int reStartButtonX = Game.WIDTH / 2 + 210;
+    private int reStartButtonY = 350;
+    private int exitButtonX = Game.WIDTH / 2 + 210;
+    private int exitButtonY = 450;
+    private int endLogoX = Game.WIDTH/2 + 60;
+    private int endLogoY = 100;
+    private static final int BUTTONWIDTH = 250;
+    private static final int BUTTONHEIGHT = 107;
+    private BufferedImage reStartButton;
+    private BufferedImage exitButton;
+    private BufferedImage reStartButton2;
+    private BufferedImage exitButton2;
+    private BufferedImage endLogo;
+    public static boolean reStartButtonState = false;
+    public static boolean exitButtonState = false;
 
-	
-	EndMenuButton() {
-		BufferedImageLoader loader = new BufferedImageLoader();
-		try {
-			this.reStartButton = loader.loadImage("/replay.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-                try {
-			this.exitButton = loader.loadImage("/exit.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			this.reStartButton2 = loader.loadImage("/replay1.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-                try {
-			this.exitButton2 = loader.loadImage("/exit1.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-                try {
-			this.endLogo = loader.loadImage("/endLogo.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}                
-                
-	}
+
+    EndMenuButton() {
+        try {
+            reStartButton = ImageIO.read(DrawTile.class.getResourceAsStream("/res/replay.png"));
+            exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/res/exit.png"));
+            reStartButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/res/replay1.png"));
+            exitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/res/exit1.png"));
+            endLogo = ImageIO.read(DrawTile.class.getResourceAsStream("/res/endLogo.png"));
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+    }
 	
 	public void drawButtons(Graphics g) {
 //        Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 120);

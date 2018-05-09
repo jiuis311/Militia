@@ -1,34 +1,30 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.IOException;
 
 public class Drawer {
 	private Hero activeHero;
 	private Map map;
-	private DrawTile swordman;
-	private DrawTile lancer;
-	private DrawTile minion;
-	private DrawTile bigMinion;
-	private DrawTile moveArea;
-	private DrawTile attackArea;
-	private DrawTile shield;
+	private final DrawTile swordman;
+	private final DrawTile lancer;
+	private final DrawTile minion;
+	private final DrawTile bigMinion;
+	private final DrawTile moveArea;
+	private final DrawTile attackArea;
+	private final DrawTile shield;
 	
 	private int monsterTotal;
 	private int heroTotal;
 	private int monsterCount = 0;
 	
 	Drawer() {
-		swordman = new DrawTile("/short_sword.png");
-		lancer = new DrawTile("/spear3.png");
-		minion = new DrawTile("/monster2.png");
-		bigMinion = new DrawTile("/monster3.png");
-		moveArea = new DrawTile("/move-tile.png");
-		attackArea = new DrawTile("/attack-tile.png");
-		shield = new DrawTile("/shield.png");
+		swordman = new DrawTile("/res/short_sword.png");
+		lancer = new DrawTile("/res/spear3.png");
+		minion = new DrawTile("/res/monster2.png");
+		bigMinion = new DrawTile("/res/monster3.png");
+		moveArea = new DrawTile("/res/move-tile.png");
+		attackArea = new DrawTile("/res/attack-tile.png");
+		shield = new DrawTile("/res/shield.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
@@ -75,18 +71,20 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-		if (map.turns == 0)Game.State = Game.STATE.ENDGAME;
-                    this.heroTotal = map.heroes.size();
-                    if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
-		else {
-			this.monsterTotal = map.monsters.size();
-			Monster mons = map.monsters.get(this.monsterCount);
-	        mons.move(map.heroes, map.monsters);
-	        map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
-	        if (map.heroes.size() == 0) Game.State = Game.STATE.ENDGAME;
-	        Game.secs = 0;
-	        this.monsterCount++;
-		}
+            if (map.turns == 0)Game.State = Game.STATE.ENDGAME;
+                this.heroTotal = map.heroes.size();
+                if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+            else {
+                if(!map.monsters.isEmpty()) {
+                    this.monsterTotal = map.monsters.size();
+                    Monster mons = map.monsters.get(this.monsterCount);
+                    mons.move(map.heroes, map.monsters);
+                    map.update(mons, Map.Event.MONSTER_MOVE, mons.getCurPosition());
+                    if (map.heroes.size() == 0) Game.State = Game.STATE.ENDGAME;
+                    Game.secs = 0;
+                    this.monsterCount++;
+                }
+            }
 	}
 	
 	public void drawMoveArea(Graphics g) {

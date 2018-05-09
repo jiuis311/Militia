@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
         maplv1 = new MapLV1();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
-        bracket = new DrawTile("/bracket.png");
+        bracket = new DrawTile("/res/bracket.png");
         drawer = new Drawer();
     }
 	

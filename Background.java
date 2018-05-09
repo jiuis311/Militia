@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Background extends DrawTile implements ImageObserver {
 
     public Background() {
-        super("/menu-background1.png");
+        super("/res/menu-background1.png");
     }
 
     @Override

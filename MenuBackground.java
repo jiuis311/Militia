@@ -5,7 +5,7 @@ import java.awt.image.ImageObserver;
 public class MenuBackground extends DrawTile implements ImageObserver {
 
     public MenuBackground() {
-        super("/menu-background1.png");
+        super("/res/menu-background1.png");
     }
 
     @Override
