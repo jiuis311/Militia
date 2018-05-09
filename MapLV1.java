@@ -3,11 +3,11 @@ public class MapLV1 extends Map {
      
     MapLV1() {
         super();
-        board[1][1] = Symbol.MINION;
-        monsters.add(new Minion(new Position(1, 1)));
-        
-        board[1][3] = Symbol.MINION;
-        monsters.add(new Minion(new Position(1, 3)));
+//        board[1][1] = Symbol.MINION;
+//        monsters.add(new Minion(new Position(1, 1)));
+//        
+//        board[1][3] = Symbol.MINION;
+//        monsters.add(new Minion(new Position(1, 3)));
         
         board[1][6] = Symbol.SWORD;
         heros.add(new Swordman(new Position(1, 6)));
@@ -69,7 +69,7 @@ public class MapLV1 extends Map {
     void random() {
         Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
-        randomUtility(minion, 5);
-        randomUtility(big_minion, 1);
+        randomCharacter(minion, 2);
+        randomCharacter(big_minion, 1);
     }    
 }

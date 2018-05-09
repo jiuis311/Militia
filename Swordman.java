@@ -5,7 +5,6 @@ public class Swordman extends Hero {
 		
     public Swordman(Position pos) {
         super(pos);
-        this.setHeroImage(new DrawTile("/short_sword.png"));
     }
     
     @Override
@@ -39,7 +38,6 @@ public class Swordman extends Hero {
 
     @Override
     boolean move(Position pos) {
-        calMoveArea();
         for(Position p: getMoveArea()) {
             if (pos.equals(p)) {
                 setCurPosition(pos);
@@ -51,7 +49,6 @@ public class Swordman extends Hero {
 
     @Override
     boolean attack(Position pos) {
-        calAttackArea();
         for(Position p: getAttackArea()) {
             if (pos.equals(p)) {
                 return true;
