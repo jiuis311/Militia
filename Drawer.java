@@ -112,11 +112,12 @@ public class Drawer {
 	}
 	
 	public void drawScore(Graphics g) {
-		Font fn1 = new Font("sofiapro-light.otf", Font.PLAIN, 40);
+		Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
         g.setFont(fn1);
-        g.setColor(Color.black);
-        g.drawString("SCORE: " + map.curScore, (Game.WIDTH / 12) * 19, 150);
-        g.drawString("TURN: " + map.turns, (Game.WIDTH / 12) * 19, 250);
+        Color gameBlue = new Color(127, 191, 191);
+        g.setColor(gameBlue);
+        g.drawString("Score: " + map.curScore, (Game.WIDTH / 12) * 21, 100);
+        g.drawString("Turn: " + map.turns, (Game.WIDTH / 12) * 21, 150);
 	}
 	
 	public void draw(Graphics g) {
