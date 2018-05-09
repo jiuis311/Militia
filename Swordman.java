@@ -39,7 +39,6 @@ public class Swordman extends Hero {
 
     @Override
     boolean move(Position pos) {
-        calMoveArea();
         for(Position p: getMoveArea()) {
             if (pos.equals(p)) {
                 setCurPosition(pos);
@@ -51,7 +50,6 @@ public class Swordman extends Hero {
 
     @Override
     boolean attack(Position pos) {
-        calAttackArea();
         for(Position p: getAttackArea()) {
             if (pos.equals(p)) {
                 return true;
