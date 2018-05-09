@@ -5,7 +5,7 @@ public class Mode {
     private Map map;
     
     private boolean checkEndGame() {
-        return (map.heros.isEmpty() || map.monsters.isEmpty());
+        return (map.heroes.isEmpty() || map.monsters.isEmpty());
     }
     
     Mode(Map map) {
@@ -56,7 +56,7 @@ public class Mode {
                         else 
                             activeHero = hero_tmp;
                     } else {
-                        if (activeHero.move(pos)) {
+                        if (activeHero.move(pos, this.map.heroes)) {
                             this.map.board[old_pos.getX()][old_pos.getY()] = Map.Symbol.DEFAULT;
                             this.map.update(activeHero, Map.Event.HERO_MOVE, pos);
                             activeHero.setState(Hero.State.MOVED);
@@ -97,7 +97,7 @@ public class Mode {
                     System.out.println("Monster move");
                     old_pos = monster_tmp.getCurPosition();
                     map.board[old_pos.getX()][old_pos.getY()] = Map.Symbol.DEFAULT;
-                    monster_tmp.move(map.heros, map.monsters);
+                    monster_tmp.move(map.heroes, map.monsters);
                     pos = monster_tmp.getCurPosition();
                     try {
                         TimeUnit.SECONDS.sleep(2);

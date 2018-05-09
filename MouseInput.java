@@ -53,13 +53,13 @@ public class MouseInput implements MouseListener{
         else if (Game.State == Game.STATE.ENDGAME){
             int mx = e.getX();
             int my = e.getY();
-            if (mx >= Game.WIDTH / 2 + 120 && mx <= Game.WIDTH / 2 +120+274){
-                if (my >= 200 && my <= 274){
+            if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+250){
+                if (my >= 350 && my <= 457){
                     EndMenuButton.reStartButtonState = true;
                 }
             }            
-            if (mx >= Game.WIDTH / 2 + 120 && mx <= Game.WIDTH / 2 +120+274){
-                if (my >= 300 && my <= 374){
+            if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+170){
+                if (my >= 450 && my <= 557){
                     EndMenuButton.exitButtonState = true;
                 }
             }
@@ -114,16 +114,16 @@ public class MouseInput implements MouseListener{
         else if (Game.State == Game.STATE.ENDGAME){
             int mx = e.getX();
             int my = e.getY();
-            if (mx >= Game.WIDTH / 2 + 120 && mx <= Game.WIDTH / 2 +120+274){
-                if (my >= 200 && my <= 274){
+            if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+250){
+                if (my >= 350 && my <= 457){
                     //Press play button
                     Game.State = Game.STATE.GAME;
                     EndMenuButton.reStartButtonState = false;
                 }
             }
             
-            if (mx >= Game.WIDTH / 2 + 120 && mx <= Game.WIDTH / 2 +120+274){
-                if (my >= 300 && my <= 374){
+            if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+170){
+                if (my >= 450 && my <= 557){
                     //Press play button
                     EndMenuButton.exitButtonState = false;
                     System.exit(1);

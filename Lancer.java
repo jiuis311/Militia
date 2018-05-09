@@ -38,8 +38,8 @@ public class Lancer extends Hero {
     }
 
     @Override
-    boolean move(Position pos) {
-        for(Position p: getMoveArea()) {
+    boolean move(Position pos, ArrayList<Hero> heroes) {
+        for(Position p: getMoveArea(heroes)) {
             if (pos.equals(p)) {
             	setCurPosition(pos);
                 return true;

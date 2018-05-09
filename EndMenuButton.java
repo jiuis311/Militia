@@ -8,18 +8,19 @@ import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 public class EndMenuButton implements ImageObserver{
-        private int reStartButtonX = Game.WIDTH / 2 + 120;
-	private int reStartButtonY = 200;
-	private int exitButtonX = Game.WIDTH / 2 + 120;
-	private int exitButtonY = 300;
-        private int menuGameX = Game.WIDTH - 600;
-        private int menuGameY = 0;
-	private static final int BUTTONWIDTH = 274;
-	private static final int BUTTONHEIGHT = 74;
+        private int reStartButtonX = Game.WIDTH / 2 + 210;
+	private int reStartButtonY = 350;
+	private int exitButtonX = Game.WIDTH / 2 + 210;
+	private int exitButtonY = 450;
+        private int endLogoX = Game.WIDTH/2 + 60;
+        private int endLogoY = 100;
+	private static final int BUTTONWIDTH = 250;
+	private static final int BUTTONHEIGHT = 107;
 	private BufferedImage reStartButton;
 	private BufferedImage exitButton;
 	private BufferedImage reStartButton2;
 	private BufferedImage exitButton2;
+        private BufferedImage endLogo;
 	public static boolean reStartButtonState = false;
 	public static boolean exitButtonState = false;
 
@@ -27,35 +28,40 @@ public class EndMenuButton implements ImageObserver{
 	EndMenuButton() {
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			this.reStartButton = loader.loadImage("/start-2.png");
+			this.reStartButton = loader.loadImage("/replay.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
                 try {
-			this.exitButton = loader.loadImage("/exit-2.png");
+			this.exitButton = loader.loadImage("/exit.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		try {
-			this.reStartButton2 = loader.loadImage("/start-1.png");
+			this.reStartButton2 = loader.loadImage("/replay1.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
                 try {
-			this.exitButton2 = loader.loadImage("/exit-1.png");
+			this.exitButton2 = loader.loadImage("/exit1.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+                try {
+			this.endLogo = loader.loadImage("/endLogo.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}                
                 
 	}
 	
 	public void drawButtons(Graphics g) {
-        Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 120);
-        g.setFont(fn1);
-        g.setColor(Color.black);
-        g.drawString("GAME OVER", Game.WIDTH / 2 - 60, 150);
-//        System.out.println(startButtonState);
+//        Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 120);
+//        g.setFont(fn1);
+//        g.setColor(Color.black);
+//        g.drawString("GAME OVER", Game.WIDTH / 2 - 60, 150);
+        g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);
         if (reStartButtonState) {
         	g.drawImage(reStartButton2, reStartButtonX, reStartButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         } else {
