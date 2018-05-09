@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
         GAME,
         ENDGAME
     }
-    public static STATE State = STATE.ENDGAME;
+    public static STATE State = STATE.MENU;
     public static enum PLAYSTATE {
     	HERO,
     	MONSTER

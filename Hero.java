@@ -28,8 +28,6 @@ abstract class Hero extends Character{
     public State getState() { return state; }
     
     void getDetail() {
-        calMoveArea();
-        calAttackArea();
         System.out.println("Vi tri di chuyen");
         for(Position pos: getMoveArea()) {
             System.out.print('('+Integer.toString(pos.getX())+','+pos.getY()+')');
@@ -41,8 +39,9 @@ abstract class Hero extends Character{
         }
     }
     
-    public ArrayList<Position> getMoveArea() {
+    public ArrayList<Position> getMoveArea(ArrayList<Hero> heroes) {
        calMoveArea();
+       blockMoveArea(heroes);
        return moveArea;
     }
     
@@ -58,9 +57,19 @@ abstract class Hero extends Character{
         return false;
     }
     
+    private void blockMoveArea(ArrayList<Hero> heroes) {
+        Position position = null;
+        
+        for(Hero hero: heroes) {
+            position = hero.getCurPosition();
+            if(!this.equals(hero))
+                moveArea.remove(position);
+        }
+    }
+    
     abstract void calMoveArea();
     abstract void calAttackArea();
-    abstract boolean move(Position pos);
+    abstract boolean move(Position pos, ArrayList<Hero> heroes);
     abstract boolean attack(Position pos);
     abstract ArrayList<Position> calDamageArea(Position pos);
 }
