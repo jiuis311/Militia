@@ -75,10 +75,9 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
+		if (map.turns == 0)Game.State = Game.STATE.ENDGAME;
 		this.heroTotal = map.heros.size();
-                this.monsterTotal = map.monsters.size();
-                if (monsterTotal == 0) Game.State = Game.STATE.ENDGAME; //tam thoi 
-                else if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+        if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
 		else {
 			this.monsterTotal = map.monsters.size();
 			Monster mons = map.monsters.get(this.monsterCount);
@@ -117,6 +116,7 @@ public class Drawer {
         g.setFont(fn1);
         g.setColor(Color.black);
         g.drawString("SCORE: " + map.curScore, (Game.WIDTH / 12) * 19, 150);
+        g.drawString("TURN: " + map.turns, (Game.WIDTH / 12) * 19, 250);
 	}
 	
 	public void draw(Graphics g) {
