@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Minion extends Monster {
 	Minion(Position pos) {
 		super(pos);
-		this.setMonsterImage(new DrawTile("/monster2.png"));
 	}
 
 	@Override
