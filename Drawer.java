@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 
 public class Drawer {
 	private Hero activeHero;
@@ -106,7 +110,7 @@ public class Drawer {
 	}
 	
 	public void drawScore(Graphics g) {
-		Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 40);
+		Font fn1 = new Font("sofiapro-light.otf", Font.PLAIN, 40);
         g.setFont(fn1);
         g.setColor(Color.black);
         g.drawString("SCORE: " + map.curScore, (Game.WIDTH / 12) * 19, 150);
