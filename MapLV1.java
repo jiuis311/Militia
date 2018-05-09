@@ -17,7 +17,11 @@ public class MapLV1 extends Map {
         
         board[6][4] = Symbol.SPEAR;
         heros.add(new Lancer(new Position(6, 4)));
-        
+        turns = 4;
+        targetedMons = 3;
+        for (Monster mons:monsters) {
+        	mons.setTarget();
+        }
         random();
     }
     

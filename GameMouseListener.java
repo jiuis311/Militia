@@ -57,8 +57,10 @@ public class GameMouseListener extends MouseAdapter {
                             System.out.println("Done state");
                     	}                    		
                     	////
-                    	if (game.maplv1.checkEndTurn())
+                    	if (game.maplv1.checkEndTurn()) {
+                    		//System.out.println("Turn: " + game.maplv1.turns);
                             Game.Playstate = Game.PLAYSTATE.MONSTER;
+                    	}
                     }
                 }				
 		

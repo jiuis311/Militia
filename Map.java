@@ -8,6 +8,8 @@ abstract class Map {
     ArrayList<Monster> monsters;
     protected Symbol[][] board;
     protected int curScore;
+    protected int turns;
+    protected int targetedMons;
    enum Symbol {
         DEFAULT,
         MINION,
@@ -148,6 +150,7 @@ abstract class Map {
     	for(Monster mons:monsters) {
     		if (mons.getCurPosition().equals(pos)) {
     			if (mons.getClass().getName() == "Minion") {
+    				if (mons.isTargeted()) targetedMons--;
     				monsters.remove(mons);
     				curScore++;
     	            board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
@@ -156,6 +159,7 @@ abstract class Map {
     				BigMinion mon = (BigMinion) mons;
     				int shield = mon.getShield();
     	            if (shield == 0) {
+    	            	if (mons.isTargeted()) targetedMons--;
     	            	monsters.remove(mons);
     	            	curScore+=3;
     	            	board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
@@ -178,6 +182,7 @@ abstract class Map {
         for(Hero hero: heros)
             if(hero.getState() != Hero.State.DONE)
                 return false;
+        turns--;
         return true;
     }
     abstract void update(Object obj, Event eventType, Position pos);
