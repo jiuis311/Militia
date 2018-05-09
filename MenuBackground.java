@@ -10,7 +10,7 @@ public class MenuBackground extends DrawTile implements ImageObserver {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(image, 0, 0, Game.WIDTH*Game.SCALE+200, Game.HEIGHT*Game.SCALE, this);
+        g.drawImage(image, 0, 0, Game.WIDTH*Game.SCALE+10, Game.HEIGHT*Game.SCALE, this);
     }
 
     @Override

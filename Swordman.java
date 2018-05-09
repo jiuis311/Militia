@@ -1,9 +1,9 @@
 
 import java.util.ArrayList;
 
-public class Sword extends Hero {
+public class Swordman extends Hero {
 		
-    public Sword(Position pos) {
+    public Swordman(Position pos) {
         super(pos);
         this.setHeroImage(new DrawTile("/short_sword.png"));
     }
