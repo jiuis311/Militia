@@ -17,7 +17,11 @@ public class MapLV1 extends Map {
         
         board[6][4] = Symbol.SPEAR;
         heros.add(new Lancer(new Position(6, 4)));
-        
+        turns = 4;
+        targetedMons = 3;
+        for (Monster mons:monsters) {
+        	mons.setTarget();
+        }
         random();
     }
     
@@ -57,20 +61,19 @@ public class MapLV1 extends Map {
 	        	}	            
 	            Swordman sw3 = new Swordman(pos);
 	            if (heros.contains(sw3)) heros.remove(sw3);
-	            Lancer sp3 = new Lancer(pos);
-	            if (heros.contains(sp3)) heros.remove(sp3);
+	             
 	            break;
  	        default:
 	            break;
     	}
-    	draw();
+    	//draw();
     }
 
     @Override
     void random() {
         Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
-        randomUtility(minion, 5);
-        randomUtility(big_minion, 1);
+        randomCharacter(minion, 2);
+        randomCharacter(big_minion, 1);
     }    
 }

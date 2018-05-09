@@ -79,7 +79,7 @@ public class Game extends Canvas implements Runnable {
 	            frames++;
 	            if (frames % 10 == 0) {
 	            	this.secs++;
-	            	System.out.println(this.secs);
+	            	//System.out.println(this.secs);
 	            }
 	            render();                         
 	            try {
@@ -106,6 +106,9 @@ public class Game extends Canvas implements Runnable {
             menuButton.drawMenuInGame(g);               
             //draw monster and hero         
             drawer.update(activeHero, maplv1);
+            if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
+            	this.setActiveHero(null);
+            }
             drawer.draw(g);        
             ////////////////////////
             //draw bracket
