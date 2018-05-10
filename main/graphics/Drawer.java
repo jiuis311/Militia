@@ -122,8 +122,8 @@ public class Drawer {
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 21, 100);
-        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 21, 150);
+        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 100);
+        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 150);
 	}
 	
 	public void draw(Graphics g) {
