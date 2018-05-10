@@ -57,7 +57,7 @@ public abstract class Hero extends Character{
     @Override
     public boolean equals(Object o) {
         if(o instanceof Hero) 
-            return curPosition.equals(((Hero) o).curPosition);
+            return this.getCurPosition().equals(((Hero) o).getCurPosition());
         return false;
     }
     
