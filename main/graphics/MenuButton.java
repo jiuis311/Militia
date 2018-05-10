@@ -45,7 +45,7 @@ public class MenuButton implements ImageObserver {
             startButton = ImageIO.read(DrawTile.class.getResourceAsStream("/play.png"));
             helpButton = ImageIO.read(DrawTile.class.getResourceAsStream("/help.png"));
             quitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/quit.png"));
-            exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/exit.png"));
+            exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/quit.png"));
             startButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/play1.png"));
             helpButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/help1.png"));
             quitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/quit1.png"));
@@ -58,11 +58,6 @@ public class MenuButton implements ImageObserver {
     }
 	
 	public void drawButtons(Graphics g) {
-//        Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 150);
-//        g.setFont(fn1);
-//        g.setColor(Color.black);
-//        g.drawString("MILITIA", Game.WIDTH / 2, 150);
-//        System.out.println(startButtonState);
         g.drawImage(logo, logoX, logoY, 499, 205, this);
         if (startButtonState) {
         	g.drawImage(startButton2, startButtonX, startButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
