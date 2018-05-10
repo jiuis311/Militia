@@ -92,7 +92,7 @@ public class Game extends Canvas implements Runnable {
 		int frames = 0;
 		while (running) {
 	            frames++;
-	            if (frames % 10 == 0) {
+	            if (frames % 5 == 0) {
 	            	this.secs++;
 	            	//System.out.println(this.secs);
 	            }
@@ -133,9 +133,11 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
+            this.setNewMap();
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
+            Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
         }			
         //////////////////////////////
