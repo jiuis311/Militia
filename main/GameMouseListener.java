@@ -30,7 +30,7 @@ public class GameMouseListener extends MouseAdapter {
             if (Game.State == Game.STATE.GAME) {
                	int x = (int)(e.getX()/80) - 2;
                	int y = (int)(e.getY()/80);
-               	Hero tmpHero = game.maplv1.getHero(x-1,y-1);
+               	Hero tmpHero = game.map.getHero(x-1,y-1);
                	//System.out.println("Hero: " + this.activeHero);
                	if (tmpHero != null && tmpHero.getState() != Hero.State.DONE && !(this.activeHero != null && this.activeHero.getState() == Hero.State.MOVED)) {
                     //System.out.println("Tmp : " + tmpHero.getState());
@@ -44,11 +44,10 @@ public class GameMouseListener extends MouseAdapter {
                     	if (this.activeHero.getState() == Hero.State.MOVED) {
                             //System.out.println("MOVED STATE. Ready to attack");
                             if (this.activeHero.attack(new Position(x-1, y-1))) {
-                				game.maplv1.update(this.activeHero, Map.Event.HERO_ATTACK, new Position(x-1,y-1));
+                				game.map.update(this.activeHero, Map.Event.HERO_ATTACK, new Position(x-1,y-1));
                     			//System.out.println("ATTACKED");
                     			this.activeHero.setState(Hero.State.DONE);
-                    			System.out.println(game.maplv1.getTargetedMons());
-                    			if (game.maplv1.getTargetedMons() == 0) Game.State = Game.STATE.MENU; 
+                    			if (game.map.getTargetedMons() == 0) Game.State = Game.STATE.NEXT; 
                 			}
                     	} else if (this.activeHero.getState() == Hero.State.UNSELECT) {
                             //System.out.println("UNSELECT STATE");
@@ -57,7 +56,7 @@ public class GameMouseListener extends MouseAdapter {
                             //System.out.println("SELECTING STATE");                           
                             if (this.activeHero.move(new Position(x-1, y-1), this.map.heroes)) {
 	                            this.map.update(this.activeHero, Map.Event.HERO_MOVE, new Position(x-1,y-1));
-	                            if (!game.maplv1.heroes.contains(activeHero)) 
+	                            if (!game.map.heroes.contains(activeHero)) 
 	                            	this.activeHero.setState(Hero.State.DONE);
 	                            else
 	                            	this.activeHero.setState(Hero.State.MOVED);
@@ -66,7 +65,7 @@ public class GameMouseListener extends MouseAdapter {
                             //System.out.println("Done state");
                     	}                    		
                     	////
-                    	if (game.maplv1.checkEndTurn()) {
+                    	if (game.map.checkEndTurn()) {
                     		////System.out.println("Turn: " + game.maplv1.turns);
                             Game.Playstate = Game.PLAYSTATE.MONSTER;
                     	}

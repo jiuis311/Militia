@@ -153,7 +153,7 @@ public class MouseInput implements MouseListener{
             if (mx >= Game.WIDTH / 2 + 650 && mx <= Game.WIDTH / 2 + 650 + 210){
                 if (my >= 600 && my <= 680){
                     //Press play button
-                    Game.State = Game.STATE.GAME;
+                    Game.State = Game.STATE.LVUP;
                     NextLevelMenu.nextButtonState = false;
                 }
             }
