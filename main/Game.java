@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable {
     public static PLAYSTATE Playstate = PLAYSTATE.HERO;
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
-    public MapLV1 maplv1;
+    public Map maplv1;
     private Hero activeHero;
     private Drawer drawer;
     
@@ -91,7 +91,7 @@ public class Game extends Canvas implements Runnable {
 		int frames = 0;
 		while (running) {
 	            frames++;
-	            if (frames % 10 == 0) {
+	            if (frames % 5 == 0) {
 	            	this.secs++;
 	            	//System.out.println(this.secs);
 	            }

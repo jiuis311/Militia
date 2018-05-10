@@ -80,8 +80,8 @@ public class Drawer {
 	
 	public void calMonster() {
         if (map.getTurns() == 0)Game.State = Game.STATE.ENDGAME;
-            this.heroTotal = map.heroes.size();
-            if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+        this.heroTotal = map.heroes.size();
+        if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
         else {
             if(!map.monsters.isEmpty()) {
                 this.monsterTotal = map.monsters.size();

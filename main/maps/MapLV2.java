@@ -43,12 +43,6 @@ public class MapLV2 extends Map {
     }
 
 	@Override
-	public void update(Object obj, Event eventType, Position pos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	void random() {
 		Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
