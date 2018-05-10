@@ -136,6 +136,7 @@ public class Game extends Canvas implements Runnable {
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
+            this.setNewMap();
         }			
         //////////////////////////////
 	g.dispose();
@@ -166,14 +167,18 @@ public class Game extends Canvas implements Runnable {
     	return this.maplv1;
     }
     
+    public void setNewMap() {
+    	this.maplv1 = new MapLV1();
+    }
+    
     public static void main(String[] args) {
-		Game game = new Game();
-		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-                game.addMouseListener(new GameMouseListener(game));
-		JFrame frame = new JFrame(game.TITLE);
-		frame.add(game);
+        Game game = new Game();
+        game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+        game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+        game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+        game.addMouseListener(new GameMouseListener(game));
+        JFrame frame = new JFrame(game.TITLE);
+        frame.add(game);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);

@@ -14,7 +14,9 @@ public class Drawer {
 	private Hero activeHero;
 	private Map map;
 	private final DrawTile swordman;
+	private final DrawTile swordmanBlur;
 	private final DrawTile lancer;
+	private final DrawTile lancerBlur;
 	private final DrawTile minion;
 	private final DrawTile bigMinion;
 	private final DrawTile moveArea;
@@ -30,7 +32,9 @@ public class Drawer {
 	
 	public Drawer() {
 		swordman = new DrawTile("/sword.png");
+		swordmanBlur = new DrawTile("/sword-blur.png");
 		lancer = new DrawTile("/spear.png");
+		lancerBlur = new DrawTile("/spear-blur.png");
 		minion = new DrawTile("/mushroom.png");
 		bigMinion = new DrawTile("/alien.png");
 		moveArea = new DrawTile("/move-tile.png");
@@ -51,13 +55,25 @@ public class Drawer {
 		for(Hero hero: map.heroes) {
         	heroName = hero.getClass().getSimpleName();
         	if (heroName.equals("Swordman")) {
-        		swordman.setX(hero.getCurPosition().getX()+1);
-        		swordman.setY(hero.getCurPosition().getY()+1);
-        		swordman.draw(g);
+        		if (hero.getState() == Hero.State.DONE) {
+        			swordmanBlur.setX(hero.getCurPosition().getX()+1);
+        			swordmanBlur.setY(hero.getCurPosition().getY()+1);
+        			swordmanBlur.draw(g);
+        		} else {
+        			swordman.setX(hero.getCurPosition().getX()+1);
+            		swordman.setY(hero.getCurPosition().getY()+1);
+            		swordman.draw(g);
+        		}
         	} else if (heroName.equals("Lancer")) {
-        		lancer.setX(hero.getCurPosition().getX()+1);
-        		lancer.setY(hero.getCurPosition().getY()+1);
-        		lancer.draw(g);
+        		if (hero.getState() == Hero.State.DONE) {
+        			lancerBlur.setX(hero.getCurPosition().getX()+1);
+        			lancerBlur.setY(hero.getCurPosition().getY()+1);
+        			lancerBlur.draw(g);
+        		} else {
+        			lancer.setX(hero.getCurPosition().getX()+1);
+            		lancer.setY(hero.getCurPosition().getY()+1);
+            		lancer.draw(g);
+        		}
         	}
         }
 	}
@@ -133,8 +149,8 @@ public class Drawer {
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 21, 100);
-        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 21, 150);
+        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 100);
+        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 150);
 	}
 	
 	public void draw(Graphics g) {

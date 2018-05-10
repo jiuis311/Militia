@@ -23,7 +23,7 @@ public abstract class Monster extends Character{
 	}
 	public boolean equals(Object obj) {
         if(obj instanceof Monster) 
-            return curPosition.equals(((Monster) obj).curPosition);
+            return this.getCurPosition().equals(((Monster) obj).getCurPosition());
         return false;
     }
 	abstract void calMoveArea(ArrayList<Monster> pos);
