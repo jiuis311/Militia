@@ -228,6 +228,7 @@ public abstract class Map {
                             heroes.remove((Hero) obj);
                         } else {
                             monsters.remove(mons);
+                            if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
                             setCurScore(getCurScore() + 1);
                         }
                         break;

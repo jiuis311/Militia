@@ -47,7 +47,8 @@ public class GameMouseListener extends MouseAdapter {
                 				game.maplv1.update(this.activeHero, Map.Event.HERO_ATTACK, new Position(x-1,y-1));
                     			//System.out.println("ATTACKED");
                     			this.activeHero.setState(Hero.State.DONE);
-                    			if (game.maplv1.getTargetedMons() == 0) Game.State = Game.STATE.ENDGAME; 
+                    			System.out.println(game.maplv1.getTargetedMons());
+                    			if (game.maplv1.getTargetedMons() == 0) Game.State = Game.STATE.MENU; 
                 			}
                     	} else if (this.activeHero.getState() == Hero.State.UNSELECT) {
                             //System.out.println("UNSELECT STATE");
