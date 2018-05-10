@@ -67,6 +67,20 @@ public class MouseInput implements MouseListener{
                 }
             }
         }
+        else if (Game.State == Game.STATE.NEXT){
+            int mx = e.getX();
+            int my = e.getY();
+            if (mx >= Game.WIDTH / 2 + 650 && mx <= Game.WIDTH / 2 + 650 + 210){
+                if (my >= 600 && my <= 680){
+                    NextLevelMenu.nextButtonState = true;
+                }
+            }
+            if (mx >= Game.WIDTH / 2 - 250 && mx <= Game.WIDTH / 2 - 250 + 210){
+                if (my >= 600 && my <= 680){
+                    NextLevelMenu.quitButtonState = true;
+                }
+            }
+        }
     }
 
     @Override
@@ -132,7 +146,24 @@ public class MouseInput implements MouseListener{
                     System.exit(1);
                 }
             }
-        }            
+        } 
+        else if (Game.State == Game.STATE.NEXT){
+            int mx = e.getX();
+            int my = e.getY();
+            if (mx >= Game.WIDTH / 2 + 650 && mx <= Game.WIDTH / 2 + 650 + 210){
+                if (my >= 600 && my <= 680){
+                    //Press play button
+                    Game.State = Game.STATE.LVUP;
+                    NextLevelMenu.nextButtonState = false;
+                }
+            }
+            if (mx >= Game.WIDTH / 2 - 250 && mx <= Game.WIDTH / 2 - 250 + 210){
+                if (my >= 600 && my <= 680){
+                    Game.State = Game.STATE.MENU;
+                    NextLevelMenu.quitButtonState = false;
+                }
+            }
+        }
     }
 
     @Override

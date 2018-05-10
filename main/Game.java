@@ -16,6 +16,7 @@ import main.graphics.EndMenuButton;
 import main.graphics.MenuBackground;
 import main.graphics.MenuButton;
 import main.graphics.MouseInput;
+import main.graphics.NextLevelMenu;
 import main.graphics.TileGrid;
 import main.helpers.Config;
 import main.maps.Map;
@@ -42,6 +43,7 @@ public class Game extends Canvas implements Runnable {
     public static enum STATE{
         MENU,
         GAME,
+        NEXT,
         LVUP,
         VICTORY,
         ENDGAME
@@ -54,6 +56,7 @@ public class Game extends Canvas implements Runnable {
     public static PLAYSTATE Playstate = PLAYSTATE.HERO;
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
+    public static NextLevelMenu nextLevelMenu;
     public Map map;
     private Hero activeHero;
     private Drawer drawer;
@@ -63,9 +66,10 @@ public class Game extends Canvas implements Runnable {
         this.addMouseListener(new MouseInput());
         menuButton = new MenuButton();
         endMenuButton = new EndMenuButton();
+        nextLevelMenu = new NextLevelMenu();
         menuBg = new MenuBackground();
         currentLv = 1;
-        map = new MapLV2();
+        map = new MapLV1();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
         bracket = new DrawTile("/bracket.png");
@@ -129,26 +133,27 @@ public class Game extends Canvas implements Runnable {
             	this.setActiveHero(null);
             }
             drawer.draw(g);        
-            ////////////////////////
-            //draw bracket
             if(bracketboo){
             	bracket.draw(g);
             }
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
-//            this.setNewMap();
+            this.setNewMap();
 	} else if (State == STATE.LVUP) {
-			levelUp();
-			System.out.println(currentLv);
-			State = STATE.GAME;
-			Game.Playstate = Game.PLAYSTATE.HERO;
-    } else if (State == STATE.ENDGAME) {
+            levelUp();
+            System.out.println(currentLv);
+            State = STATE.GAME;
+            Game.Playstate = Game.PLAYSTATE.HERO;            
+        } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
             Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
-    }			
+        } else if(State == STATE.NEXT){
+            menuBg.draw(g);
+            nextLevelMenu.drawButtons(g);
+        }			
         //////////////////////////////
 	g.dispose();
 	bs.show();
