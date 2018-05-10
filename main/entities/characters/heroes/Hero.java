@@ -7,7 +7,11 @@ import main.helpers.Position;
 public abstract class Hero extends Character{
     private ArrayList<Position> attackArea;
     private State state;
-
+    private boolean shield;
+    
+    public void setShield(boolean shield) { this.shield = shield; }
+    public boolean getShield() { return shield; }
+    
     public void setAttackArea(ArrayList<Position> attackArea) {
             this.attackArea = attackArea;
     }
@@ -26,6 +30,7 @@ public abstract class Hero extends Character{
         super(position);
         attackArea = new ArrayList<Position> ();
         state = State.UNSELECT;
+        shield = false;
     }
     
     public void setState(State state) { this.state = state; }

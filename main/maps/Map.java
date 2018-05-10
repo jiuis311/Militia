@@ -3,20 +3,15 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import main.entities.characters.heroes.Archer;
-import main.entities.characters.heroes.Hero;
-import main.entities.characters.heroes.Lancer;
-import main.entities.characters.heroes.Swordman;
-import main.entities.characters.monsters.BigMinion;
-import main.entities.characters.monsters.Ghost;
-import main.entities.characters.monsters.Minion;
-import main.entities.characters.monsters.Monster;
-import main.helpers.Config;
-import main.helpers.Position;
+import main.entities.characters.heroes.*;
+import main.entities.characters.monsters.*;
+import main.entities.items.*;
+import main.helpers.*;
 
 public abstract class Map {
     public ArrayList<Hero> heroes;
     public ArrayList<Monster> monsters;
+    public ArrayList<Item> items;
     protected Symbol[][] board;
     private int curScore;
     private int turns;
@@ -47,7 +42,8 @@ public abstract class Map {
         
         heroes = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
-        setUnselectState();
+        items = new ArrayList<Item>();
+        //setUnselectState();
     }
     
     /**
@@ -201,14 +197,6 @@ public abstract class Map {
         return true;
     }
     
-    private void HeroMove(Object obj, Event eventType, Position position) {
-        
-    }
-    
-    private void HeroAttack(Object obj, Event eventType, Position pos) {
-        
-    }
-    
     public void update(Object obj, Event eventType, Position pos) {
         switch(eventType) {
             case HERO_MOVE:
@@ -222,6 +210,7 @@ public abstract class Map {
                 }
                 // --------------------------------------------------
                 
+                // check for position of monster
                for(Monster mons:monsters) {
                     if (mons.getCurPosition().equals(pos)) {
                         if (mons instanceof BigMinion) {
@@ -234,6 +223,18 @@ public abstract class Map {
                         break;
                     }
                 }
+                
+                // check for position of item
+               for(Item item:items) {
+                   if (item.getCurPosition().equals(pos)) {
+                        if(item instanceof Bomb) {
+                               
+                        }
+                        else if(item instanceof Shield) {
+                            
+                        }
+                   }
+               }
                 break;
             case HERO_ATTACK:
                 for (Position position: ((Hero) obj).calDamageArea(pos)) {
