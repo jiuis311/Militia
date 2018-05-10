@@ -40,6 +40,7 @@ public class Game extends Canvas implements Runnable {
     public static enum STATE{
         MENU,
         GAME,
+        
         ENDGAME
     }
     public static STATE State = STATE.MENU;
@@ -132,9 +133,12 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
+            this.setNewMap();
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
+            Game.Playstate = Game.PLAYSTATE.HERO;
+            this.setNewMap();
         }			
         //////////////////////////////
 	g.dispose();
@@ -163,6 +167,10 @@ public class Game extends Canvas implements Runnable {
     
     public Map getMap() {
     	return this.maplv1;
+    }
+    
+    public void setNewMap() {
+    	this.maplv1 = new MapLV1();
     }
     
     public static void main(String[] args) {
