@@ -16,6 +16,7 @@ import main.graphics.EndMenuButton;
 import main.graphics.MenuBackground;
 import main.graphics.MenuButton;
 import main.graphics.MouseInput;
+import main.graphics.NextLevelMenu;
 import main.graphics.TileGrid;
 import main.helpers.Config;
 import main.maps.Map;
@@ -40,7 +41,7 @@ public class Game extends Canvas implements Runnable {
     public static enum STATE{
         MENU,
         GAME,
-        
+        NEXT,
         ENDGAME
     }
     public static STATE State = STATE.MENU;
@@ -51,6 +52,7 @@ public class Game extends Canvas implements Runnable {
     public static PLAYSTATE Playstate = PLAYSTATE.HERO;
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
+    public static NextLevelMenu nextLevelMenu;
     public MapLV1 maplv1;
     private Hero activeHero;
     private Drawer drawer;
@@ -60,6 +62,7 @@ public class Game extends Canvas implements Runnable {
         this.addMouseListener(new MouseInput());
         menuButton = new MenuButton();
         endMenuButton = new EndMenuButton();
+        nextLevelMenu = new NextLevelMenu();
         menuBg = new MenuBackground();
         maplv1 = new MapLV1();
         Playstate = PLAYSTATE.HERO;
@@ -137,7 +140,11 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
             this.setNewMap();
-        }			
+        
+        } else if(State == STATE.NEXT){
+            menuBg.draw(g);
+            nextLevelMenu.drawButtons(g);
+        }
         //////////////////////////////
 	g.dispose();
 	bs.show();
