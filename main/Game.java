@@ -38,10 +38,12 @@ public class Game extends Canvas implements Runnable {
     private Background bg = new Background();
     private MenuBackground menuBg;
     private DrawTile bracket;
+    private int currentLv;
     public static enum STATE{
         MENU,
         GAME,
-        
+        LVUP,
+        VICTORY,
         ENDGAME
     }
     public static STATE State = STATE.MENU;
@@ -52,7 +54,7 @@ public class Game extends Canvas implements Runnable {
     public static PLAYSTATE Playstate = PLAYSTATE.HERO;
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
-    public Map maplv1;
+    public Map map;
     private Hero activeHero;
     private Drawer drawer;
     
@@ -62,7 +64,8 @@ public class Game extends Canvas implements Runnable {
         menuButton = new MenuButton();
         endMenuButton = new EndMenuButton();
         menuBg = new MenuBackground();
-        maplv1 = new MapLV2();
+        currentLv = 1;
+        map = new MapLV2();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
         bracket = new DrawTile("/bracket.png");
@@ -121,7 +124,7 @@ public class Game extends Canvas implements Runnable {
             grid.draw(g);
             menuButton.drawMenuInGame(g);               
             //draw monster and hero         
-            drawer.update(activeHero, maplv1);
+            drawer.update(activeHero, map);
             if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
             	this.setActiveHero(null);
             }
@@ -134,13 +137,18 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
-            this.setNewMap();
-        } else if (State == STATE.ENDGAME) {
+//            this.setNewMap();
+	} else if (State == STATE.LVUP) {
+			levelUp();
+			System.out.println(currentLv);
+			State = STATE.GAME;
+			Game.Playstate = Game.PLAYSTATE.HERO;
+    } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
             Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
-        }			
+    }			
         //////////////////////////////
 	g.dispose();
 	bs.show();
@@ -167,11 +175,23 @@ public class Game extends Canvas implements Runnable {
     }
     
     public Map getMap() {
-    	return this.maplv1;
+    	return this.map;
     }
     
     public void setNewMap() {
-    	this.maplv1 = new MapLV1();
+    	this.map = new MapLV1();
+    	this.currentLv = 1;
+    }
+    
+    public void levelUp() {
+    	switch (currentLv) {
+    		case 1:
+    			this.map = new MapLV2();
+    			this.currentLv++;
+    			break;
+    		default:
+    			break;
+    	}
     }
     
     public static void main(String[] args) {
