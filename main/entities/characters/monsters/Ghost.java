@@ -10,7 +10,7 @@ public class Ghost extends Monster{
 	public void setCloak() {
 		cloak = 1 - cloak;
 	}
-	Ghost(Position pos) {
+	public Ghost(Position pos) {
 		super(pos);
 		cloak = 1;
 	}
