@@ -21,6 +21,7 @@ import main.graphics.TileGrid;
 import main.helpers.Config;
 import main.maps.Map;
 import main.maps.MapLV1;
+import main.maps.MapLV2;
 
 public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -53,7 +54,7 @@ public class Game extends Canvas implements Runnable {
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
     public static NextLevelMenu nextLevelMenu;
-    public MapLV1 maplv1;
+    public Map maplv1;
     private Hero activeHero;
     private Drawer drawer;
     
@@ -64,7 +65,7 @@ public class Game extends Canvas implements Runnable {
         endMenuButton = new EndMenuButton();
         nextLevelMenu = new NextLevelMenu();
         menuBg = new MenuBackground();
-        maplv1 = new MapLV1();
+        maplv1 = new MapLV2();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
         bracket = new DrawTile("/bracket.png");
@@ -95,7 +96,7 @@ public class Game extends Canvas implements Runnable {
 		int frames = 0;
 		while (running) {
 	            frames++;
-	            if (frames % 10 == 0) {
+	            if (frames % 5 == 0) {
 	            	this.secs++;
 	            	//System.out.println(this.secs);
 	            }
@@ -136,9 +137,11 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
+            this.setNewMap();
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
+            Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
         
         } else if(State == STATE.NEXT){

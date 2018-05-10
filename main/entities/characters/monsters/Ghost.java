@@ -5,14 +5,14 @@ import main.entities.characters.heroes.Hero;
 import main.helpers.Position;
 
 public class Ghost extends Monster{
-	private int cloak;
-	public int getCloak() { return cloak; }
+	private boolean cloak;
+	public boolean getCloak() { return cloak; }
 	public void setCloak() {
-		cloak = 1 - cloak;
+		cloak = !cloak;
 	}
-	Ghost(Position pos) {
+	public Ghost(Position pos) {
 		super(pos);
-		cloak = 1;
+		cloak = false;
 	}
 	@Override
 	void calMoveArea(ArrayList<Monster> monsters) {
