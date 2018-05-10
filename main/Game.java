@@ -135,6 +135,7 @@ public class Game extends Canvas implements Runnable {
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
+            Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
         }			
         //////////////////////////////
