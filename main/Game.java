@@ -92,7 +92,7 @@ public class Game extends Canvas implements Runnable {
 		int frames = 0;
 		while (running) {
 	            frames++;
-	            if (frames % 10 == 0) {
+	            if (frames % 5 == 0) {
 	            	this.secs++;
 	            	//System.out.println(this.secs);
 	            }
