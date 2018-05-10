@@ -237,7 +237,26 @@ public abstract class Map {
                }
                 break;
             case HERO_ATTACK:
+                ArrayList<Position> damageArea = new ArrayList<Position>();
+                
                 for (Position position: ((Hero) obj).calDamageArea(pos)) {
+                    damageArea.add(position);
+                }
+                
+                for(Item item: items) {
+                    if(item.getCurPosition().equals(pos)) {
+                        if(item instanceof Bomb) {
+                            for(Position position: ((Bomb) item).getDamageArea())
+                                damageArea.add(position);
+                        }
+                    }
+                }
+                
+//                for(Position pos1: damageArea) {
+//                    System.out.println(pos1.getX() + " " + pos1.getY());
+//                }
+                
+                for (Position position: damageArea) {
                     removeMonster(position);
                 }
                 break;

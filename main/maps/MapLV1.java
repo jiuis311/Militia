@@ -5,6 +5,7 @@ import main.entities.characters.heroes.Swordman;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Minion;
 import main.entities.characters.monsters.Monster;
+import main.entities.items.Bomb;
 import main.helpers.Position;
 
 public class MapLV1 extends Map {
@@ -22,6 +23,8 @@ public class MapLV1 extends Map {
         
         board[5][2] = Symbol.BIG_MINION;
         monsters.add(new BigMinion(new Position(5, 2)));
+        
+        items.add(new Bomb(new Position(6, 2)));
         
         board[6][4] = Symbol.SPEAR;
         heroes.add(new Lancer(new Position(6, 4)));
