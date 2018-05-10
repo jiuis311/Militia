@@ -2,9 +2,9 @@ package main.maps;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import main.entities.characters.heroes.Hero;
+import main.entities.characters.heroes.Lancer;
 import main.entities.characters.heroes.Swordman;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Minion;
@@ -19,7 +19,7 @@ public abstract class Map {
     private int curScore;
     private int turns;
     private int targetedMons;
-   enum Symbol {
+    enum Symbol {
         DEFAULT,
         MINION,
         BIG_MINION,
@@ -196,7 +196,65 @@ public abstract class Map {
         setTurns(getTurns() - 1);
         return true;
     }
-    public abstract void update(Object obj, Event eventType, Position pos);
+    
+    private void HeroMove(Object obj, Event eventType, Position position) {
+        
+    }
+    
+    private void HeroAttack(Object obj, Event eventType, Position pos) {
+        
+    }
+    
+    public void update(Object obj, Event eventType, Position pos) {
+        switch(eventType) {
+            case HERO_MOVE:
+                
+                // this part is only for testing in console
+                if (obj instanceof Swordman) {
+                        board[pos.getX()][pos.getY()] = Symbol.SWORD;
+                }
+                else if (obj instanceof Lancer) {
+                        board[pos.getX()][pos.getY()] = Symbol.SPEAR;
+                }
+                // --------------------------------------------------
+                
+               for(Monster mons:monsters) {
+                    if (mons.getCurPosition().equals(pos)) {
+                        if (mons instanceof BigMinion) {
+                            heroes.remove((Hero) obj);
+                        } else {
+                            monsters.remove(mons);
+                            setCurScore(getCurScore() + 1);
+                        }
+                        break;
+                    }
+                }
+                break;
+            case HERO_ATTACK:
+                for (Position position: ((Hero) obj).calDamageArea(pos)) {
+                    removeMonster(position);
+                }
+                break;
+            case MONSTER_MOVE:
+                
+                // this part is only for testing in console
+                 if (obj instanceof Minion) {
+                        board[pos.getX()][pos.getY()] = Symbol.MINION;
+                } else if (obj instanceof BigMinion) {
+                        board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
+                }	            
+                // -------------------------------------------
+                 
+                for(Hero hero: heroes) {
+                    if(hero.getCurPosition().equals(pos)) {
+                        heroes.remove(hero);
+                        break;
+                    }
+                }
+                break;
+        }
+    }
+    
     abstract void random();
 
 	public int getTargetedMons() {
