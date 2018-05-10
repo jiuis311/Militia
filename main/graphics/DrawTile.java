@@ -15,11 +15,10 @@ public class DrawTile implements ImageObserver  {
     protected BufferedImage image;
     protected String imageLink;
     public static final int WIDTH = Config.TILEWIDTH;
-    
+
     public DrawTile(String imageLink) {
         try {
             image = ImageIO.read(DrawTile.class.getResourceAsStream(imageLink));
-            //System.out.println("Call");
         } catch (IOException e) {
             e.printStackTrace();
         }
