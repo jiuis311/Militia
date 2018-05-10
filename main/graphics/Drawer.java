@@ -17,14 +17,16 @@ public class Drawer {
 	private final DrawTile swordmanBlur;
 	private final DrawTile lancer;
 	private final DrawTile lancerBlur;
+	private final DrawTile archer;
+	private final DrawTile archerBlur;
+	
 	private final DrawTile minion;
 	private final DrawTile bigMinion;
 	private final DrawTile moveArea;
 	private final DrawTile attackArea;
 	private final DrawTile shield;
-        private final DrawTile ghost;
-        private final DrawTile archer;
-        private final DrawTile star;
+    private final DrawTile ghost;
+    private final DrawTile star;
 	
 	private int monsterTotal;
 	private int heroTotal;
@@ -35,14 +37,15 @@ public class Drawer {
 		swordmanBlur = new DrawTile("/sword-blur.png");
 		lancer = new DrawTile("/spear.png");
 		lancerBlur = new DrawTile("/spear-blur.png");
+		archer = new DrawTile("/bow.png");
+		archerBlur = new DrawTile("/bow-blur.png");
 		minion = new DrawTile("/mushroom.png");
 		bigMinion = new DrawTile("/alien.png");
 		moveArea = new DrawTile("/move-tile.png");
 		attackArea = new DrawTile("/attack-tile.png");
 		shield = new DrawTile("/shield.png");
-                ghost = new DrawTile("/ghost.png");
-                archer = new DrawTile("/bow.png");
-                star = new DrawTile("/star.png");
+        ghost = new DrawTile("/ghost.png");
+        star = new DrawTile("/star.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
@@ -74,6 +77,16 @@ public class Drawer {
             		lancer.setY(hero.getCurPosition().getY()+1);
             		lancer.draw(g);
         		}
+        	} else if (heroName.equals("Archer")) {
+        		if (hero.getState() == Hero.State.DONE) {
+        			archerBlur.setX(hero.getCurPosition().getX()+1);
+        			archerBlur.setY(hero.getCurPosition().getY()+1);
+        			archerBlur.draw(g);
+        		} else {
+        			archer.setX(hero.getCurPosition().getX()+1);
+        			archer.setY(hero.getCurPosition().getY()+1);
+        			archer.draw(g);
+        		}
         	}
         }
 	}
@@ -87,6 +100,10 @@ public class Drawer {
         		minion.setX(monster.getCurPosition().getX()+1);
         		minion.setY(monster.getCurPosition().getY()+1);
         		minion.draw(g);
+        	} else if (monsterName.equals("Ghost")) {
+        		ghost.setX(monster.getCurPosition().getX()+1);
+        		ghost.setY(monster.getCurPosition().getY()+1);
+        		ghost.draw(g);
         	} else if (monsterName.equals("BigMinion")) {
         		bigMinion.setX(monster.getCurPosition().getX()+1);
         		bigMinion.setY(monster.getCurPosition().getY()+1);
@@ -107,8 +124,8 @@ public class Drawer {
 	
 	public void calMonster() {
         if (map.getTurns() == 0)Game.State = Game.STATE.ENDGAME;
-            this.heroTotal = map.heroes.size();
-            if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
+        this.heroTotal = map.heroes.size();
+        if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
         else {
             if(!map.monsters.isEmpty()) {
                 this.monsterTotal = map.monsters.size();

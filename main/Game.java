@@ -38,10 +38,12 @@ public class Game extends Canvas implements Runnable {
     private Background bg = new Background();
     private MenuBackground menuBg;
     private DrawTile bracket;
+    private int currentLv;
     public static enum STATE{
         MENU,
         GAME,
-        
+        LVUP,
+        VICTORY,
         ENDGAME
     }
     public static STATE State = STATE.MENU;
@@ -62,6 +64,7 @@ public class Game extends Canvas implements Runnable {
         menuButton = new MenuButton();
         endMenuButton = new EndMenuButton();
         menuBg = new MenuBackground();
+        currentLv = 1;
         map = new MapLV1();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
@@ -135,12 +138,17 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             menuButton.drawButtons(g);
             this.setNewMap();
-        } else if (State == STATE.ENDGAME) {
+	} else if (State == STATE.LVUP) {
+			levelUp();
+			System.out.println(currentLv);
+			State = STATE.GAME;
+			Game.Playstate = Game.PLAYSTATE.HERO;
+    } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
             Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
-        }			
+    }			
         //////////////////////////////
 	g.dispose();
 	bs.show();
@@ -172,6 +180,18 @@ public class Game extends Canvas implements Runnable {
     
     public void setNewMap() {
     	this.map = new MapLV1();
+    	this.currentLv = 1;
+    }
+    
+    public void levelUp() {
+    	switch (currentLv) {
+    		case 1:
+    			this.map = new MapLV2();
+    			this.currentLv++;
+    			break;
+    		default:
+    			break;
+    	}
     }
     
     public static void main(String[] args) {
