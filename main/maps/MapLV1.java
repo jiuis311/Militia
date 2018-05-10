@@ -32,56 +32,12 @@ public class MapLV1 extends Map {
         }
         random();
     }
-    
-    @Override
-	public void update(Object obj, Event eventType, Position pos) {
-    	switch(eventType) {
-	        case HERO_MOVE:	
-	        	if (obj instanceof Swordman) {
-	        		board[pos.getX()][pos.getY()] = Symbol.SWORD;
-	        	}
-	        	else if (obj instanceof Lancer) {
-	        		board[pos.getX()][pos.getY()] = Symbol.SPEAR;
-	        	}
-	        	for(Monster mons:monsters) {
-	        		if (mons.getCurPosition().equals(pos)) {
-	        			if (mons.getClass().getSimpleName().equals("Minion")) {
-	        				monsters.remove(mons);
-	        				setCurScore(getCurScore() + 1);
-	        			} else if (mons.getClass().getSimpleName().equals("BigMinion")) {
-	        				heroes.remove(obj);
-	        			}
-	        			break;
-	        		}
-	        	}             
-	            break;
-	        case HERO_ATTACK:	  
-	            for (Position position: ((Hero) obj).calDamageArea(pos)) {
-	            	removeMonster(position);
-	            }
-                    
-	            break;
-	        case MONSTER_MOVE:
-	        	if (obj instanceof Minion) {
-	        		board[pos.getX()][pos.getY()] = Symbol.MINION;
-	        	} else if (obj instanceof BigMinion) {
-	        		board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
-	        	}	            
-	            Swordman sw3 = new Swordman(pos);
-	            if (heroes.contains(sw3)) heroes.remove(sw3);
-	             
-	            break;
- 	        default:
-	            break;
-    	}
-    	//draw();
-    }
 
     @Override
     void random() {
         Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
-        randomCharacter(minion, 2);
-        randomCharacter(big_minion, 1);
+        randomCharacter(minion, 10);
+        randomCharacter(big_minion, 3);
     }    
 }
