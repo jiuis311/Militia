@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import main.Game;
 import main.entities.characters.heroes.Hero;
 import main.entities.characters.monsters.BigMinion;
+import main.entities.characters.monsters.Ghost;
 import main.entities.characters.monsters.Monster;
 import main.helpers.Position;
 import main.maps.Map;
@@ -103,7 +104,9 @@ public class Drawer {
         	} else if (monsterName.equals("Ghost")) {
         		ghost.setX(monster.getCurPosition().getX()+1);
         		ghost.setY(monster.getCurPosition().getY()+1);
-        		ghost.draw(g);
+        		if (!((Ghost)monster).getCloak()) {
+            		ghost.draw(g);
+        		}
         	} else if (monsterName.equals("BigMinion")) {
         		bigMinion.setX(monster.getCurPosition().getX()+1);
         		bigMinion.setY(monster.getCurPosition().getY()+1);
