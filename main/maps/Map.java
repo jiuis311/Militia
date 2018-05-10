@@ -4,9 +4,11 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import main.entities.characters.heroes.Archer;
 import main.entities.characters.heroes.Hero;
 import main.entities.characters.heroes.Swordman;
 import main.entities.characters.monsters.BigMinion;
+import main.entities.characters.monsters.Ghost;
 import main.entities.characters.monsters.Minion;
 import main.entities.characters.monsters.Monster;
 import main.helpers.Config;
@@ -23,7 +25,9 @@ public abstract class Map {
         DEFAULT,
         MINION,
         BIG_MINION,
+        GHOST,
         SWORD,
+        ARROW,
         SPEAR;
     }
     
@@ -127,14 +131,6 @@ public abstract class Map {
                                     .distinct()
                                     .limit(num);
         switch(obj.getClass().getSimpleName()) {
-            case "Sword":
-                stream.forEach(number->
-                              {
-                                Position pos = calPosition(number);
-                                board[pos.getX()][pos.getY()] = Symbol.SWORD;
-                                heroes.add(new Swordman(pos));
-                              });
-                break;
             case "Minion":
                 stream.forEach(number->
                               {
@@ -149,6 +145,14 @@ public abstract class Map {
                                 Position pos = calPosition(number);
                                 board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
                                 monsters.add(new BigMinion(pos));
+                              });
+                break;
+            case "Ghost":
+                stream.forEach(number->
+                              {
+                                Position pos = calPosition(number);
+                                board[pos.getX()][pos.getY()] = Symbol.GHOST;
+                                monsters.add(new Ghost(pos));
                               });
                 break;
             default:

@@ -45,7 +45,7 @@ public class MenuButton implements ImageObserver {
             startButton = ImageIO.read(DrawTile.class.getResourceAsStream("/play.png"));
             helpButton = ImageIO.read(DrawTile.class.getResourceAsStream("/help.png"));
             quitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/quit.png"));
-            exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/exit.png"));
+            exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/quit.png"));
             startButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/play1.png"));
             helpButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/help1.png"));
             quitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/quit1.png"));
