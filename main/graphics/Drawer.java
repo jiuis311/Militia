@@ -20,6 +20,9 @@ public class Drawer {
 	private final DrawTile moveArea;
 	private final DrawTile attackArea;
 	private final DrawTile shield;
+        private final DrawTile ghost;
+        private final DrawTile archer;
+        private final DrawTile star;
 	
 	private int monsterTotal;
 	private int heroTotal;
@@ -33,6 +36,9 @@ public class Drawer {
 		moveArea = new DrawTile("/move-tile.png");
 		attackArea = new DrawTile("/attack-tile.png");
 		shield = new DrawTile("/shield.png");
+                ghost = new DrawTile("/ghost.png");
+                archer = new DrawTile("/bow.png");
+                star = new DrawTile("/star.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
@@ -75,7 +81,12 @@ public class Drawer {
         			this.shield.draw(g);
         		}
         	}
-        }
+                    if (monster.isTargeted()){
+                        this.star.setX(monster.getCurPosition().getX()+1);
+                        this.star.setY(monster.getCurPosition().getY()+1);
+        		this.star.draw(g);
+                    }
+                }
 	}
 	
 	public void calMonster() {

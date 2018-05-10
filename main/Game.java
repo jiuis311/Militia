@@ -40,6 +40,7 @@ public class Game extends Canvas implements Runnable {
     public static enum STATE{
         MENU,
         GAME,
+        
         ENDGAME
     }
     public static STATE State = STATE.MENU;
