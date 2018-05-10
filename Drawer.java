@@ -22,10 +22,10 @@ public class Drawer {
 	private int monsterCount = 0;
 	
 	Drawer() {
-		swordman = new DrawTile("/short_sword.png");
-		lancer = new DrawTile("/spear3.png");
-		minion = new DrawTile("/monster2.png");
-		bigMinion = new DrawTile("/monster3.png");
+		swordman = new DrawTile("/sword.png");
+		lancer = new DrawTile("/spear.png");
+		minion = new DrawTile("/mushroom.png");
+		bigMinion = new DrawTile("/alien.png");
 		moveArea = new DrawTile("/move-tile.png");
 		attackArea = new DrawTile("/attack-tile.png");
 		shield = new DrawTile("/shield.png");
