@@ -65,7 +65,7 @@ public class Game extends Canvas implements Runnable {
         endMenuButton = new EndMenuButton();
         menuBg = new MenuBackground();
         currentLv = 1;
-        map = new MapLV1();
+        map = new MapLV2();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
         bracket = new DrawTile("/bracket.png");
@@ -137,7 +137,7 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
-            this.setNewMap();
+//            this.setNewMap();
 	} else if (State == STATE.LVUP) {
 			levelUp();
 			System.out.println(currentLv);
