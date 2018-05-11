@@ -30,7 +30,6 @@ public class Drawer {
 	private final DrawTile shield;
     private final DrawTile ghost;
     private final DrawTile star;
-    private final DrawTile redBackground;
 	
 	private int monsterTotal;
 	private int heroTotal;
@@ -50,7 +49,6 @@ public class Drawer {
 		shield = new DrawTile("/shield.png");
         ghost = new DrawTile("/ghost.png");
         star = new DrawTile("/star.png");
-        redBackground = new DrawTile("/red-background.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
@@ -175,7 +173,28 @@ public class Drawer {
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
         g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 100);
-        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 150);
+        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 160);
+        g.drawString("Hero alive: ", 240, 770);
+	}
+	
+	public void drawHeroLeft(Graphics g) {
+		String heroName;
+		for(Hero hero: map.heroes) {
+        	heroName = hero.getClass().getSimpleName();
+        	if (heroName.equals("Swordman")) {
+        			swordman.setX(3);
+            		swordman.setY(9);
+            		swordman.draw(g);
+        	} else if (heroName.equals("Lancer")) {
+        			lancer.setX(4);
+            		lancer.setY(9);
+            		lancer.draw(g);
+        	} else if (heroName.equals("Archer")) {
+        			archer.setX(5);
+        			archer.setY(9);
+        			archer.draw(g);
+        	}
+        }
 	}
 	
 	public void draw(Graphics g) {
@@ -195,5 +214,6 @@ public class Drawer {
 		this.drawHero(g);
 		this.drawMonster(g);
 		this.drawScore(g);
+		this.drawHeroLeft(g);
 	}
 }
