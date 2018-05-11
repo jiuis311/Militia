@@ -171,7 +171,7 @@ public class Game extends Canvas implements Runnable {
     }
     
     public void setNewMap() {
-    	this.maplv1 = new MapLV1();
+    	this.maplv1 = new MapLV2();
     }
     
     public static void main(String[] args) {
