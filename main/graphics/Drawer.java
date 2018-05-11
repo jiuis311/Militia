@@ -2,6 +2,7 @@ package main.graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import main.Game;
 import main.entities.characters.heroes.Hero;
@@ -95,6 +96,7 @@ public class Drawer {
 	
 	public void drawMonster(Graphics g) {
 		String monsterName;
+		ArrayList<Monster> monsters = map.monsters;
 		for(Monster monster: map.monsters) {
         	monsterName = monster.getClass().getSimpleName();
         	if (monsterName.equals("Minion")) {
