@@ -290,16 +290,20 @@ public abstract class Map {
                  
                 for(Hero hero: heroes) {
                     if(hero.getCurPosition().equals(pos)) {
-                        if(hero.getShield() == false || 
-                           obj.getClass().getSimpleName().equals("BigMinion")) {
+                        if(obj.getClass().getSimpleName().equals("BigMinion")) {
                             heroes.remove(hero);
                             setHeroDied(true);
-                            break;
                         } else {
-                            removeMonster(pos);
-                            setHeroDied(false);
-                            break;
+                            if(hero.getShield() == true) {
+                                hero.setShield(false);
+                                removeMonster(pos);
+                                setHeroDied(false);
+                            } else {
+                                heroes.remove(hero);
+                                setHeroDied(true);
+                            }
                         }
+                        break;
                     }
                 }
                 

@@ -5,7 +5,7 @@ import main.entities.characters.heroes.Swordman;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Minion;
 import main.entities.characters.monsters.Monster;
-import main.entities.items.Bomb;
+import main.entities.items.*;
 import main.helpers.Position;
 
 public class MapLV1 extends Map {
@@ -26,6 +26,7 @@ public class MapLV1 extends Map {
         
         items.add(new Bomb(new Position(6, 2)));
         
+        items.add(new Shield(new Position(2, 6)));
         //board[6][4] = Symbol.SPEAR;
         heroes.add(new Lancer(new Position(6, 4)));
         setTurns(4);
@@ -40,7 +41,7 @@ public class MapLV1 extends Map {
     void random() {
         Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
-        randomCharacter(minion, 10);
-        randomCharacter(big_minion, 3);
+        randomCharacter(minion, 3);
+        randomCharacter(big_minion, 1);
     }    
 }
