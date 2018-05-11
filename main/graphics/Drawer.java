@@ -117,12 +117,12 @@ public class Drawer {
         			this.shield.draw(g);
         		}
         	}
-                    if (monster.isTargeted()){
-                        this.star.setX(monster.getCurPosition().getX()+1);
-                        this.star.setY(monster.getCurPosition().getY()+1);
+            if (monster.isTargeted() && !(monsterName.equals("Ghost") && ((Ghost)monster).getCloak())) {
+                this.star.setX(monster.getCurPosition().getX()+1);
+                this.star.setY(monster.getCurPosition().getY()+1);
         		this.star.draw(g);
-                    }
-                }
+            }
+        }
 	}
 	
 	public void calMonster() {
