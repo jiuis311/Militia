@@ -14,6 +14,7 @@ import main.maps.Map;
 public class Drawer {
 	private Hero activeHero;
 	private Map map;
+	
 	private final DrawTile swordman;
 	private final DrawTile swordmanBlur;
 	private final DrawTile lancer;
@@ -28,6 +29,7 @@ public class Drawer {
 	private final DrawTile shield;
     private final DrawTile ghost;
     private final DrawTile star;
+    private final DrawTile redBackground;
 	
 	private int monsterTotal;
 	private int heroTotal;
@@ -47,6 +49,7 @@ public class Drawer {
 		shield = new DrawTile("/shield.png");
         ghost = new DrawTile("/ghost.png");
         star = new DrawTile("/star.png");
+        redBackground = new DrawTile("/red-background.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
