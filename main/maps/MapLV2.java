@@ -13,25 +13,25 @@ import main.maps.Map.Symbol;
 public class MapLV2 extends Map {
 	public MapLV2() {
         super();
-        board[1][6] = Symbol.SPEAR;
+        //board[1][6] = Symbol.SPEAR;
         heroes.add(new Lancer(new Position(1, 6)));
         
-        board[4][5] = Symbol.ARROW;
+        //board[4][5] = Symbol.ARROW;
         heroes.add(new Archer(new Position(4, 5)));
         
-        board[7][5] = Symbol.SWORD;
+        //board[7][5] = Symbol.SWORD;
         heroes.add(new Swordman(new Position(7, 5)));
         
-        board[1][2] = Symbol.BIG_MINION;
+        //board[1][2] = Symbol.BIG_MINION;
         monsters.add(new BigMinion(new Position(1, 2)));
         
-        board[2][4] = Symbol.BIG_MINION;
+        //board[2][4] = Symbol.BIG_MINION;
         monsters.add(new BigMinion(new Position(2, 4)));
         
-        board[4][2] = Symbol.MINION;
+        //board[4][2] = Symbol.MINION;
         monsters.add(new Minion(new Position(4, 2)));
         
-        board[6][1] = Symbol.GHOST;
+        //board[6][1] = Symbol.GHOST;
         monsters.add(new Ghost(new Position(6, 1)));
         
         setTurns(4);
