@@ -16,6 +16,7 @@ public abstract class Map {
     private int curScore;
     private int turns;
     private int targetedMons;
+    private boolean heroDied;
     enum Symbol {
         DEFAULT,
         MINION,
@@ -43,6 +44,7 @@ public abstract class Map {
         heroes = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
         items = new ArrayList<Item>();
+        setHeroDied(false);
         //setUnselectState();
     }
     
@@ -220,6 +222,7 @@ public abstract class Map {
                     if (mons.getCurPosition().equals(pos)) {
                         if (mons instanceof BigMinion || mons instanceof Ghost) {
                             heroes.remove((Hero) obj);
+                            setHeroDied(true);
                         } else {
                             monsters.remove(mons);
                             if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
@@ -278,6 +281,7 @@ public abstract class Map {
                 for(Hero hero: heroes) {
                     if(hero.getCurPosition().equals(pos)) {
                         heroes.remove(hero);
+                        setHeroDied(true);
                         break;
                     }
                 }
@@ -309,5 +313,13 @@ public abstract class Map {
 
 	public void setCurScore(int curScore) {
 		this.curScore = curScore;
+	}
+
+	public boolean isHeroDied() {
+		return heroDied;
+	}
+
+	public void setHeroDied(boolean heroDied) {
+		this.heroDied = heroDied;
 	}
 }
