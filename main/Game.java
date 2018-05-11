@@ -16,6 +16,7 @@ import main.graphics.EndMenuButton;
 import main.graphics.MenuBackground;
 import main.graphics.MenuButton;
 import main.graphics.MouseInput;
+import main.graphics.NextLevelMenu;
 import main.graphics.TileGrid;
 import main.helpers.Config;
 import main.maps.Map;
@@ -38,10 +39,13 @@ public class Game extends Canvas implements Runnable {
     private Background bg = new Background();
     private MenuBackground menuBg;
     private DrawTile bracket;
+    private int currentLv;
     public static enum STATE{
         MENU,
         GAME,
-        
+        NEXT,
+        LVUP,
+        VICTORY,
         ENDGAME
     }
     public static STATE State = STATE.MENU;
@@ -52,7 +56,8 @@ public class Game extends Canvas implements Runnable {
     public static PLAYSTATE Playstate = PLAYSTATE.HERO;
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
-    public Map maplv1;
+    public static NextLevelMenu nextLevelMenu;
+    public Map map;
     private Hero activeHero;
     private Drawer drawer;
     
@@ -61,8 +66,10 @@ public class Game extends Canvas implements Runnable {
         this.addMouseListener(new MouseInput());
         menuButton = new MenuButton();
         endMenuButton = new EndMenuButton();
+        nextLevelMenu = new NextLevelMenu();
         menuBg = new MenuBackground();
-        maplv1 = new MapLV2();
+        currentLv = 1;
+        map = new MapLV1();
         Playstate = PLAYSTATE.HERO;
         activeHero = null; 
         bracket = new DrawTile("/bracket.png");
@@ -121,13 +128,11 @@ public class Game extends Canvas implements Runnable {
             grid.draw(g);
             menuButton.drawMenuInGame(g);               
             //draw monster and hero         
-            drawer.update(activeHero, maplv1);
+            drawer.update(activeHero, map);
             if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
             	this.setActiveHero(null);
             }
             drawer.draw(g);        
-            ////////////////////////
-            //draw bracket
             if(bracketboo){
             	bracket.draw(g);
             }
@@ -135,11 +140,19 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             menuButton.drawButtons(g);
             this.setNewMap();
+	} else if (State == STATE.LVUP) {
+            levelUp();
+            System.out.println(currentLv);
+            State = STATE.GAME;
+            Game.Playstate = Game.PLAYSTATE.HERO;            
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
             Game.Playstate = Game.PLAYSTATE.HERO;
             this.setNewMap();
+        } else if(State == STATE.NEXT){
+            menuBg.draw(g);
+            nextLevelMenu.drawButtons(g);
         }			
         //////////////////////////////
 	g.dispose();
@@ -167,11 +180,23 @@ public class Game extends Canvas implements Runnable {
     }
     
     public Map getMap() {
-    	return this.maplv1;
+    	return this.map;
     }
     
     public void setNewMap() {
-    	this.maplv1 = new MapLV2();
+    	this.map = new MapLV1();
+    	this.currentLv = 1;
+    }
+    
+    public void levelUp() {
+    	switch (currentLv) {
+    		case 1:
+    			this.map = new MapLV2();
+    			this.currentLv++;
+    			break;
+    		default:
+    			break;
+    	}
     }
     
     public static void main(String[] args) {

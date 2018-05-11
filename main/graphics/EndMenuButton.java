@@ -1,7 +1,5 @@
 package main.graphics;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -42,10 +40,6 @@ public class EndMenuButton implements ImageObserver{
     }
 	
 	public void drawButtons(Graphics g) {
-//        Font fn1 = new Font("Berlin Sans FB Demi", Font.PLAIN, 120);
-//        g.setFont(fn1);
-//        g.setColor(Color.black);
-//        g.drawString("GAME OVER", Game.WIDTH / 2 - 60, 150);
         g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);
         if (reStartButtonState) {
         	g.drawImage(reStartButton2, reStartButtonX, reStartButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);

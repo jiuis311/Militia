@@ -52,6 +52,7 @@ public class Ghost extends Monster{
 			}
 		}
 		setCurPosition(min2);
+		setCloak();
 		return true;
 	}
 	
