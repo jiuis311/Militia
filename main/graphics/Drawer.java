@@ -15,6 +15,7 @@ import main.maps.Map;
 public class Drawer {
 	private Hero activeHero;
 	private Map map;
+	
 	private final DrawTile swordman;
 	private final DrawTile swordmanBlur;
 	private final DrawTile lancer;
@@ -96,8 +97,9 @@ public class Drawer {
 	
 	public void drawMonster(Graphics g) {
 		String monsterName;
-		ArrayList<Monster> monsters = map.monsters;
-		for(Monster monster: map.monsters) {
+		ArrayList<Monster> monsters = new ArrayList<Monster> ();
+		monsters = map.monsters;
+		for(Monster monster: monsters) {
         	monsterName = monster.getClass().getSimpleName();
         	if (monsterName.equals("Minion")) {
         		minion.setX(monster.getCurPosition().getX()+1);
@@ -172,7 +174,28 @@ public class Drawer {
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
         g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 100);
-        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 150);
+        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 160);
+        g.drawString("Hero alive: ", 240, 770);
+	}
+	
+	public void drawHeroLeft(Graphics g) {
+		String heroName;
+		for(Hero hero: map.heroes) {
+        	heroName = hero.getClass().getSimpleName();
+        	if (heroName.equals("Swordman")) {
+        			swordman.setX(3);
+            		swordman.setY(9);
+            		swordman.draw(g);
+        	} else if (heroName.equals("Lancer")) {
+        			lancer.setX(4);
+            		lancer.setY(9);
+            		lancer.draw(g);
+        	} else if (heroName.equals("Archer")) {
+        			archer.setX(5);
+        			archer.setY(9);
+        			archer.draw(g);
+        	}
+        }
 	}
 	
 	public void draw(Graphics g) {
@@ -192,5 +215,6 @@ public class Drawer {
 		this.drawHero(g);
 		this.drawMonster(g);
 		this.drawScore(g);
+		this.drawHeroLeft(g);
 	}
 }
