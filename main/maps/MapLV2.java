@@ -28,14 +28,20 @@ public class MapLV2 extends Map {
         //board[2][4] = Symbol.BIG_MINION;
         monsters.add(new BigMinion(new Position(2, 4)));
         
+        //board[3][6] = Symbol.BIG_MINION;
+        monsters.add(new BigMinion(new Position(3, 6)));
+        
         //board[4][2] = Symbol.MINION;
         monsters.add(new Minion(new Position(4, 2)));
         
-        //board[6][1] = Symbol.GHOST;
-        monsters.add(new Ghost(new Position(6, 1)));
+        //board[7][1] = Symbol.MINION;
+        monsters.add(new Minion(new Position(7, 1)));
+        
+        //board[5][2] = Symbol.GHOST;
+        monsters.add(new Ghost(new Position(5, 2)));
         
         setTurns(4);
-        setTargetedMons(4);
+        setTargetedMons(6);
         for (Monster mons:monsters) {
         	mons.setTarget();
         }
@@ -47,8 +53,8 @@ public class MapLV2 extends Map {
 		Minion minion = new Minion(new Position(0, 0));
         BigMinion big_minion = new BigMinion(new Position(0, 0));
         Ghost ghost = new Ghost(new Position(0, 0));
-        randomCharacter(minion, 8);
-        randomCharacter(big_minion, 2);
-        randomCharacter(ghost, 1);
+        randomCharacter(minion, 9);
+        randomCharacter(big_minion, 3);
+        randomCharacter(ghost, 2);
 	}
 }
