@@ -96,7 +96,7 @@ public abstract class Map {
         }
         return null;
     }
-    
+
     private boolean checkHero(Position pos) {
         for(Hero hero: heroes) {
             if(hero.getCurPosition().equals(pos))
@@ -112,7 +112,7 @@ public abstract class Map {
         }
         return false;
     }
-    
+
     private boolean checkCharacter(Position pos) {
         return checkHero(pos) || checkMonster(pos);
     }
@@ -122,7 +122,7 @@ public abstract class Map {
         int x = (number - y)/Config.GAME_WIDTH;
         return new Position(x, y);
     }
-    
+
     protected void randomCharacter(Object obj, int num) {
         IntStream stream = new Random().ints(0, Config.GAME_WIDTH*Config.GAME_HEIGHT)
                                     .filter(number->!checkCharacter(calPosition(number)))
@@ -203,7 +203,7 @@ public abstract class Map {
         setTurns(getTurns() - 1);
         return true;
     }
-    
+
     public void update(Object obj, Event eventType, Position pos) {
         switch(eventType) {
             case HERO_MOVE:
