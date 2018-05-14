@@ -192,13 +192,12 @@ public abstract class Map {
                         if(item instanceof Bomb) {
                              for(Position position: ((Bomb) item).getDamageArea())
                                  removeMonster(position);
-                            break;
                         }
                         else if(item instanceof Shield) {
                             ((Hero) obj).setShield(true);
-                            break;
                         }
                         items.remove(item);
+                        break;
                    }
                }
                 break;
