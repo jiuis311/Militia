@@ -142,7 +142,6 @@ public class MouseInput implements MouseListener{
             int my = e.getY();
             if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+250){
                 if (my >= 350 && my <= 450){
-                    //Press play button
                     Game.State = Game.STATE.GAME;
                     EndMenuButton.reStartButtonState = false;
                 }
