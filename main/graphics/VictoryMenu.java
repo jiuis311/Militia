@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import main.maps.Map;
 
 public class VictoryMenu implements ImageObserver{
     private int quitButtonX = Game.WIDTH / 2 - 250;
@@ -24,8 +25,7 @@ public class VictoryMenu implements ImageObserver{
     private BufferedImage trophy;
     public static boolean nextButtonState = false;
     public static boolean quitButtonState = false;
-
-
+    
     public VictoryMenu() {
         try {
             quitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/nextQuit.png"));
@@ -45,6 +45,7 @@ public class VictoryMenu implements ImageObserver{
         } else {
     		g.drawImage(quitButton, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         }
+        
 	}
 
     @Override

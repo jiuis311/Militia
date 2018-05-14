@@ -179,7 +179,7 @@ public class Drawer {
 	}
 	
 	public void drawScore(Graphics g) {
-		Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+	Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
@@ -234,7 +234,7 @@ public class Drawer {
 	}
 	
 	public void draw(Graphics g) {
-		if (Game.Playstate == Game.PLAYSTATE.HERO) {
+	if (Game.Playstate == Game.PLAYSTATE.HERO) {
             this.drawMoveArea(g);
             this.drawAttackArea(g);
         } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
