@@ -86,31 +86,31 @@ public class Game extends Canvas implements Runnable {
     }
 	
     private synchronized void stop() throws InterruptedException {
-		if (!running) {
-	       return;
-		}		
-		running = false;
-		thread.join();
-		System.exit(1);
+        if (!running) {
+       return;
+        }		
+        running = false;
+        thread.join();
+        System.exit(1);
     }
 
     @Override
     public void run() {
-		init();
-		int frames = 0;
-		while (running) {
-	            frames++;
-	            if (frames % 5 == 0) {
-	            	this.secs++;
-	            	//System.out.println(this.secs);
-	            }
-	            render();                         
-	            try {
-			Thread.sleep(50);
-	            } catch (InterruptedException e) {
-			e.printStackTrace();
-	            }
-		}
+        init();
+        int frames = 0;
+        while (running) {
+            frames++;
+            if (frames % 5 == 0) {
+                this.secs++;
+                //System.out.println(this.secs);
+            }
+            render();                         
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 	
     public void render() {
