@@ -109,7 +109,7 @@ public class Drawer {
 		String monsterName;
 		//ArrayList<Monster> monsters = new ArrayList<Monster> ();
 		//monsters = map.monsters;
-		for(Monster monster: map.monsters) {
+		for(Monster monster: map.monsters.toArray(new Monster[0])) {
         	monsterName = monster.getClass().getSimpleName();
         	if (monsterName.equals("Minion")) {
         		minion.setX(monster.getCurPosition().getX()+1);
