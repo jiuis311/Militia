@@ -12,7 +12,7 @@ public abstract class Map {
     public ArrayList<Hero> heroes;
     public ArrayList<Monster> monsters;
     public ArrayList<Item> items;
-    private int curScore;
+    private static int curScore;
     private int turns;
     private int targetedMons;
     private boolean heroDied;
@@ -215,6 +215,7 @@ public abstract class Map {
                         if(item instanceof Bomb) {
                             for(Position position: ((Bomb) item).getDamageArea())
                                 damageArea.add(position);
+                            items.remove(item);
                         }
                     }
                 }
