@@ -190,16 +190,14 @@ public abstract class Map {
                for(Item item:items) {
                    if (item.getCurPosition().equals(pos)) {
                         if(item instanceof Bomb) {
-                             heroes.remove((Hero) obj);
-                             setHeroDied(true);
                              for(Position position: ((Bomb) item).getDamageArea())
                                  removeMonster(position);
                         }
                         else if(item instanceof Shield) {
                             ((Hero) obj).setShield(true);
-                            items.remove(item);
-                            break;
                         }
+                        items.remove(item);
+                        break;
                    }
                }
                 break;
