@@ -140,7 +140,7 @@ public class Drawer {
 	}
 	
 	public void calMonster() {
-        if (map.getTurns() == 0)Game.State = Game.STATE.ENDGAME;
+        if (map.getTurns() == 0 && map.getTargetedMons() != 0)Game.State = Game.STATE.ENDGAME;
         this.heroTotal = map.heroes.size();
         if (heroTotal == 0) Game.State = Game.STATE.ENDGAME;
         else {

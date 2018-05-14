@@ -28,6 +28,7 @@ public class MapLV1 extends Map {
         
         heroes.add(new Swordman(new Position(1, 6)));
         
+        //setCurScore(0);
         setTurns(4);
         setTargetedMons(6);
         for (Monster mons:monsters) {
