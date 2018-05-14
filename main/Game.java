@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable {
         ENDGAME,
         HELP
     }
-    public static STATE State = STATE.VICTORY;
+    public static STATE State = STATE.HELP;
     public static enum PLAYSTATE {
     	HERO,
     	MONSTER
