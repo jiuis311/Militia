@@ -9,89 +9,99 @@ import main.entities.characters.heroes.Hero;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Ghost;
 import main.entities.characters.monsters.Monster;
+import main.entities.items.Item;
 import main.helpers.Position;
 import main.maps.Map;
 
 public class Drawer {
-	private Hero activeHero;
-	private Map map;
-	
-	private final DrawTile swordman;
-	private final DrawTile swordmanBlur;
-	private final DrawTile lancer;
-	private final DrawTile lancerBlur;
-	private final DrawTile archer;
-	private final DrawTile archerBlur;
-	
-	private final DrawTile minion;
-	private final DrawTile bigMinion;
-	private final DrawTile moveArea;
-	private final DrawTile attackArea;
-	private final DrawTile shield;
+
+    private Hero activeHero;
+    private Map map;
+
+    private final DrawTile swordman;
+    private final DrawTile swordmanBlur;
+    private final DrawTile lancer;
+    private final DrawTile lancerBlur;
+    private final DrawTile archer;
+    private final DrawTile archerBlur;
+
+    private final DrawTile minion;
+    private final DrawTile bigMinion;
+    private final DrawTile moveArea;
+    private final DrawTile attackArea;
+    private final DrawTile shield;
     private final DrawTile ghost;
     private final DrawTile star;
-	
-	private int monsterTotal;
-	private int heroTotal;
-	private int monsterCount = 0;
-	
-	public Drawer() {
-		swordman = new DrawTile("/sword.png");
-		swordmanBlur = new DrawTile("/sword-blur.png");
-		lancer = new DrawTile("/spear.png");
-		lancerBlur = new DrawTile("/spear-blur.png");
-		archer = new DrawTile("/bow.png");
-		archerBlur = new DrawTile("/bow-blur.png");
-		minion = new DrawTile("/mushroom.png");
-		bigMinion = new DrawTile("/alien.png");
-		moveArea = new DrawTile("/move-tile.png");
-		attackArea = new DrawTile("/attack-tile.png");
-		shield = new DrawTile("/shield.png");
+    private final DrawTile bomb; 
+    private final DrawTile shieldItem;
+    private final DrawTile shieldEffect;	
+    private int monsterTotal;
+    private int heroTotal;
+    private int monsterCount = 0;
+    private int currentLv = 1;
+
+    public Drawer() {
+        swordman = new DrawTile("/sword.png");
+        swordmanBlur = new DrawTile("/sword-blur.png");
+        lancer = new DrawTile("/spear.png");
+        lancerBlur = new DrawTile("/spear-blur.png");
+        archer = new DrawTile("/bow.png");
+        archerBlur = new DrawTile("/bow-blur.png");
+        minion = new DrawTile("/mushroom.png");
+        bigMinion = new DrawTile("/alien.png");
+        moveArea = new DrawTile("/move-tile.png");
+        attackArea = new DrawTile("/attack-tile.png");
+        shield = new DrawTile("/shield.png");
         ghost = new DrawTile("/ghost.png");
         star = new DrawTile("/star.png");
-	}
-	
-	public void update(Hero activeHero, Map map) {
-		this.activeHero = activeHero;
-		this.map = map;
-	}
+        bomb = new DrawTile("/bomb.png");
+        shieldItem = new DrawTile("/shield-item.png");
+        shieldEffect = new DrawTile("/shield-effect.png");
+    }
+
+    public void update(Hero activeHero, Map map, int level) {
+            this.activeHero = activeHero;
+            this.map = map;
+            this.currentLv = level;
+    }
 	
 	public void drawHero(Graphics g) {
-		String heroName;
-		for(Hero hero: map.heroes) {
-        	heroName = hero.getClass().getSimpleName();
-        	if (heroName.equals("Swordman")) {
-        		if (hero.getState() == Hero.State.DONE) {
-        			swordmanBlur.setX(hero.getCurPosition().getX()+1);
-        			swordmanBlur.setY(hero.getCurPosition().getY()+1);
-        			swordmanBlur.draw(g);
-        		} else {
-        			swordman.setX(hero.getCurPosition().getX()+1);
-            		swordman.setY(hero.getCurPosition().getY()+1);
-            		swordman.draw(g);
-        		}
-        	} else if (heroName.equals("Lancer")) {
-        		if (hero.getState() == Hero.State.DONE) {
-        			lancerBlur.setX(hero.getCurPosition().getX()+1);
-        			lancerBlur.setY(hero.getCurPosition().getY()+1);
-        			lancerBlur.draw(g);
-        		} else {
-        			lancer.setX(hero.getCurPosition().getX()+1);
-            		lancer.setY(hero.getCurPosition().getY()+1);
-            		lancer.draw(g);
-        		}
-        	} else if (heroName.equals("Archer")) {
-        		if (hero.getState() == Hero.State.DONE) {
-        			archerBlur.setX(hero.getCurPosition().getX()+1);
-        			archerBlur.setY(hero.getCurPosition().getY()+1);
-        			archerBlur.draw(g);
-        		} else {
-        			archer.setX(hero.getCurPosition().getX()+1);
-        			archer.setY(hero.getCurPosition().getY()+1);
-        			archer.draw(g);
-        		}
-        	}
-        }
+            String heroName;
+            for(Hero hero: map.heroes) {
+            heroName = hero.getClass().getSimpleName();
+            if (heroName.equals("Swordman")) {
+                    if (hero.getState() == Hero.State.DONE) {
+                            swordmanBlur.setX(hero.getCurPosition().getX()+1);
+                            swordmanBlur.setY(hero.getCurPosition().getY()+1);
+                            swordmanBlur.draw(g);
+                    } else {
+                            swordman.setX(hero.getCurPosition().getX()+1);
+                    swordman.setY(hero.getCurPosition().getY()+1);
+                    swordman.draw(g);
+                    }
+            } else if (heroName.equals("Lancer")) {
+                    if (hero.getState() == Hero.State.DONE) {
+                            lancerBlur.setX(hero.getCurPosition().getX()+1);
+                            lancerBlur.setY(hero.getCurPosition().getY()+1);
+                            lancerBlur.draw(g);
+                    } else {
+                            lancer.setX(hero.getCurPosition().getX()+1);
+                    lancer.setY(hero.getCurPosition().getY()+1);
+                    lancer.draw(g);
+                    }
+            } else if (heroName.equals("Archer")) {
+                    if (hero.getState() == Hero.State.DONE) {
+                            archerBlur.setX(hero.getCurPosition().getX()+1);
+                            archerBlur.setY(hero.getCurPosition().getY()+1);
+                            archerBlur.draw(g);
+                    } else {
+                            archer.setX(hero.getCurPosition().getX()+1);
+                            archer.setY(hero.getCurPosition().getY()+1);
+                            archer.draw(g);
+                    }
+            }
+            drawHeroEffect(g,hero);
+            }
 	}
 
 	
@@ -148,11 +158,11 @@ public class Drawer {
 	
 	public void drawMoveArea(Graphics g) {
 		if (this.activeHero != null && this.activeHero.getState() == Hero.State.SELECTING) {
-			this.activeHero.calMoveArea();
-			for(Position pos: activeHero.getMoveArea(this.map.heroes)) {
-	    		this.moveArea.setX(pos.getX()+1);
-	    		this.moveArea.setY(pos.getY()+1);
-	    		this.moveArea.draw(g);
+                    this.activeHero.calMoveArea();
+                    for(Position pos: activeHero.getMoveArea(this.map.heroes)) {
+                    this.moveArea.setX(pos.getX()+1);
+                    this.moveArea.setY(pos.getY()+1);
+                    this.moveArea.draw(g);
 	    	}
 		}
 	}
@@ -173,8 +183,9 @@ public class Drawer {
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 100);
-        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 160);
+        g.drawString("Level: " + this.currentLv, (Game.WIDTH / 12) * 20, 70);
+        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 150);
+        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 200);
         g.drawString("Hero alive: ", 240, 770);
 	}
 	
@@ -198,6 +209,30 @@ public class Drawer {
         }
 	}
 	
+	public void drawItem(Graphics g) {
+		String itemName;
+		for (Item item: map.items) {
+			itemName = item.getClass().getSimpleName();
+			if (itemName.equals("Bomb")) {
+				bomb.setX(item.getCurPosition().getX()+1);
+				bomb.setY(item.getCurPosition().getY()+1);
+				bomb.draw(g);
+			} else if (itemName.equals("Shield")) {
+				shieldItem.setX(item.getCurPosition().getX()+1);
+				shieldItem.setY(item.getCurPosition().getY()+1);
+				shieldItem.draw(g);
+			}
+		}
+	}
+	
+	public void drawHeroEffect(Graphics g, Hero hero) {
+		if (hero.getShield()) {
+			shieldEffect.setX(hero.getCurPosition().getX()+1);
+			shieldEffect.setY(hero.getCurPosition().getY()+1);
+			shieldEffect.draw(g);
+		}
+	}
+	
 	public void draw(Graphics g) {
 		if (Game.Playstate == Game.PLAYSTATE.HERO) {
             this.drawMoveArea(g);
@@ -216,5 +251,6 @@ public class Drawer {
 		this.drawMonster(g);
 		this.drawScore(g);
 		this.drawHeroLeft(g);
+		this.drawItem(g);
 	}
 }
