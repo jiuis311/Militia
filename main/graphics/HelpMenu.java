@@ -28,7 +28,9 @@ public class HelpMenu implements ImageObserver{
     private int helpLogoX = Game.WIDTH/2 + 230;
     private int helpLogoY = 30;
     private int ruleX = Game.WIDTH / 2 - 200;
-    private int ruleY = 420;
+    private int ruleY = 460;
+    private int starX = Game.WIDTH / 2 - 173;
+    private int starY = 400;
     private int quitButtonX = Game.WIDTH / 2 + 700;
     private int quitButtonY = 650;
     private static final int BUTTONWIDTH = 300;
@@ -43,6 +45,7 @@ public class HelpMenu implements ImageObserver{
     private BufferedImage ghost;
     private BufferedImage bomb;
     private BufferedImage shield;
+    private BufferedImage star;
     private BufferedImage rule;
     private BufferedImage helpLogo;
     private BufferedImage quitButton;
@@ -63,6 +66,7 @@ public class HelpMenu implements ImageObserver{
             ghost = ImageIO.read(DrawTile.class.getResourceAsStream("/helpinfo8.png"));
             shield = ImageIO.read(DrawTile.class.getResourceAsStream("/helpinfo9.png"));
             bomb = ImageIO.read(DrawTile.class.getResourceAsStream("/helpinfo10.png"));
+            star = ImageIO.read(DrawTile.class.getResourceAsStream("/helpinfo11.png"));
             rule = ImageIO.read(DrawTile.class.getResource("/rule.png"));
             quitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/nextQuit.png"));
             quitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/nextQuit1.png"));
@@ -83,6 +87,7 @@ public class HelpMenu implements ImageObserver{
         g.drawImage(ghost, ghostX, monsterY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         g.drawImage(shield, shieldX, itemY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         g.drawImage(bomb, bombX, itemY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
+        g.drawImage(star, starX, starY, 450, BUTTONHEIGHT, (ImageObserver) this);
         g.drawImage(rule, ruleX, ruleY, 800, 300, (ImageObserver) this);
         if (quitButtonState) {
             g.drawImage(quitButton2, quitButtonX, quitButtonY, 169, 60, (ImageObserver) this);
