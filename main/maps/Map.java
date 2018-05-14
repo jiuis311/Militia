@@ -12,19 +12,10 @@ public abstract class Map {
     public ArrayList<Hero> heroes;
     public ArrayList<Monster> monsters;
     public ArrayList<Item> items;
-    protected Symbol[][] board;
     private int curScore;
     private int turns;
     private int targetedMons;
-    enum Symbol {
-        DEFAULT,
-        MINION,
-        BIG_MINION,
-        GHOST,
-        SWORD,
-        ARROW,
-        SPEAR;
-    }
+    private boolean heroDied;
     
     public enum Event {
     	HERO_MOVE,
@@ -33,48 +24,10 @@ public abstract class Map {
     }
     
     Map() {
-        board = new Symbol[Config.GAME_WIDTH][Config.GAME_HEIGHT];
-        for(int i = 0; i < Config.GAME_HEIGHT; i++) {
-            for(int j = 0; j < Config.GAME_WIDTH; j++) {
-                board[i][j] = Symbol.DEFAULT;
-            }
-        }
-        
         heroes = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
         items = new ArrayList<Item>();
-        //setUnselectState();
-    }
-    
-    /**
-     * Use this function for test
-     */
-    protected void draw() {
-        for(int i = 0; i < Config.GAME_HEIGHT; i++) {
-            for(int j = 0; j < Config.GAME_WIDTH; j++) {
-                switch(board[j][i]) {
-                    case DEFAULT:
-                        System.out.print("-   ");
-                        break;
-                    case MINION:
-                        System.out.print("M   ");
-                        break;
-                    case BIG_MINION:
-                        System.out.print("BM  ");
-                        break;
-                    case SWORD:
-                        System.out.print("S   ");
-                        break;
-                    case SPEAR:
-                        System.out.print("SP  ");
-                        break;
-                    default:
-                        System.out.print("-   ");
-                        break;
-                }
-            }
-            System.out.println();
-        }
+        setHeroDied(false);
     }
     
     public Hero getHero(int x, int y) {
@@ -94,7 +47,7 @@ public abstract class Map {
         }
         return null;
     }
-    
+
     private boolean checkHero(Position pos) {
         for(Hero hero: heroes) {
             if(hero.getCurPosition().equals(pos))
@@ -110,7 +63,7 @@ public abstract class Map {
         }
         return false;
     }
-    
+
     private boolean checkCharacter(Position pos) {
         return checkHero(pos) || checkMonster(pos);
     }
@@ -120,7 +73,7 @@ public abstract class Map {
         int x = (number - y)/Config.GAME_WIDTH;
         return new Position(x, y);
     }
-    
+
     protected void randomCharacter(Object obj, int num) {
         IntStream stream = new Random().ints(0, Config.GAME_WIDTH*Config.GAME_HEIGHT)
                                     .filter(number->!checkCharacter(calPosition(number)))
@@ -131,7 +84,6 @@ public abstract class Map {
                 stream.forEach(number->
                               {
                                 Position pos = calPosition(number);
-                                board[pos.getX()][pos.getY()] = Symbol.MINION;
                                 monsters.add(new Minion(pos));
                               });
                 break;
@@ -139,7 +91,6 @@ public abstract class Map {
                 stream.forEach(number->
                               {
                                 Position pos = calPosition(number);
-                                board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
                                 monsters.add(new BigMinion(pos));
                               });
                 break;
@@ -147,7 +98,6 @@ public abstract class Map {
                 stream.forEach(number->
                               {
                                 Position pos = calPosition(number);
-                                board[pos.getX()][pos.getY()] = Symbol.GHOST;
                                 monsters.add(new Ghost(pos));
                               });
                 break;
@@ -156,39 +106,42 @@ public abstract class Map {
         }
     }
 
-    protected boolean removeMonster(Position pos) {
+    private boolean removeMonster(Position pos) {
     	for(Monster mons:monsters) {
     		if (mons.getCurPosition().equals(pos)) {
     			if (mons.getClass().getSimpleName().equals("Minion")) {
-    				if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
-    				monsters.remove(mons);
-    				setCurScore(getCurScore() + 1);
-    	            board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
-    	            return true;
+                            if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
+                            monsters.remove(mons);
+                            setCurScore(getCurScore() + 1);
+                            return true;
     			} else if (mons.getClass().getSimpleName().equals("BigMinion")) {
-    				BigMinion mon = (BigMinion) mons;
-    				int shield = mon.getShield();
-    	            if (shield == 0) {
-    	            	if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
-    	            	monsters.remove(mons);
-    	            	setCurScore(getCurScore() + 3);
-    	            	board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
-    	            	return true;
-    	            } else {
-    	            	mon.lowerShield();
-    	            	return false;
-    	            } 
+                            BigMinion mon = (BigMinion) mons;
+                            int shield = mon.getShield();
+                            if (shield == 0) {
+                                if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
+                                monsters.remove(mons);
+                                setCurScore(getCurScore() + 3);
+                                return true;
+                            } else {
+                                mon.lowerShield();
+                                return false;
+                            } 
+    			} else if (mons.getClass().getSimpleName().equals("Ghost")) {
+                            if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
+                            monsters.remove(mons);
+                            setCurScore(getCurScore() + 2);
+                            return true;
     			}
     		}
-    	} 
-        
-        return true;
+    	}       
+        return false;
     }
   
     public void setUnselectState() {
         for(Hero hero: heroes)
             hero.setState(Hero.State.UNSELECT);
     }
+    
     public boolean checkEndTurn() {
         for(Hero hero: heroes)
             if(hero.getState() != Hero.State.DONE)
@@ -196,29 +149,30 @@ public abstract class Map {
         setTurns(getTurns() - 1);
         return true;
     }
-    
+
     public void update(Object obj, Event eventType, Position pos) {
         switch(eventType) {
             case HERO_MOVE:
-                
-                // this part is only for testing in console
-                if (obj instanceof Swordman) {
-                        board[pos.getX()][pos.getY()] = Symbol.SWORD;
-                }
-                else if (obj instanceof Lancer) {
-                        board[pos.getX()][pos.getY()] = Symbol.SPEAR;
-                }
-                // --------------------------------------------------
                 
                 // check for position of monster
                for(Monster mons:monsters) {
                     if (mons.getCurPosition().equals(pos)) {
                         if (mons instanceof BigMinion) {
                             heroes.remove((Hero) obj);
-                        } else {
-                            monsters.remove(mons);
-                            if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
-                            setCurScore(getCurScore() + 1);
+                            setHeroDied(true);
+                        } else if(mons instanceof Ghost) {
+                            if(((Hero) obj).getShield() == true) {
+                                removeMonster(pos);
+                                ((Hero) obj).setShield(false);
+                                setHeroDied(false);
+                            } else {
+                                heroes.remove((Hero) obj);
+                                setHeroDied(true);
+                            }
+                                   
+                        } else if(mons instanceof Minion) {
+                            removeMonster(pos);
+                            setHeroDied(false);
                         }
                         break;
                     }
@@ -228,10 +182,14 @@ public abstract class Map {
                for(Item item:items) {
                    if (item.getCurPosition().equals(pos)) {
                         if(item instanceof Bomb) {
-                               
+                             heroes.remove((Hero) obj);
+                             setHeroDied(true);
+                             for(Position position: ((Bomb) item).getDamageArea())
+                                 removeMonster(position);
                         }
                         else if(item instanceof Shield) {
-                            
+                            ((Hero) obj).setShield(true);
+                            setHeroDied(false);
                         }
                    }
                }
@@ -252,30 +210,38 @@ public abstract class Map {
                     }
                 }
                 
-//                for(Position pos1: damageArea) {
-//                    System.out.println(pos1.getX() + " " + pos1.getY());
-//                }
-                
                 for (Position position: damageArea) {
                     removeMonster(position);
                 }
                 break;
             case MONSTER_MOVE:
-                
-                // this part is only for testing in console
-                 if (obj instanceof Minion) {
-                        board[pos.getX()][pos.getY()] = Symbol.MINION;
-                } else if (obj instanceof BigMinion) {
-                        board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
-                }	            
-                // -------------------------------------------
                  
                 for(Hero hero: heroes) {
                     if(hero.getCurPosition().equals(pos)) {
-                        heroes.remove(hero);
+                        if(obj.getClass().getSimpleName().equals("BigMinion")) {
+                            heroes.remove(hero);
+                            setHeroDied(true);
+                        } else {
+                            if(hero.getShield() == true) {
+                                hero.setShield(false);
+                                removeMonster(pos);
+                                setHeroDied(false);
+                            } else {
+                                heroes.remove(hero);
+                                setHeroDied(true);
+                            }
+                        }
                         break;
                     }
                 }
+                
+                for(Item item: items) {
+                    if(item.getCurPosition().equals(pos)) {
+                        items.remove(item);
+                        break;
+                    }
+                }
+                
                 break;
         }
     }
@@ -304,5 +270,13 @@ public abstract class Map {
 
 	public void setCurScore(int curScore) {
 		this.curScore = curScore;
+	}
+
+	public boolean isHeroDied() {
+		return heroDied;
+	}
+
+	private void setHeroDied(boolean heroDied) {
+		this.heroDied = heroDied;
 	}
 }
