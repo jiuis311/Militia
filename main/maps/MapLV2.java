@@ -32,9 +32,9 @@ public class MapLV2 extends Map {
 
         monsters.add(new Ghost(new Position(5, 2)));
         
-        items.add(new Bomb(new Position(6, 2)));
+        items.add(new Bomb(new Position(2, 2)));
         
-        items.add(new Shield(new Position(2, 6)));
+        items.add(new Shield(new Position(4, 3)));
         
         setTurns(4);
         setTargetedMons(6);
