@@ -146,7 +146,6 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             menuButton.drawButtons(g);
             this.setNewMap();
-            System.out.println(this.map.getCurScore());
 	} else if (State == STATE.LVUP) {
             State = STATE.GAME;
             Game.Playstate = Game.PLAYSTATE.HERO;   
