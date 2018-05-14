@@ -107,9 +107,9 @@ public class Drawer {
 	
 	public void drawMonster(Graphics g) {
 		String monsterName;
-		ArrayList<Monster> monsters = new ArrayList<Monster> ();
-		monsters = map.monsters;
-		for(Monster monster: monsters) {
+		//ArrayList<Monster> monsters = new ArrayList<Monster> ();
+		//monsters = map.monsters;
+		for(Monster monster: map.monsters) {
         	monsterName = monster.getClass().getSimpleName();
         	if (monsterName.equals("Minion")) {
         		minion.setX(monster.getCurPosition().getX()+1);
