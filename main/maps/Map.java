@@ -63,9 +63,17 @@ public abstract class Map {
         }
         return false;
     }
+    
+    private boolean checkItem(Position pos) {
+        for(Item item: items) {
+            if(item.getCurPosition().equals(pos))
+                return true;
+        }
+        return false;
+    }
 
-    private boolean checkCharacter(Position pos) {
-        return checkHero(pos) || checkMonster(pos);
+    private boolean checkEntity(Position pos) {
+        return checkHero(pos) || checkMonster(pos) || checkItem(pos);
     }
     
     private Position calPosition(int number) {
@@ -76,7 +84,7 @@ public abstract class Map {
 
     protected void randomCharacter(Object obj, int num) {
         IntStream stream = new Random().ints(0, Config.GAME_WIDTH*Config.GAME_HEIGHT)
-                                    .filter(number->!checkCharacter(calPosition(number)))
+                                    .filter(number->!checkEntity(calPosition(number)))
                                     .distinct()
                                     .limit(num);
         switch(obj.getClass().getSimpleName()) {
@@ -189,7 +197,8 @@ public abstract class Map {
                         }
                         else if(item instanceof Shield) {
                             ((Hero) obj).setShield(true);
-                            setHeroDied(false);
+                            items.remove(item);
+                            break;
                         }
                    }
                }
