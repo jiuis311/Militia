@@ -9,6 +9,7 @@ import main.entities.characters.heroes.Hero;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Ghost;
 import main.entities.characters.monsters.Monster;
+import main.entities.items.Item;
 import main.helpers.Position;
 import main.maps.Map;
 
@@ -30,6 +31,7 @@ public class Drawer {
 	private final DrawTile shield;
     private final DrawTile ghost;
     private final DrawTile star;
+    private final DrawTile bomb; 
 	
 	private int monsterTotal;
 	private int heroTotal;
@@ -49,6 +51,7 @@ public class Drawer {
 		shield = new DrawTile("/shield.png");
         ghost = new DrawTile("/ghost.png");
         star = new DrawTile("/star.png");
+        bomb = new DrawTile("/bomb.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
@@ -198,6 +201,19 @@ public class Drawer {
         }
 	}
 	
+	public void drawItem(Graphics g) {
+		String itemName;
+		for (Item item: map.items) {
+			itemName = item.getClass().getSimpleName();
+			if (itemName.equals("Bomb")) {
+				bomb.setX(item.getCurPosition().getX()+1);
+				bomb.setY(item.getCurPosition().getY()+1);
+				bomb.draw(g);
+			}
+			
+		}
+	}
+	
 	public void draw(Graphics g) {
 		if (Game.Playstate == Game.PLAYSTATE.HERO) {
             this.drawMoveArea(g);
@@ -216,5 +232,6 @@ public class Drawer {
 		this.drawMonster(g);
 		this.drawScore(g);
 		this.drawHeroLeft(g);
+		this.drawItem(g);
 	}
 }
