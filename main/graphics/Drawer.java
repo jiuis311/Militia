@@ -32,6 +32,7 @@ public class Drawer {
     private final DrawTile ghost;
     private final DrawTile star;
     private final DrawTile bomb; 
+    private final DrawTile shieldItem;
 	
 	private int monsterTotal;
 	private int heroTotal;
@@ -52,6 +53,7 @@ public class Drawer {
         ghost = new DrawTile("/ghost.png");
         star = new DrawTile("/star.png");
         bomb = new DrawTile("/bomb.png");
+        shieldItem = new DrawTile("/shield-item.png");
 	}
 	
 	public void update(Hero activeHero, Map map) {
@@ -209,9 +211,17 @@ public class Drawer {
 				bomb.setX(item.getCurPosition().getX()+1);
 				bomb.setY(item.getCurPosition().getY()+1);
 				bomb.draw(g);
+			} else if (itemName.equals("Shield")) {
+				shieldItem.setX(item.getCurPosition().getX()+1);
+				shieldItem.setY(item.getCurPosition().getY()+1);
+				shieldItem.draw(g);
 			}
 			
 		}
+	}
+	
+	public void drawHeroEffect(Graphics g, Hero hero) {
+		
 	}
 	
 	public void draw(Graphics g) {
