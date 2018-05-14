@@ -209,7 +209,7 @@ public abstract class Map {
                 }
                 
                 for(Item item: items) {
-                    if(item.getCurPosition().equals(pos)) {
+                    if(((Hero) obj).calDamageArea(pos).contains(item.getCurPosition())) {
                         if(item instanceof Bomb) {
                             for(Position position: ((Bomb) item).getDamageArea())
                                 damageArea.add(position);
