@@ -18,6 +18,7 @@ import main.graphics.MenuButton;
 import main.graphics.MouseInput;
 import main.graphics.NextLevelMenu;
 import main.graphics.TileGrid;
+import main.graphics.VictoryMenu;
 import main.helpers.Config;
 import main.maps.Map;
 import main.maps.MapLV1;
@@ -57,6 +58,7 @@ public class Game extends Canvas implements Runnable {
     public static MenuButton menuButton;
     public static EndMenuButton endMenuButton;
     public static NextLevelMenu nextLevelMenu;
+    public static VictoryMenu victoryMenu;
     public Map map;
     private Hero activeHero;
     private Drawer drawer;
@@ -67,6 +69,7 @@ public class Game extends Canvas implements Runnable {
         menuButton = new MenuButton();
         endMenuButton = new EndMenuButton();
         nextLevelMenu = new NextLevelMenu();
+        victoryMenu = new VictoryMenu();
         menuBg = new MenuBackground();
         currentLv = 1;
         map = new MapLV1();
@@ -102,7 +105,6 @@ public class Game extends Canvas implements Runnable {
             frames++;
             if (frames % 5 == 0) {
                 this.secs++;
-                //System.out.println(this.secs);
             }
             render();                         
             try {
@@ -154,9 +156,13 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             nextLevelMenu.drawButtons(g);
             if (currentLv >= Config.MAXLEVEL) {
-        		State = STATE.ENDGAME;
-        	}
-        }			
+                    State = STATE.VICTORY;
+            }
+        }
+        else if (State == STATE.VICTORY){
+            menuBg.draw(g);
+            victoryMenu.drawButtons(g);
+        }
         //////////////////////////////
 	g.dispose();
 	bs.show();

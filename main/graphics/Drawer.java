@@ -9,6 +9,7 @@ import main.entities.characters.heroes.Hero;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Ghost;
 import main.entities.characters.monsters.Monster;
+import main.entities.items.Item;
 import main.helpers.Position;
 import main.maps.Map;
 
@@ -31,26 +32,32 @@ public class Drawer {
     private final DrawTile shield;
     private final DrawTile ghost;
     private final DrawTile star;
+    private final DrawTile bomb; 
+    private final DrawTile shieldItem;
+    private final DrawTile shieldEffect;
 
     private int monsterTotal;
     private int heroTotal;
     private int monsterCount = 0;
-	
-	public Drawer() {
-            swordman = new DrawTile("/sword.png");
-            swordmanBlur = new DrawTile("/sword-blur.png");
-            lancer = new DrawTile("/spear.png");
-            lancerBlur = new DrawTile("/spear-blur.png");
-            archer = new DrawTile("/bow.png");
-            archerBlur = new DrawTile("/bow-blur.png");
-            minion = new DrawTile("/mushroom.png");
-            bigMinion = new DrawTile("/alien.png");
-            moveArea = new DrawTile("/move-tile.png");
-            attackArea = new DrawTile("/attack-tile.png");
-            shield = new DrawTile("/shield.png");
-            ghost = new DrawTile("/ghost.png");
-            star = new DrawTile("/star.png");
-	}
+
+    public Drawer() {
+        swordman = new DrawTile("/sword.png");
+        swordmanBlur = new DrawTile("/sword-blur.png");
+        lancer = new DrawTile("/spear.png");
+        lancerBlur = new DrawTile("/spear-blur.png");
+        archer = new DrawTile("/bow.png");
+        archerBlur = new DrawTile("/bow-blur.png");
+        minion = new DrawTile("/mushroom.png");
+        bigMinion = new DrawTile("/alien.png");
+        moveArea = new DrawTile("/move-tile.png");
+        attackArea = new DrawTile("/attack-tile.png");
+        shield = new DrawTile("/shield.png");
+        ghost = new DrawTile("/ghost.png");
+        star = new DrawTile("/star.png");
+        bomb = new DrawTile("/bomb.png");
+        shieldItem = new DrawTile("/shield-item.png");
+        shieldEffect = new DrawTile("/shield-effect.png");
+    }
 	
 	public void update(Hero activeHero, Map map) {
             this.activeHero = activeHero;
@@ -92,7 +99,8 @@ public class Drawer {
                             archer.draw(g);
                     }
             }
-        }
+            drawHeroEffect(g,hero);
+            }
 	}
 
 	
@@ -199,6 +207,30 @@ public class Drawer {
         }
 	}
 	
+	public void drawItem(Graphics g) {
+		String itemName;
+		for (Item item: map.items) {
+			itemName = item.getClass().getSimpleName();
+			if (itemName.equals("Bomb")) {
+				bomb.setX(item.getCurPosition().getX()+1);
+				bomb.setY(item.getCurPosition().getY()+1);
+				bomb.draw(g);
+			} else if (itemName.equals("Shield")) {
+				shieldItem.setX(item.getCurPosition().getX()+1);
+				shieldItem.setY(item.getCurPosition().getY()+1);
+				shieldItem.draw(g);
+			}
+		}
+	}
+	
+	public void drawHeroEffect(Graphics g, Hero hero) {
+		if (hero.getShield()) {
+			shieldEffect.setX(hero.getCurPosition().getX()+1);
+			shieldEffect.setY(hero.getCurPosition().getY()+1);
+			shieldEffect.draw(g);
+		}
+	}
+	
 	public void draw(Graphics g) {
 		if (Game.Playstate == Game.PLAYSTATE.HERO) {
             this.drawMoveArea(g);
@@ -217,5 +249,6 @@ public class Drawer {
 		this.drawMonster(g);
 		this.drawScore(g);
 		this.drawHeroLeft(g);
+		this.drawItem(g);
 	}
 }
