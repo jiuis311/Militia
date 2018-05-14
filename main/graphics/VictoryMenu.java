@@ -1,5 +1,7 @@
 package main.graphics;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -24,6 +26,7 @@ public class VictoryMenu implements ImageObserver{
     private BufferedImage trophy;
     public static boolean nextButtonState = false;
     public static boolean quitButtonState = false;
+    private int score = 0;
 
 
     public VictoryMenu() {
@@ -36,6 +39,18 @@ public class VictoryMenu implements ImageObserver{
                 e.printStackTrace();
         }
     }
+    
+    public void updateScore(int score) {
+    	this.score = score ;
+    }
+    
+    public void drawScore(Graphics g) {
+    	Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 50);
+        g.setFont(fn1);
+        Color gameBlue = new Color(127, 191, 191);
+        g.setColor(gameBlue);
+        g.drawString("Score: " + this.score, trophyX, trophyY + 270);
+    }
 	
 	public void drawButtons(Graphics g) {
         g.drawImage(victory, vicLogoX, vicLogoY, 499, 205, this);
@@ -45,6 +60,7 @@ public class VictoryMenu implements ImageObserver{
         } else {
     		g.drawImage(quitButton, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         }
+        drawScore(g);
 	}
 
     @Override
