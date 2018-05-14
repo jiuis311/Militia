@@ -163,6 +163,7 @@ public class Drawer {
                     this.moveArea.setX(pos.getX()+1);
                     this.moveArea.setY(pos.getY()+1);
                     this.moveArea.draw(g);
+//                    System.out.println(activeHero);
 	    	}
 		}
 	}

@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable {
         ENDGAME,
         HELP
     }
-    public static STATE State = STATE.MENU;
+    public static STATE State = STATE.VICTORY;
     public static enum PLAYSTATE {
     	HERO,
     	MONSTER
@@ -147,16 +147,16 @@ public class Game extends Canvas implements Runnable {
             menuButton.drawButtons(g);
             this.setNewMap();
 	} else if (State == STATE.LVUP) {
-            System.out.println(currentLv);
             State = STATE.GAME;
             Game.Playstate = Game.PLAYSTATE.HERO;   
             levelUp();
         } else if (State == STATE.ENDGAME) {
             menuBg.draw(g);
+            endMenuButton.updateScore(map.getCurScore());
             endMenuButton.drawButtons(g);
             Game.Playstate = Game.PLAYSTATE.HERO;
-            this.setNewMap();
         } else if(State == STATE.NEXT){
+        	nextLevelMenu.updateScore(map.getCurScore());
             menuBg.draw(g);
             nextLevelMenu.drawButtons(g);
             if (currentLv >= Config.MAXLEVEL) {
@@ -165,6 +165,7 @@ public class Game extends Canvas implements Runnable {
         }
         else if (State == STATE.VICTORY){
             menuBg.draw(g);
+            victoryMenu.updateScore(map.getCurScore());
             victoryMenu.drawButtons(g);
         }
         else if (State == STATE.HELP){
@@ -202,7 +203,10 @@ public class Game extends Canvas implements Runnable {
     
     public void setNewMap() {
     	this.map = new MapLV1();
+    	map.setCurScore(0);
     	this.currentLv = 1;
+    	this.activeHero = null;
+    	Game.Playstate = Game.PLAYSTATE.HERO;
     }
     
     public void levelUp() {

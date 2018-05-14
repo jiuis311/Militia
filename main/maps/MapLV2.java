@@ -37,11 +37,10 @@ public class MapLV2 extends Map {
         items.add(new Shield(new Position(2, 6)));
         
         setTurns(4);
-        setTargetedMons(1);
-        monsters.get(0).setTarget();
-//        for (Monster mons:monsters) {
-//        	mons.setTarget();
-//        }
+        setTargetedMons(6);
+        for (Monster mons:monsters) {
+        	mons.setTarget();
+        }
         random();
     }
 

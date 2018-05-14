@@ -28,8 +28,7 @@ public class EndMenuButton implements ImageObserver{
     private BufferedImage endLogo;
     public static boolean reStartButtonState = false;
     public static boolean exitButtonState = false;
-    private int score = Map.curScore;
-
+    private int score = 0;
     public EndMenuButton() {
         try {
             exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/exit.png"));
@@ -39,19 +38,28 @@ public class EndMenuButton implements ImageObserver{
             e.printStackTrace();
         }
     }
-	
-	public void drawButtons(Graphics g) {
-        Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+    
+    public void updateScore(int score) {
+    	this.score = score ;
+    }
+    
+    public void drawScore(Graphics g) {
+    	Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 50);
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);
-        g.drawString("Score: " + Map.curScore, (Game.WIDTH / 2) + 245, 350);        
+        g.drawString("Score: " + this.score, Game.WIDTH / 2 + 180, 400);    
+    }
+	
+	
+	public void drawButtons(Graphics g) {
+        g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);       
         if (exitButtonState) {
         	g.drawImage(exitButton2, exitButtonX, exitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         } else {
     		g.drawImage(exitButton, exitButtonX, exitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         }
+        drawScore(g);
 	}
 
     @Override

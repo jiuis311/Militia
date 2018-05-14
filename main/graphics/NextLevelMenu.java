@@ -28,8 +28,8 @@ public class NextLevelMenu implements ImageObserver{
     private BufferedImage vicLogo;
     public static boolean nextButtonState = false;
     public static boolean quitButtonState = false;
-    private int score = Map.curScore;
-
+    private int score = 0;
+    
     public NextLevelMenu() {
         try {
             nextButton = ImageIO.read(DrawTile.class.getResourceAsStream("/next.png"));
@@ -41,14 +41,21 @@ public class NextLevelMenu implements ImageObserver{
                 e.printStackTrace();
         }
     }
-	
-	public void drawButtons(Graphics g) {
-        Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+    
+    public void updateScore(int score) {
+    	this.score = score ;
+    }
+    
+    public void drawScore(Graphics g) {
+    	Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 50);
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
+        g.drawString("Score: " + this.score, vicLogoX + 150, vicLogoY + 305);
+    }
+	
+	public void drawButtons(Graphics g) {
         g.drawImage(vicLogo, vicLogoX, vicLogoY, 499, 205, this);
-        g.drawString("Score: " + score, (Game.WIDTH / 2) + 245, 400);
         if (nextButtonState) {
         	g.drawImage(nextButton2, nextButtonX, nextButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         } else {
@@ -59,7 +66,9 @@ public class NextLevelMenu implements ImageObserver{
         } else {
     		g.drawImage(quitButton, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         }
+        drawScore(g);
 	}
+	
 
     @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
