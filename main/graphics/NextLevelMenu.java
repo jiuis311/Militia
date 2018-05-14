@@ -1,5 +1,7 @@
 package main.graphics;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import main.maps.Map;
 
 public class NextLevelMenu implements ImageObserver{
     private int nextButtonX = Game.WIDTH / 2 + 650;
@@ -15,7 +18,7 @@ public class NextLevelMenu implements ImageObserver{
     private int quitButtonX = Game.WIDTH / 2 - 250;
     private int quitButtonY = 600;
     private int vicLogoX = Game.WIDTH/2 + 60;
-    private int vicLogoY = 200;
+    private int vicLogoY = 100;
     private static final int BUTTONWIDTH = 225;
     private static final int BUTTONHEIGHT = 80;
     private BufferedImage nextButton;
@@ -25,7 +28,7 @@ public class NextLevelMenu implements ImageObserver{
     private BufferedImage vicLogo;
     public static boolean nextButtonState = false;
     public static boolean quitButtonState = false;
-
+    private int score = Map.curScore;
 
     public NextLevelMenu() {
         try {
@@ -40,7 +43,12 @@ public class NextLevelMenu implements ImageObserver{
     }
 	
 	public void drawButtons(Graphics g) {
+        Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+        g.setFont(fn1);
+        Color gameBlue = new Color(127, 191, 191);
+        g.setColor(gameBlue);
         g.drawImage(vicLogo, vicLogoX, vicLogoY, 499, 205, this);
+        g.drawString("Score: " + score, (Game.WIDTH / 2) + 245, 400);
         if (nextButtonState) {
         	g.drawImage(nextButton2, nextButtonX, nextButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         } else {

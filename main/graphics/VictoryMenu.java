@@ -1,12 +1,13 @@
 package main.graphics;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
 import main.Game;
 import main.maps.Map;
 
@@ -16,7 +17,7 @@ public class VictoryMenu implements ImageObserver{
     private int vicLogoX = Game.WIDTH/2 + 60;
     private int vicLogoY = 100;
     private int trophyX = Game.WIDTH/2 + 200;
-    private int trophyY = 350;
+    private int trophyY = 400;
     private static final int BUTTONWIDTH = 225;
     private static final int BUTTONHEIGHT = 80;
     private BufferedImage quitButton;
@@ -25,6 +26,7 @@ public class VictoryMenu implements ImageObserver{
     private BufferedImage trophy;
     public static boolean nextButtonState = false;
     public static boolean quitButtonState = false;
+    private int score = Map.curScore;
     
     public VictoryMenu() {
         try {
@@ -38,15 +40,19 @@ public class VictoryMenu implements ImageObserver{
     }
 	
 	public void drawButtons(Graphics g) {
-        g.drawImage(victory, vicLogoX, vicLogoY, 499, 205, this);
-        g.drawImage(trophy, trophyX, trophyY, 200, 200, this);
-        if (quitButtonState) {
-            g.drawImage(quitButton2, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
-        } else {
-    		g.drawImage(quitButton, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
+            Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+            g.setFont(fn1);
+            Color gameBlue = new Color(127, 191, 191);
+            g.setColor(gameBlue);
+            g.drawImage(victory, vicLogoX, vicLogoY, 499, 205, this);
+            g.drawImage(trophy, trophyX, trophyY, 200, 200, this);
+            g.drawString("Score: " + score, (Game.WIDTH / 2) + 245, 350);
+            if (quitButtonState) {
+                g.drawImage(quitButton2, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
+            } else {
+                g.drawImage(quitButton, quitButtonX, quitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
+            }
         }
-        
-	}
 
     @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {

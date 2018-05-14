@@ -29,10 +29,11 @@ public class MapLV1 extends Map {
         heroes.add(new Swordman(new Position(1, 6)));
         
         setTurns(4);
-        setTargetedMons(6);
-        for (Monster mons:monsters) {
-        	mons.setTarget();
-        }
+        setTargetedMons(1);
+        monsters.get(0).setTarget();
+//        for (Monster mons:monsters) {
+//        	mons.setTarget();
+//        }
         random();
     }
 

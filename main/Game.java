@@ -145,7 +145,6 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
-            this.map.setCurScore(0);
             this.setNewMap();
 	} else if (State == STATE.LVUP) {
             System.out.println(currentLv);
@@ -156,7 +155,6 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             endMenuButton.drawButtons(g);
             Game.Playstate = Game.PLAYSTATE.HERO;
-            this.map.setCurScore(0);
             this.setNewMap();
         } else if(State == STATE.NEXT){
             menuBg.draw(g);
@@ -208,14 +206,14 @@ public class Game extends Canvas implements Runnable {
     }
     
     public void levelUp() {
-    		switch (currentLv) {
-    		case 1:
-    			this.map = new MapLV2();
-    			this.currentLv++;
-    			break;
-    		default:
-    			break;
-    		}
+        switch (currentLv) {
+        case 1:
+                this.map = new MapLV2();
+                this.currentLv++;
+                break;
+        default:
+                break;
+        }
     }
     
     public static void main(String[] args) {

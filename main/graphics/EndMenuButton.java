@@ -1,5 +1,7 @@
 package main.graphics;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import main.maps.Map;
 
 public class EndMenuButton implements ImageObserver{
     private int reStartButtonX = Game.WIDTH / 2 + 210;
@@ -25,28 +28,25 @@ public class EndMenuButton implements ImageObserver{
     private BufferedImage endLogo;
     public static boolean reStartButtonState = false;
     public static boolean exitButtonState = false;
-
+    private int score = Map.curScore;
 
     public EndMenuButton() {
         try {
-            reStartButton = ImageIO.read(DrawTile.class.getResourceAsStream("/replay.png"));
             exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/exit.png"));
-            reStartButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/replay1.png"));
             exitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/exit1.png"));
             endLogo = ImageIO.read(DrawTile.class.getResourceAsStream("/endLogo.png"));
         } catch (IOException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 	
 	public void drawButtons(Graphics g) {
+        Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+        g.setFont(fn1);
+        Color gameBlue = new Color(127, 191, 191);
+        g.setColor(gameBlue);
         g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);
-        if (reStartButtonState) {
-        	g.drawImage(reStartButton2, reStartButtonX, reStartButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
-        } else {
-    		g.drawImage(reStartButton, reStartButtonX, reStartButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
-        }
-        
+        g.drawString("Score: " + Map.curScore, (Game.WIDTH / 2) + 245, 350);        
         if (exitButtonState) {
         	g.drawImage(exitButton2, exitButtonX, exitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         } else {
