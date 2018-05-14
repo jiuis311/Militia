@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import main.maps.Map;
 
 public class NextLevelMenu implements ImageObserver{
     private int nextButtonX = Game.WIDTH / 2 + 650;
@@ -17,7 +18,7 @@ public class NextLevelMenu implements ImageObserver{
     private int quitButtonX = Game.WIDTH / 2 - 250;
     private int quitButtonY = 600;
     private int vicLogoX = Game.WIDTH/2 + 60;
-    private int vicLogoY = 200;
+    private int vicLogoY = 100;
     private static final int BUTTONWIDTH = 225;
     private static final int BUTTONHEIGHT = 80;
     private BufferedImage nextButton;
@@ -28,8 +29,7 @@ public class NextLevelMenu implements ImageObserver{
     public static boolean nextButtonState = false;
     public static boolean quitButtonState = false;
     private int score = 0;
-
-
+    
     public NextLevelMenu() {
         try {
             nextButton = ImageIO.read(DrawTile.class.getResourceAsStream("/next.png"));
