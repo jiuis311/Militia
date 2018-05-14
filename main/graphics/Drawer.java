@@ -183,7 +183,7 @@ public class Drawer {
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawString("Level: " + this.currentLv, (Game.WIDTH / 12) * 20, 70);
+        g.drawString("Level: " + this.currentLv, (Game.WIDTH / 12) * 20, 100);
         g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 150);
         g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 200);
         g.drawString("Hero alive: ", 240, 770);
