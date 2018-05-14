@@ -12,20 +12,10 @@ public abstract class Map {
     public ArrayList<Hero> heroes;
     public ArrayList<Monster> monsters;
     public ArrayList<Item> items;
-    //protected Symbol[][] board;
     private int curScore;
     private int turns;
     private int targetedMons;
     private boolean heroDied;
-    enum Symbol {
-        DEFAULT,
-        MINION,
-        BIG_MINION,
-        GHOST,
-        SWORD,
-        ARROW,
-        SPEAR;
-    }
     
     public enum Event {
     	HERO_MOVE,
@@ -34,50 +24,11 @@ public abstract class Map {
     }
     
     Map() {
-//        board = new Symbol[Config.GAME_WIDTH][Config.GAME_HEIGHT];
-//        for(int i = 0; i < Config.GAME_HEIGHT; i++) {
-//            for(int j = 0; j < Config.GAME_WIDTH; j++) {
-//                board[i][j] = Symbol.DEFAULT;
-//            }
-//        }
-        
         heroes = new ArrayList<Hero>();
         monsters = new ArrayList<Monster>();
         items = new ArrayList<Item>();
         setHeroDied(false);
-        //setUnselectState();
     }
-    
-    /**
-     * Use this function for test
-     */
-//    protected void draw() {
-//        for(int i = 0; i < Config.GAME_HEIGHT; i++) {
-//            for(int j = 0; j < Config.GAME_WIDTH; j++) {
-//                switch(board[j][i]) {
-//                    case DEFAULT:
-//                        System.out.print("-   ");
-//                        break;
-//                    case MINION:
-//                        System.out.print("M   ");
-//                        break;
-//                    case BIG_MINION:
-//                        System.out.print("BM  ");
-//                        break;
-//                    case SWORD:
-//                        System.out.print("S   ");
-//                        break;
-//                    case SPEAR:
-//                        System.out.print("SP  ");
-//                        break;
-//                    default:
-//                        System.out.print("-   ");
-//                        break;
-//                }
-//            }
-//            System.out.println();
-//        }
-//    }
     
     public Hero getHero(int x, int y) {
         Position pos = new Position(x, y);
@@ -133,7 +84,6 @@ public abstract class Map {
                 stream.forEach(number->
                               {
                                 Position pos = calPosition(number);
-                                //board[pos.getX()][pos.getY()] = Symbol.MINION;
                                 monsters.add(new Minion(pos));
                               });
                 break;
@@ -141,7 +91,6 @@ public abstract class Map {
                 stream.forEach(number->
                               {
                                 Position pos = calPosition(number);
-                                //board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
                                 monsters.add(new BigMinion(pos));
                               });
                 break;
@@ -149,7 +98,6 @@ public abstract class Map {
                 stream.forEach(number->
                               {
                                 Position pos = calPosition(number);
-                                //board[pos.getX()][pos.getY()] = Symbol.GHOST;
                                 monsters.add(new Ghost(pos));
                               });
                 break;
@@ -165,7 +113,6 @@ public abstract class Map {
                             if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
                             monsters.remove(mons);
                             setCurScore(getCurScore() + 1);
-                            //board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
                             return true;
     			} else if (mons.getClass().getSimpleName().equals("BigMinion")) {
                             BigMinion mon = (BigMinion) mons;
@@ -174,7 +121,6 @@ public abstract class Map {
                                 if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
                                 monsters.remove(mons);
                                 setCurScore(getCurScore() + 3);
-                                //board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
                                 return true;
                             } else {
                                 mon.lowerShield();
@@ -184,7 +130,6 @@ public abstract class Map {
                             if (mons.isTargeted()) setTargetedMons(getTargetedMons() - 1);
                             monsters.remove(mons);
                             setCurScore(getCurScore() + 2);
-                            //board[pos.getX()][pos.getY()] = Symbol.DEFAULT;
                             return true;
     			}
     		}
@@ -208,15 +153,6 @@ public abstract class Map {
     public void update(Object obj, Event eventType, Position pos) {
         switch(eventType) {
             case HERO_MOVE:
-                
-                // this part is only for testing in console
-//                if (obj instanceof Swordman) {
-//                        board[pos.getX()][pos.getY()] = Symbol.SWORD;
-//                }
-//                else if (obj instanceof Lancer) {
-//                        board[pos.getX()][pos.getY()] = Symbol.SPEAR;
-//                }
-                // --------------------------------------------------
                 
                 // check for position of monster
                for(Monster mons:monsters) {
@@ -279,14 +215,6 @@ public abstract class Map {
                 }
                 break;
             case MONSTER_MOVE:
-                
-                // this part is only for testing in console
-//                 if (obj instanceof Minion) {
-//                        board[pos.getX()][pos.getY()] = Symbol.MINION;
-//                } else if (obj instanceof BigMinion) {
-//                        board[pos.getX()][pos.getY()] = Symbol.BIG_MINION;
-//                }	            
-                // -------------------------------------------
                  
                 for(Hero hero: heroes) {
                     if(hero.getCurPosition().equals(pos)) {
