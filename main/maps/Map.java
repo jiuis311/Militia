@@ -12,7 +12,7 @@ public abstract class Map {
     public ArrayList<Hero> heroes;
     public ArrayList<Monster> monsters;
     public ArrayList<Item> items;
-    private static int curScore;
+    public static int curScore;
     private int turns;
     private int targetedMons;
     private boolean heroDied;
@@ -272,12 +272,12 @@ public abstract class Map {
 		this.turns = turns;
 	}
 
-	public int getCurScore() {
+	public static int getCurScore() {
 		return curScore;
 	}
 
-	public void setCurScore(int curScore) {
-		this.curScore = curScore;
+	public static void setCurScore(int score) {
+		curScore = score;
 	}
 
 	public boolean isHeroDied() {

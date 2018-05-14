@@ -16,8 +16,6 @@ public class MapLV1 extends Map {
         
         monsters.add(new Minion(new Position(1, 3)));
         
-        monsters.add(new Minion(new Position(7, 7)));
-        
         monsters.add(new Minion(new Position(4, 7)));
         
         monsters.add(new BigMinion(new Position(5, 2)));
@@ -28,9 +26,8 @@ public class MapLV1 extends Map {
         
         heroes.add(new Swordman(new Position(1, 6)));
         
-        //setCurScore(0);
         setTurns(4);
-        setTargetedMons(6);
+        setTargetedMons(5);
         for (Monster mons:monsters) {
         	mons.setTarget();
         }

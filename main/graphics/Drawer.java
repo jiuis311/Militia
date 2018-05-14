@@ -76,8 +76,8 @@ public class Drawer {
                             swordmanBlur.draw(g);
                     } else {
                             swordman.setX(hero.getCurPosition().getX()+1);
-                    swordman.setY(hero.getCurPosition().getY()+1);
-                    swordman.draw(g);
+                            swordman.setY(hero.getCurPosition().getY()+1);
+                            swordman.draw(g);
                     }
             } else if (heroName.equals("Lancer")) {
                     if (hero.getState() == Hero.State.DONE) {
@@ -86,8 +86,8 @@ public class Drawer {
                             lancerBlur.draw(g);
                     } else {
                             lancer.setX(hero.getCurPosition().getX()+1);
-                    lancer.setY(hero.getCurPosition().getY()+1);
-                    lancer.draw(g);
+                            lancer.setY(hero.getCurPosition().getY()+1);
+                            lancer.draw(g);
                     }
             } else if (heroName.equals("Archer")) {
                     if (hero.getState() == Hero.State.DONE) {
@@ -180,7 +180,7 @@ public class Drawer {
 	}
 	
 	public void drawScore(Graphics g) {
-		Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
+	Font fn1 = new Font("Sofia Pro Light", Font.PLAIN, 30);
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
@@ -235,23 +235,22 @@ public class Drawer {
 	}
 	
 	public void draw(Graphics g) {
-		if (Game.Playstate == Game.PLAYSTATE.HERO) {
+	if (Game.Playstate == Game.PLAYSTATE.HERO) {
             this.drawMoveArea(g);
             this.drawAttackArea(g);
         } else if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
-        	if (Game.secs >=1)
-        		this.calMonster();
-        	if (this.monsterCount >= map.monsters.size()) {
-        		Game.Playstate = Game.PLAYSTATE.HERO;
-            	map.setUnselectState();
-            	this.monsterCount = 0;
-        	}
+            if (Game.secs >=1)
+                    this.calMonster();
+            if (this.monsterCount >= map.monsters.size()) {
+                    Game.Playstate = Game.PLAYSTATE.HERO;
+            map.setUnselectState();
+            this.monsterCount = 0;
+            }
         }
-		
-		this.drawHero(g);
-		this.drawMonster(g);
-		this.drawScore(g);
-		this.drawHeroLeft(g);
-		this.drawItem(g);
+            this.drawHero(g);
+            this.drawMonster(g);
+            this.drawScore(g);
+            this.drawHeroLeft(g);
+            this.drawItem(g);
 	}
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import main.maps.Map;
 
 public class EndMenuButton implements ImageObserver{
     private int reStartButtonX = Game.WIDTH / 2 + 210;
@@ -28,17 +29,13 @@ public class EndMenuButton implements ImageObserver{
     public static boolean reStartButtonState = false;
     public static boolean exitButtonState = false;
     private int score = 0;
-
-
     public EndMenuButton() {
         try {
-            reStartButton = ImageIO.read(DrawTile.class.getResourceAsStream("/replay.png"));
             exitButton = ImageIO.read(DrawTile.class.getResourceAsStream("/exit.png"));
-            reStartButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/replay1.png"));
             exitButton2 = ImageIO.read(DrawTile.class.getResourceAsStream("/exit1.png"));
             endLogo = ImageIO.read(DrawTile.class.getResourceAsStream("/endLogo.png"));
         } catch (IOException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
     
@@ -51,18 +48,12 @@ public class EndMenuButton implements ImageObserver{
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawString("Score: " + this.score, (Game.WIDTH / 12) * 19, 150);    
+        g.drawString("Score: " + this.score, Game.WIDTH / 2 + 180, 400);    
     }
 	
 	
 	public void drawButtons(Graphics g) {
-        g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);
-        if (reStartButtonState) {
-        	g.drawImage(reStartButton2, reStartButtonX, reStartButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
-        } else {
-    		g.drawImage(reStartButton, reStartButtonX, reStartButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
-        }
-        
+        g.drawImage(endLogo, endLogoX, endLogoY, 499, 205, this);       
         if (exitButtonState) {
         	g.drawImage(exitButton2, exitButtonX, exitButtonY, BUTTONWIDTH, BUTTONHEIGHT, (ImageObserver) this);
         } else {

@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import main.Game;
+import main.maps.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -55,12 +56,7 @@ public class MouseInput implements MouseListener{
         }
         else if (Game.State == Game.STATE.ENDGAME){
             int mx = e.getX();
-            int my = e.getY();
-            if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+250){
-                if (my >= 350 && my <= 457){
-                    EndMenuButton.reStartButtonState = true;
-                }
-            }            
+            int my = e.getY();           
             if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+170){
                 if (my >= 450 && my <= 557){
                     EndMenuButton.exitButtonState = true;
@@ -90,6 +86,15 @@ public class MouseInput implements MouseListener{
                 }
             }
         }
+        else if (Game.State == Game.STATE.HELP){
+            int mx = e.getX();
+            int my = e.getY();
+            if (mx >= Game.WIDTH / 2 + 700 && mx <= Game.WIDTH / 2 + 700 + 150){
+                if (my >= 650 && my <= 710){
+                    HelpMenu.quitButtonState = true;
+                }
+            }
+        }
     }
 
     @Override
@@ -107,6 +112,7 @@ public class MouseInput implements MouseListener{
                 if (my >= 350 && my <= 450){
                     //Press play button
                     Game.State = Game.STATE.GAME;
+                    Map.setCurScore(0);
                     MenuButton.startButtonState = false;
                 }
             }
@@ -114,6 +120,7 @@ public class MouseInput implements MouseListener{
             if (mx >= Game.WIDTH / 2 + 230 && mx <= Game.WIDTH / 2 +230+170){
                 if (my >= 450 && my <= 550){
                     //Press play button
+                    Game.State = Game.STATE.HELP;
                     MenuButton.helpButtonState = false;
                 }
             }
@@ -139,22 +146,15 @@ public class MouseInput implements MouseListener{
         }
         else if (Game.State == Game.STATE.ENDGAME){
             int mx = e.getX();
-            int my = e.getY();
-            if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+250){
-                if (my >= 350 && my <= 450){
-                    Game.State = Game.STATE.GAME;
-                    EndMenuButton.reStartButtonState = false;
-                }
-            }
-            
+            int my = e.getY();          
             if (mx >= Game.WIDTH / 2 + 210 && mx <= Game.WIDTH / 2 +210+170){
                 if (my >= 450 && my <= 550){
                     //Press play button
+                    Game.State = Game.STATE.MENU;
                     EndMenuButton.exitButtonState = false;
-                    System.exit(1);
-                }
             }
-        } 
+            }
+        }
         else if (Game.State == Game.STATE.NEXT){
             int mx = e.getX();
             int my = e.getY();
@@ -179,6 +179,16 @@ public class MouseInput implements MouseListener{
                 if (my >= 600 && my <= 680){
                     Game.State = Game.STATE.MENU;
                     VictoryMenu.quitButtonState = false;
+                }
+            }
+        }
+        else if (Game.State == Game.STATE.HELP){
+            int mx = e.getX();
+            int my = e.getY();
+            if (mx >= Game.WIDTH / 2 + 700 && mx <= Game.WIDTH / 2 + 700 + 150){
+                if (my >= 650 && my <= 710){
+                    Game.State = Game.STATE.MENU;
+                    HelpMenu.quitButtonState = false;
                 }
             }
         }

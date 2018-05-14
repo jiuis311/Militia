@@ -13,6 +13,7 @@ import main.graphics.Background;
 import main.graphics.DrawTile;
 import main.graphics.Drawer;
 import main.graphics.EndMenuButton;
+import main.graphics.HelpMenu;
 import main.graphics.MenuBackground;
 import main.graphics.MenuButton;
 import main.graphics.MouseInput;
@@ -47,7 +48,8 @@ public class Game extends Canvas implements Runnable {
         NEXT,
         LVUP,
         VICTORY,
-        ENDGAME
+        ENDGAME,
+        HELP
     }
     public static STATE State = STATE.MENU;
     public static enum PLAYSTATE {
@@ -59,6 +61,7 @@ public class Game extends Canvas implements Runnable {
     public static EndMenuButton endMenuButton;
     public static NextLevelMenu nextLevelMenu;
     public static VictoryMenu victoryMenu;
+    public static HelpMenu helpMenu;
     public Map map;
     private Hero activeHero;
     private Drawer drawer;
@@ -70,6 +73,7 @@ public class Game extends Canvas implements Runnable {
         endMenuButton = new EndMenuButton();
         nextLevelMenu = new NextLevelMenu();
         victoryMenu = new VictoryMenu();
+        helpMenu = new HelpMenu();
         menuBg = new MenuBackground();
         currentLv = 1;
         map = new MapLV1();
@@ -141,7 +145,6 @@ public class Game extends Canvas implements Runnable {
 	} else if(State == STATE.MENU){
             menuBg.draw(g);
             menuButton.drawButtons(g);
-            //this.map.setCurScore(0);
             this.setNewMap();
             System.out.println(this.map.getCurScore());
 	} else if (State == STATE.LVUP) {
@@ -165,6 +168,10 @@ public class Game extends Canvas implements Runnable {
             menuBg.draw(g);
             victoryMenu.updateScore(map.getCurScore());
             victoryMenu.drawButtons(g);
+        }
+        else if (State == STATE.HELP){
+            menuBg.draw(g);
+            helpMenu.drawButtons(g);
         }
         //////////////////////////////
 	g.dispose();
@@ -204,14 +211,14 @@ public class Game extends Canvas implements Runnable {
     }
     
     public void levelUp() {
-    		switch (currentLv) {
-    		case 1:
-    			this.map = new MapLV2();
-    			this.currentLv++;
-    			break;
-    		default:
-    			break;
-    		}
+        switch (currentLv) {
+        case 1:
+                this.map = new MapLV2();
+                this.currentLv++;
+                break;
+        default:
+                break;
+        }
     }
     
     public static void main(String[] args) {
