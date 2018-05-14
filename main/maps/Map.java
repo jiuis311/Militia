@@ -12,7 +12,7 @@ public abstract class Map {
     public ArrayList<Hero> heroes;
     public ArrayList<Monster> monsters;
     public ArrayList<Item> items;
-    private int curScore;
+    private static int curScore;
     private int turns;
     private int targetedMons;
     private boolean heroDied;
@@ -190,16 +190,14 @@ public abstract class Map {
                for(Item item:items) {
                    if (item.getCurPosition().equals(pos)) {
                         if(item instanceof Bomb) {
-                             heroes.remove((Hero) obj);
-                             setHeroDied(true);
                              for(Position position: ((Bomb) item).getDamageArea())
                                  removeMonster(position);
                         }
                         else if(item instanceof Shield) {
                             ((Hero) obj).setShield(true);
-                            items.remove(item);
-                            break;
                         }
+                        items.remove(item);
+                        break;
                    }
                }
                 break;
@@ -211,10 +209,11 @@ public abstract class Map {
                 }
                 
                 for(Item item: items) {
-                    if(item.getCurPosition().equals(pos)) {
+                    if(((Hero) obj).calDamageArea(pos).contains(item.getCurPosition())) {
                         if(item instanceof Bomb) {
                             for(Position position: ((Bomb) item).getDamageArea())
                                 damageArea.add(position);
+                            items.remove(item);
                         }
                     }
                 }
