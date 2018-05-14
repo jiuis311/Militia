@@ -24,10 +24,6 @@ public class MapLV1 extends Map {
         
         monsters.add(new BigMinion(new Position(2, 4)));
         
-        items.add(new Bomb(new Position(6, 2)));
-        
-        items.add(new Shield(new Position(2, 6)));
-
         heroes.add(new Lancer(new Position(6, 4)));
         
         heroes.add(new Swordman(new Position(1, 6)));

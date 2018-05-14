@@ -7,6 +7,8 @@ import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Ghost;
 import main.entities.characters.monsters.Minion;
 import main.entities.characters.monsters.Monster;
+import main.entities.items.Bomb;
+import main.entities.items.Shield;
 import main.helpers.Position;
 
 public class MapLV2 extends Map {
@@ -29,6 +31,10 @@ public class MapLV2 extends Map {
         monsters.add(new Minion(new Position(7, 1)));
 
         monsters.add(new Ghost(new Position(5, 2)));
+        
+        items.add(new Bomb(new Position(6, 2)));
+        
+        items.add(new Shield(new Position(2, 6)));
         
         setTurns(4);
         setTargetedMons(6);
