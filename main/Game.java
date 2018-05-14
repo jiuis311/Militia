@@ -128,7 +128,7 @@ public class Game extends Canvas implements Runnable {
             grid.draw(g);
             menuButton.drawMenuInGame(g);               
             //draw monster and hero         
-            drawer.update(activeHero, map);
+            drawer.update(activeHero, map, this.currentLv);
             if (Game.Playstate == Game.PLAYSTATE.MONSTER) {
             	this.setActiveHero(null);
             }
