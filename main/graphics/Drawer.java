@@ -34,11 +34,11 @@ public class Drawer {
     private final DrawTile star;
     private final DrawTile bomb; 
     private final DrawTile shieldItem;
-    private final DrawTile shieldEffect;
-
+    private final DrawTile shieldEffect;	
     private int monsterTotal;
     private int heroTotal;
     private int monsterCount = 0;
+    private int currentLv = 1;
 
     public Drawer() {
         swordman = new DrawTile("/sword.png");
@@ -58,11 +58,12 @@ public class Drawer {
         shieldItem = new DrawTile("/shield-item.png");
         shieldEffect = new DrawTile("/shield-effect.png");
     }
-	
-	public void update(Hero activeHero, Map map) {
+
+    public void update(Hero activeHero, Map map, int level) {
             this.activeHero = activeHero;
             this.map = map;
-	}
+            this.currentLv = level;
+    }
 	
 	public void drawHero(Graphics g) {
             String heroName;
@@ -182,8 +183,9 @@ public class Drawer {
         g.setFont(fn1);
         Color gameBlue = new Color(127, 191, 191);
         g.setColor(gameBlue);
-        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 100);
-        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 160);
+        g.drawString("Level: " + this.currentLv, (Game.WIDTH / 12) * 20, 70);
+        g.drawString("Score: " + map.getCurScore(), (Game.WIDTH / 12) * 20, 150);
+        g.drawString("Turn: " + map.getTurns(), (Game.WIDTH / 12) * 20, 200);
         g.drawString("Hero alive: ", 240, 770);
 	}
 	
