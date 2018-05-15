@@ -36,7 +36,7 @@ public class MapLV2 extends Map {
         
         items.add(new Shield(new Position(4, 3)));
         
-        setTurns(4);
+        setTurns(5);
         setTargetedMons(6);
         for (Monster mons:monsters) {
         	mons.setTarget();
