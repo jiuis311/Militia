@@ -5,7 +5,6 @@ import main.entities.characters.heroes.Swordman;
 import main.entities.characters.monsters.BigMinion;
 import main.entities.characters.monsters.Minion;
 import main.entities.characters.monsters.Monster;
-import main.entities.items.*;
 import main.helpers.Position;
 
 public class MapLV1 extends Map {

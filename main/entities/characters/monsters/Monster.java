@@ -1,5 +1,4 @@
 package main.entities.characters.monsters;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 import main.entities.characters.Character;
